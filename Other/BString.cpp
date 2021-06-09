@@ -1,9 +1,9 @@
 ﻿/*****************************************************************************
 FileName:   BString.cpp
 Creater:    Xeler
-Date:       2021/04/20
+Date:       2021/05/13
 Desc:       Desc
-Version:    1.0
+Version:    1.1
 ******************************************************************************/
 
 #include "BString.h"
@@ -11,95 +11,104 @@ Version:    1.0
 using namespace be;
 
 BString::BString() {
-    stringLength = 0;
-    string = new char;
-    string[0] = '\0';
+    m_iStringLength = 0;
+    m_pString = nullptr;
+    m_pString[0] = '\0';
 }
 
 BString::BString(const char *str) {
-    stringLength = stringCount(str);
-    string = new char[stringLength + 1];
-    stringCpy(string, str);
+    m_iStringLength = strCount(str);
+    m_pString = new char[m_iStringLength + 1];
+    strCopy(m_pString, str);
 }
 
 BString::BString(const BString &bString) {
-    stringLength = bString.stringLength;
-    string = new char[stringLength + 1];
-    stringCpy(string, bString.string);
+    m_iStringLength = bString.m_iStringLength;
+    m_pString = new char[m_iStringLength + 1];
+    strCopy(m_pString, bString.m_pString);
 }
 
 BString::~BString() {
-    delete[] string;
+    delete[] m_pString;
+    delete[] m_pTempChars;
 }
 
 BString &BString::operator+(const BString &bString) {
-    tmp.stringLength = this->stringLength + bString.stringLength;
-    tmp.string = new char[tmp.stringLength + 1];
-    tmp.string = this->string + *bString.string;
-    tmp.string[tmp.stringLength] = '\0';
-    return tmp;
+    char *tempChars = new char[m_iStringLength + bString.m_iStringLength + 1];
+    strCopy(tempChars, m_pString);
+    strCopy(tempChars + m_iStringLength, bString.m_pString);
+    delete[] m_pString;
+    m_pString = tempChars;
+    m_iStringLength += bString.m_iStringLength;
+    return (*this);
 }
 
 BString &BString::operator+(const char *str) {
-    tmp.stringLength = this->stringLength + stringCount(str);
-    tmp.string = new char[tmp.stringLength + 1];
-    tmp.string = this->string + *str;
-    tmp.string[tmp.stringLength] = '\0';
-    return tmp;
+    unsigned int strLength = strCount(str);
+    char *tempChars = new char[m_iStringLength + strLength + 1];
+    strCopy(tempChars, m_pString);
+    strCopy(tempChars + m_iStringLength, str);
+    delete[] m_pString;
+    m_pString = tempChars;
+    m_iStringLength += strLength;
+    return (*this);
 }
 
 BString &BString::operator+(char c) {
-    tmp.stringLength = this->stringLength + 1;
-    tmp.string = new char[tmp.stringLength + 1];
-    tmp.string = this->string + c;
-    tmp.string[tmp.stringLength] = '\0';
-    return tmp;
+    char *tempChars = new char[m_iStringLength + 2];
+    strCopy(tempChars, m_pString);
+    m_pString[m_iStringLength] = c;
+    m_pString[m_iStringLength] = '\0';
+    delete[] m_pString;
+    m_pString = tempChars;
+    m_iStringLength += 1;
+    return (*this);
 }
 
 BString &BString::operator=(const BString &bString) {
     if (this == &bString) {
         return *this;
     }
-    if (string != nullptr) {
-        delete string;
-        string = nullptr;
+    if (m_pString != nullptr) {
+        delete m_pString;
+        m_pString = nullptr;
     }
-    stringLength = bString.stringLength;
-    string = new char[stringLength + 1];
-    stringCpy(string, bString.string);
+    m_iStringLength = bString.m_iStringLength;
+    m_pString = new char[m_iStringLength + 1];
+    strCopy(m_pString, bString.m_pString);
     return *this;
 }
 
 BString &BString::operator=(const char *str) {
-    if (string != nullptr) {
-        delete string;
-        string = nullptr;
+    if (m_pString != nullptr) {
+        delete m_pString;
+        m_pString = nullptr;
     }
-    stringLength = stringCount(str);
-    string = new char[stringLength + 1];
-    stringCpy(string, str);
+    m_iStringLength = strCount(str);
+    m_pString = new char[m_iStringLength + 1];
+    strCopy(m_pString, str);
     return *this;
 }
 
 BString &BString::operator=(char c) {
-    if (string != nullptr) {
-        delete string;
-        string = nullptr;
+    if (m_pString != nullptr) {
+        delete m_pString;
+        m_pString = nullptr;
     }
-    stringLength = 1;
-    string = new char[stringLength + 1];
-    string[0] = c;
-    string[1] = '\0';
+    m_iStringLength = 1;
+    m_pString = new char[m_iStringLength + 1];
+    m_pString[0] = c;
+    m_pString[1] = '\0';
     return *this;
 }
 
 bool BString::operator==(const BString &bString) {
     unsigned int i;
-    if (stringLength != bString.stringLength) {
+    if (m_iStringLength != bString.m_iStringLength) {
         return false;
     }
-    for (i = 0; i < stringLength; i++) {
-        if (string[i] != bString.string[i])
+    for (i = 0; i < m_iStringLength; i++) {
+        if (m_pString[i] != bString.m_pString[i])
             return false;
     }
     return true;
@@ -107,10 +116,13 @@ bool BString::operator==(const BString &bString) {
 
 bool BString::operator==(const char *str) {
     unsigned int i = 0;
-    while (string[i] == str[i]) {
-        if (!(string[i] + str[i]))break;
+    while (m_pString[i] == str[i]) {
+        if (i > m_iStringLength) {
+            break;
+        }
+        i++;
     }
-    return string[i] == str[i];
+    return m_pString[i] == str[i];
 }
 
 bool BString::operator!=(const BString &bString) {
@@ -118,54 +130,101 @@ bool BString::operator!=(const BString &bString) {
 }
 
 BString BString::operator+=(const BString &bString) {
-    *this = *this + bString.string;
+    *this = *this + bString.m_pString;
     return *this;
 }
 
 BString BString::operator+=(const char *str) {
-    char *temp = string;
-    stringLength = stringLength + stringCount(str);
-    string = new char[stringLength + 1];
-    stringCpy(string, temp);
-    stringCpy(string + stringCount(string), str);
-    string[stringLength] = '\0';
+    char *temp = new;
+    m_iStringLength = m_iStringLength + strCount(str);
+    m_pString = new char[m_iStringLength + 1];
+    strCopy(m_pString, temp);
+    strCopy(m_pString + strCount(m_pString), str);
+    m_pString[m_iStringLength] = '\0';
     delete temp;
     return *this;
 }
 
 BString BString::operator+=(char c) {
-    char *temp = string;
-    stringLength++;
-    string = new char[stringLength + 1];
-    stringCpy(string, temp);
-    string[stringLength - 1] = c;
-    string[stringLength] = '\0';
+    char *temp = m_pString;
+    m_iStringLength++;
+    m_pString = new char[m_iStringLength + 1];
+    strCopy(m_pString, temp);
+    m_pString[m_iStringLength - 1] = c;
+    m_pString[m_iStringLength] = '\0';
+    delete temp;
     return *this;
 }
 
 char BString::operator[](unsigned long point) {
-    return string[point];
+    return m_pString[point];
 }
 
 char *BString::toChar() {
-    tempChars = new char[stringLength];
-    stringCpy(tempChars, string);
-    return tempChars;
+    checkNewTempChars(m_iStringLength);
+    strCopy(m_pTempChars, m_pString);
+    return m_pTempChars;
 }
 
-void BString::stringCpy(char *s1, const char *s2) {
+BString BString::strSub(unsigned int startIndex) {
+    if (startIndex >= m_iStringLength) {
+        return BString();
+    } else {
+        unsigned int offset = 0;
+
+        checkNewTempChars(m_iStringLength - startIndex);
+        while ((startIndex + offset) <= m_iStringLength) {
+            m_pTempChars[offset] = m_pString[startIndex + offset];
+            offset++;
+        }
+    }
+    return BString(m_pTempChars);
+}
+
+BString BString::strSub(unsigned int startIndex, unsigned int endIndex) {
+    if (endIndex < startIndex || (endIndex - startIndex) >= m_iStringLength) {
+        return BString();
+    } else {
+        unsigned int offset = 0;
+        checkNewTempChars(endIndex - startIndex);
+        while ((startIndex + offset) <= endIndex) {
+            m_pTempChars[offset] = m_pString[startIndex + offset];
+            offset++;
+        }
+    }
+    return BString(m_pTempChars);
+}
+
+int BString::strFind(char c) {
+    int point = 0;
+    while (point < m_iStringLength) {
+        if (m_pString[point] == c) {
+            return point + 1;
+        }
+        point++;
+    }
+    return -1;
+}
+
+void BString::checkNewTempChars(unsigned int length) {
+    delete[] m_pTempChars;
+    m_pTempChars = new char[length];
+}
+
+void strCopy(char *to, const char *from) {
     int i = 0;
-    while (s2[i] != '\0') {
-        s1[i] = s2[i];
+    while (from[i] != '\0') {
+        to[i] = from[i];
         i++;
     }
-    s1[i] = '\0';
+    to[i] = '\0';
 }
 
-unsigned int BString::stringCount(const char *str) {
+unsigned int strCount(const char *str) {
     unsigned int i = 0;
     while (str[i] != '\0') {
         i++;
     }
     return i;
 }
+

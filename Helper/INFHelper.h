@@ -10,7 +10,7 @@ Version:    0.1
 #define BALLENGINE4CPP_JSONHELPER_H
 
 #include "../Other/BString.h"
-#include <vector>
+#include <map>
 #include <fstream>
 
 namespace be {
@@ -23,8 +23,7 @@ namespace be {
     protected:
         void analysis(BString code);
     private:
-        std::vector<BString> key;
-        std::vector<BString> value;
+        std::map<BString, BString> m_mapData;
     };
 
 }

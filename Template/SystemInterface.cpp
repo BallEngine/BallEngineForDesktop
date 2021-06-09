@@ -1,5 +1,4 @@
 /*****************************************************************************
-Copyright(c) 2006-2019,ZHAW Tech. Co., Ltd.
 FileName:   SystemInterface.cpp
 Creater:    Xeler
 Date:       2021/04/20

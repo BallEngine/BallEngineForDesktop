@@ -1,19 +1,16 @@
 /*****************************************************************************
-Copyright(c) 2006-2019,ZHAW Tech. Co., Ltd.
 FileName:   define.h
 Creater:    Zekai Zhao
 Date:       2020/12/5
 Desc:       Define macro and type.
 Version:    0.1
-ChanDesc:   none
-Changer:    none
-ChanDate:   none
 ******************************************************************************/
 1
 #ifndef BALLENGINE4CPP_DEFINE_H
 #define BALLENGINE4CPP_DEFINE_H
 
-#define WIN
+#define WIN32
+//#define LINUX
 
 #define _BE_BEGIN namespace be{
 #define _BE_END   }

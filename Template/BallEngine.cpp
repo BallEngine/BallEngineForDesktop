@@ -22,5 +22,18 @@ BallEngine &BallEngine::getEngine() {
 }
 
 void BallEngine::emit(Event event) {
-    
+    switch(event.to)    {
+        case Interface:
+            systemInterface->processEvent(event);
+            break;
+        case PasterSys:
+            pasterManager->processEvent(event);
+            break;
+        case ScriptSys:
+        case Other:
+            scriptManager->processEvent(event);
+            break;
+        default:
+            break;
+    }
 }

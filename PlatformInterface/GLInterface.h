@@ -11,14 +11,15 @@ Version:    0.1
 
 #include "../define.h"
 #include "../Template/SystemInterface.h"
-#include <GL/glew.h>
+//#include <GL/glew.h>
 #include <GL/freeglut.h>
 
 
 _BE_BEGIN
 
     class GLInterface : public SystemInterface {
-    
+    public:
+        void processEvent(Event event);
     };
 
 _BE_END

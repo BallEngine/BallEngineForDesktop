@@ -34,7 +34,11 @@ Paster &Paster::operator=(const Paster &paster) {
 }
 
 void Paster::frameControl(int frame) {
-    picPoint += frame;
+    if(picPoint + frame >0) {
+        picPoint += frame;
+    }else{
+        picPoint = 0;
+    }
 }
 
 BImage Paster::getFrame() {
@@ -52,7 +56,7 @@ PasterManager::~PasterManager() {
 
 
 void PasterManager::processEvent(Event event) {
-    //TODO
+
 }
 
 

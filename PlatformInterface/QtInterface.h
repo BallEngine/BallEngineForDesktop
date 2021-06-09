@@ -17,6 +17,7 @@ _BE_USE
 class QtBallEngine : public BallEngine {
 public:
     QtBallEngine();
+
     ~QtBallEngine();
 };
 
@@ -27,6 +28,7 @@ public:
     SystemInterface getInterface();
     BImage updateFrame();
     void *castPasterToPic();
+    void processEvent(Event event);
 private:
     QtInterface();
     ~QtInterface();

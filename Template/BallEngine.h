@@ -12,6 +12,8 @@ Version:    0.1
 #include "../define.h"
 #include "../Manager/PasterManager.h"
 #include "../Manager/ScriptManager.h"
+#include "../Manager/AudioManager.h"
+#include "SystemInterface.h"
 #include <thread>
 
 _BE_BEGIN
@@ -27,9 +29,13 @@ _BE_BEGIN
         BallEngine(const BallEngine &engine);
         BallEngine &operator=(const BallEngine &engine);
     protected:
+        //Engine Manager
         static BallEngine *ballEngine;
+        AudioManager *audioManager;
         PasterManager *pasterManager;
         ScriptManager *scriptManager;
+        //PlatformInterface
+        SystemInterface *systemInterface;
     };
 
 _BE_END

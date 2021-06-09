@@ -36,9 +36,6 @@ namespace be {
 
     typedef void* FuncType(int, char *[]);
 
-    /*
-     *
-     */
     class BThread {
     public:
         explicit BThread(FuncType *func);

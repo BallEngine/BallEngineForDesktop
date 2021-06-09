@@ -20,6 +20,7 @@ _BE_BEGIN
         virtual SystemInterface getInterface();
         virtual BImage updateFrame();
         virtual void *castPasterToPic();
+        virtual void processEvent(Event event);
     protected:
         SystemInterface();
         virtual ~SystemInterface();

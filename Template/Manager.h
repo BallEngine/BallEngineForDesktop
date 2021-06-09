@@ -24,7 +24,6 @@ _BE_BEGIN
     class Event {
     public:
         Event(ManagerType whereFrom, ManagerType wantTo, BString eventMessage);
-    protected:
         ManagerType from, to;
         BString data;
     };
