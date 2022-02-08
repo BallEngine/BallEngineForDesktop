@@ -34,8 +34,8 @@ namespace be {
         void clientStart();
         void close();
         bool isCrash();
+        bool sendMessage(BString message);
         BString getMessage();
-        BString sendMessage();
         BString operator>>(BString bString);
         NetHelper operator<<(BString bString);
         ~NetHelper();

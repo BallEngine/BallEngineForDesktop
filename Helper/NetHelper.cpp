@@ -37,10 +37,10 @@ bool NetHelper::isCrash() {
     return true;
 }
 
-BString NetHelper::getMessage() {
-    return BString();
+bool NetHelper::sendMessage(BString message) {
+    return true;
 }
 
-BString NetHelper::sendMessage() {
+BString NetHelper::getMessage() {
     return BString();
 }

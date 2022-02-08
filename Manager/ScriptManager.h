@@ -9,6 +9,7 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_SCRIPTMANAGER_H
 #define BALLENGINE4CPP_SCRIPTMANAGER_H
 
+#include <vector>
 #include "../define.h"
 #include "../Template/Manager.h"
 
@@ -28,7 +29,7 @@ _BE_BEGIN
         void* memoryRead(BString key);
     protected:
         std::vector<BString> key[26];
-        std::vector<void*> value[26];
+        std::vector<int> value[26];
     };
 _BE_END
 
