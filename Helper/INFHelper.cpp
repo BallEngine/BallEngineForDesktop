@@ -10,7 +10,7 @@ Version:    0.1
 using namespace be;
 
 INFHelper::INFHelper(BString fileName) {
-    std::ifstream fileStream = std::ifstream(fileName.toChar(), std::ios::in | std::ios::binary);
+    std::ifstream fileStream = std::ifstream(fileName.toCStyleStr(), std::ios::in | std::ios::binary);
     fileStream.seekg(std::ios::end);
     unsigned long fileLength = fileStream.tellg(), count = 0;
     char *temp = new char[fileLength + 1], *cache = new char[fileLength + 1];
@@ -45,7 +45,7 @@ BString INFHelper::getValue(BString &dataName) {
 void INFHelper::analysis(BString code) {
     unsigned long count = 0;
     BString key = BString(), value = BString();
-    key=code.strSub(0, code.strFind('='));
-    value=code.strSub(code.strFind('=')+1);
+    key = code.strSub(0, code.strFind('='));
+    value = code.strSub(code.strFind('=') + 1, code.getLength());
     m_mapData.insert(key, value);
 }

@@ -10,7 +10,7 @@ Version:    0.1
 
 #include "BString.h"
 #include <fstream>
-#include <math.h>
+#include <cmath>
 
 typedef unsigned short word;
 typedef unsigned long dword;
@@ -76,11 +76,9 @@ namespace be {
 
     class BImage {
     public:
-        BImage();
+        explicit BImage();
 
         BImage(BString imagePath);
-
-        BImage(BImage bImage, uint startX, uint startY, uint endX, uint endY);
 
         BImage(const BImage &bImage);
 
@@ -94,18 +92,20 @@ namespace be {
 
         void drawArc(uint pointAX, uint pointAY, uint pointBX, uint pointBY, uint pointCX, uint pointCY, Paint paint);
 
-        void drawPic(BImage pic, uint startX, uint startY);
+        void drawPic(const BImage &pic, uint startX, uint startY);
+
+        void clip(uint pointAX, uint pointAY, uint pointBX, uint pointBY);
 
         byte *getImageData();
 
         ImageType getType();
 
     protected:
-        void convertFromBMP(std::ifstream picStream);
+        void convertFromBMP(std::ifstream &picStream);
 
-        void convertFromJPG(std::ifstream picStream);
+        void convertFromJPG(std::ifstream &picStream);
 
-        void convertFromPNG(std::ifstream picStream);
+        void convertFromPNG(std::ifstream &picStream);
 
     private:
         ImageType type;

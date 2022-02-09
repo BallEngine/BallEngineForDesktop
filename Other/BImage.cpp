@@ -13,11 +13,15 @@ BImage::BImage() {
     type = None;
     width = 0;
     height = 0;
+    picLength = 0;
     picData = nullptr;
+    bmpInfo = {};
+    jpgInfo = {};
+    pngInfo = {};
 }
 
 BImage::BImage(BString imagePath) {
-    std::ifstream imageFile = std::ifstream(imagePath.toChar(), std::ios::in | std::ios::binary);
+    std::ifstream imageFile = std::ifstream(imagePath.toCStyleStr(), std::ios::in | std::ios::binary);
 
     int flag = -1;
 
@@ -25,23 +29,27 @@ BImage::BImage(BString imagePath) {
 
     if (filePostfix == ".bmp") {
         convertFromBMP(imageFile);
-    } else if (filePostfix == ".jpg" || filePostfix == "jpeg") {
+    } else if (filePostfix == ".jpg") {
         convertFromJPG(imageFile);
     } else if (filePostfix == ".png") {
         convertFromPNG(imageFile);
     } else {
-
+        //默认是JPEG
+        convertFromJPG(imageFile);
     }
 
     imageFile.close();
 }
 
-BImage::BImage(BImage bImage, uint startX, uint startY, uint endX, uint endY) {
-
-}
-
 BImage::BImage(const BImage &bImage) {
-    (*this) = bImage;
+    type = bImage.type;
+    bmpInfo = bImage.bmpInfo;
+    jpgInfo = bImage.jpgInfo;
+    pngInfo = bImage.pngInfo;
+    width = bImage.width;
+    height = bImage.height;
+    picLength = bImage.picLength;
+    picData = bImage.picData
 }
 
 BImage &BImage::operator=(const BImage &bImage) {
@@ -73,7 +81,11 @@ void BImage::drawArc(uint pointAX, uint pointAY, uint pointBX, uint pointBY, uin
 
 }
 
-void BImage::drawPic(BImage pic, uint startX, uint startY) {
+void BImage::drawPic(const BImage &pic, uint startX, uint startY) {
+
+}
+
+void BImage::clip(uint pointAX, uint pointAY, uint pointBX, uint pointBY) {
 
 }
 
@@ -85,7 +97,7 @@ ImageType BImage::getType() {
     return type;
 }
 
-void BImage::convertFromBMP(std::ifstream picStream) {
+void BImage::convertFromBMP(std::ifstream &picStream) {
     SourceBmpInfo sourceBmpInfo{};
     SourceBmpImageInfo sourceBmpImageInfo{};
 
@@ -115,10 +127,10 @@ void BImage::convertFromBMP(std::ifstream picStream) {
     picStream.read((char *) (picData), picLength);
 }
 
-void BImage::convertFromJPG(std::ifstream picStream) {
+void BImage::convertFromJPG(std::ifstream &picStream) {
 
 }
 
-void BImage::convertFromPNG(std::ifstream picStream) {
+void BImage::convertFromPNG(std::ifstream &picStream) {
 
 }

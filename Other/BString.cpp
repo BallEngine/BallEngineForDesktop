@@ -28,74 +28,56 @@ BString::BString(const BString &bString) {
 }
 
 BString::~BString() {
+    while (!m_listCharPtrStack.empty()) {
+        delete[] m_listCharPtrStack.top();
+        m_listCharPtrStack.pop();
+    }
     delete[] m_pString;
-    delete[] m_pTempChars;
 }
 
 BString &BString::operator+(const BString &bString) {
-    char *tempChars = new char[m_iStringLength + bString.m_iStringLength + 1];
-    strCopy(tempChars, m_pString);
-    strCopy(tempChars + m_iStringLength, bString.m_pString);
-    delete[] m_pString;
-    m_pString = tempChars;
+    checkStringSpace(m_iStringLength + bString.m_iStringLength);
+    strCopy(m_pString + m_iStringLength, bString.m_pString);
     m_iStringLength += bString.m_iStringLength;
     return (*this);
 }
 
 BString &BString::operator+(const char *str) {
     unsigned int strLength = strCount(str);
-    char *tempChars = new char[m_iStringLength + strLength + 1];
-    strCopy(tempChars, m_pString);
-    strCopy(tempChars + m_iStringLength, str);
-    delete[] m_pString;
-    m_pString = tempChars;
+    checkStringSpace(m_iStringLength + strLength);
+    strCopy(m_pString + m_iStringLength, str);
     m_iStringLength += strLength;
     return (*this);
 }
 
 BString &BString::operator+(char c) {
-    char *tempChars = new char[m_iStringLength + 2];
-    strCopy(tempChars, m_pString);
+    checkStringSpace(m_iStringLength + 1);
     m_pString[m_iStringLength] = c;
+    m_iStringLength++;
     m_pString[m_iStringLength] = '\0';
-    delete[] m_pString;
-    m_pString = tempChars;
-    m_iStringLength += 1;
     return (*this);
 }
 
 BString &BString::operator=(const BString &bString) {
-    if (this == &bString) {
+    if (m_pString == bString.m_pString) {
         return *this;
     }
-    if (m_pString != nullptr) {
-        delete m_pString;
-        m_pString = nullptr;
-    }
     m_iStringLength = bString.m_iStringLength;
-    m_pString = new char[m_iStringLength + 1];
+    checkStringSpace(m_iStringLength);
     strCopy(m_pString, bString.m_pString);
     return *this;
 }
 
 BString &BString::operator=(const char *str) {
-    if (m_pString != nullptr) {
-        delete m_pString;
-        m_pString = nullptr;
-    }
     m_iStringLength = strCount(str);
-    m_pString = new char[m_iStringLength + 1];
+    checkStringSpace(m_iStringLength);
     strCopy(m_pString, str);
     return *this;
 }
 
 BString &BString::operator=(char c) {
-    if (m_pString != nullptr) {
-        delete m_pString;
-        m_pString = nullptr;
-    }
     m_iStringLength = 1;
-    m_pString = new char[m_iStringLength + 1];
+    checkStringSpace(m_iStringLength);
     m_pString[0] = c;
     m_pString[1] = '\0';
     return *this;
@@ -105,12 +87,9 @@ bool BString::operator==(const BString &bString) {
     unsigned int i;
     if (m_iStringLength != bString.m_iStringLength) {
         return false;
+    } else {
+        return (*this) == bString.m_pString;
     }
-    for (i = 0; i < m_iStringLength; i++) {
-        if (m_pString[i] != bString.m_pString[i])
-            return false;
-    }
-    return true;
 }
 
 bool BString::operator==(const char *str) {
@@ -134,24 +113,17 @@ BString BString::operator+=(const BString &bString) {
 }
 
 BString BString::operator+=(const char *str) {
-    char *temp = m_pString;
     m_iStringLength = m_iStringLength + strCount(str);
-    m_pString = new char[m_iStringLength + 1];
-    strCopy(m_pString, temp);
+    checkStringSpace(m_iStringLength);
     strCopy(m_pString + strCount(m_pString), str);
-    m_pString[m_iStringLength] = '\0';
-    delete temp;
     return *this;
 }
 
 BString BString::operator+=(char c) {
-    char *temp = m_pString;
+    checkStringSpace(m_iStringLength + 1);
+    m_pString[m_iStringLength] = c;
     m_iStringLength++;
-    m_pString = new char[m_iStringLength + 1];
-    strCopy(m_pString, temp);
-    m_pString[m_iStringLength - 1] = c;
     m_pString[m_iStringLength] = '\0';
-    delete temp;
     return *this;
 }
 
@@ -159,39 +131,20 @@ char BString::operator[](unsigned long point) {
     return m_pString[point];
 }
 
-char *BString::toChar() {
-    checkNewTempChars(m_iStringLength);
-    strCopy(m_pTempChars, m_pString);
-    return m_pTempChars;
-}
-
-BString BString::strSub(unsigned int startIndex) {
-    if (startIndex >= m_iStringLength) {
-        return BString();
-    } else {
-        unsigned int offset = 0;
-
-        checkNewTempChars(m_iStringLength - startIndex);
-        while ((startIndex + offset) <= m_iStringLength) {
-            m_pTempChars[offset] = m_pString[startIndex + offset];
-            offset++;
-        }
-    }
-    return BString(m_pTempChars);
+char *BString::toCStyleStr() {
+    char *retStr = new char[m_iStringLength + 1];
+    strCopy(retStr, m_pString);
+    m_listCharPtrStack.push(retStr);
+    return retStr;
 }
 
 BString BString::strSub(unsigned int startIndex, unsigned int endIndex) {
     if (endIndex < startIndex || (endIndex - startIndex) >= m_iStringLength) {
         return BString();
     } else {
-        unsigned int offset = 0;
-        checkNewTempChars(endIndex - startIndex);
-        while ((startIndex + offset) <= endIndex) {
-            m_pTempChars[offset] = m_pString[startIndex + offset];
-            offset++;
-        }
+        BString bString = BString(m_pString + endIndex - startIndex);
+        return bString;
     }
-    return BString(m_pTempChars);
 }
 
 int BString::strFind(char c) {
@@ -205,13 +158,29 @@ int BString::strFind(char c) {
     return -1;
 }
 
-void BString::checkNewTempChars(unsigned int length) {
-    delete[] m_pTempChars;
-    m_pTempChars = new char[length];
-}
-
 unsigned long BString::getLength() {
     return m_iStringLength;
+}
+
+void BString::checkStringSpace(unsigned int length) {
+    if (length >= m_iStringLength) {
+        char *tempStr = new char[m_iStringLength + 1];
+        be::strCopy(tempStr, m_pString);
+        m_iMemoryLength = length;
+    }
+}
+
+void BString::memoryGC(unsigned int threshold) {
+    if (threshold > (m_iMemoryLength - m_iStringLength)) {
+        char *tempStr = new char[m_iStringLength + 1];
+        unsigned int offset = 0;
+        while (offset <= m_iStringLength) {
+            tempStr[offset] = m_pString[offset];
+            offset++;
+        }
+        delete[] m_pString;
+        m_pString = tempStr;
+    }
 }
 
 void strCopy(char *to, const char *from) {

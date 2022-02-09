@@ -19,7 +19,7 @@ ScriptManager::~ScriptManager() {
 
 BString ScriptManager::pretreatment(char *code) {
     BString operands, operators;
-
+    BString encode;
     return encode;
 }
 
@@ -45,7 +45,7 @@ double ScriptManager::execute(BString expression) {
                 case '&':
                 case '|':
                 case '%':
-                    1^2;
+                    1 ^ 2;
                     break;
             }
         }
