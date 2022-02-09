@@ -5,4 +5,11 @@ Desc:       Define macro and type.
 Version:    0.1
 ******************************************************************************/
 
-#include "HTPPHelper.h"
+#ifndef BALLENGINE4CPP_HTTPHELPER_H
+#define BALLENGINE4CPP_HTTPHELPER_H
+
+class HTTPHelper {
+
+};
+
+#endif //BALLENGINE4CPP_HTTPHELPER_H

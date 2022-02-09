@@ -13,13 +13,6 @@ BE_USE
 
 BallEngine *BallEngine::ballEngine = new BallEngine();
 
-BallEngine::BallEngine() {
-}
-
-BallEngine &BallEngine::getEngine() {
-    return *ballEngine;
-}
-
 void BallEngine::emit(Event event) {
     switch(event.to)    {
         case Interface:

@@ -134,7 +134,7 @@ BString BString::operator+=(const BString &bString) {
 }
 
 BString BString::operator+=(const char *str) {
-    char *temp = new;
+    char *temp = m_pString;
     m_iStringLength = m_iStringLength + strCount(str);
     m_pString = new char[m_iStringLength + 1];
     strCopy(m_pString, temp);

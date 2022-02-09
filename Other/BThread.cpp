@@ -29,7 +29,7 @@ void *BThread::checkReturn() {
 }
 
 void BThread::startThread() {
-    if (pthread_create(&threadID, nullptr, threadLoop, (void *) this)) {
+    if (pthread_create(&threadID, nullptr, this.thre, (void *) this)) {
     }
 }
 

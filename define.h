@@ -16,7 +16,7 @@ Version:    0.1
 
 #define OPTION_SINGLETON_CLASS(CLASSNAME) explicit CLASSNAME() {}; CLASSNAME(CLASSNAME &) {}; CLASSNAME &operator=(const CLASSNAME &input) { return *this; };
 
-#define INTERFACE_INSTANTIATION(CLASSNAME) static CLASSNAME &instantiation() {static CLASSNAME *instance = nullptr;if (instance == nullptr) {instance = new CLASSNAME();}return *instance;}
+#define INTERFACE_INSTANTIATION(CLASSNAME) static CLASSNAME &instantiation() {static CLASSNAME *instance = nullptr;if (instance == nullptr) {instance = new CLASSNAME();}return *instance;};
 
 #define BE_BEGIN namespace be{
 #define BE_END   }

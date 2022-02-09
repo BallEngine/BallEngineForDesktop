@@ -20,13 +20,17 @@ BE_BEGIN
     class Manager;
 
     class BallEngine {
+    CLASS_OPTION:
+
+        OPTION_SINGLETON_CLASS(BallEngine)
+    CLASS_INTERFACE:
+
+        INTERFACE_INSTANTIATION(BallEngine)
+
     public:
-        static BallEngine &getEngine();
+
         void emit(Event event);
-    private:
-        BallEngine();
-        BallEngine(const BallEngine &engine);
-        BallEngine &operator=(const BallEngine &engine);
+
     protected:
         //Engine Manager
         static BallEngine *ballEngine;
