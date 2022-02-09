@@ -1,13 +1,12 @@
 /*****************************************************************************
 FileName:   SystemInterface.cpp
 Creater:    Xeler
-Date:       2021/04/20
 Desc:       Virtual Interface class code(like Trump's brain).
 Version:    0.1
 ******************************************************************************/
 
 #include "SystemInterface.h"
 
-_BE_BEGIN
+BE_BEGIN
 
-_BE_END
+BE_END

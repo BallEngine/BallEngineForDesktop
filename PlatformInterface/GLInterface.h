@@ -1,7 +1,6 @@
 /*****************************************************************************
 FileName:   GLInterface.h
 Creater:    Xeler
-Date:       2021/04/20
 Desc:       Desc
 Version:    0.1
 ******************************************************************************/
@@ -15,13 +14,13 @@ Version:    0.1
 #include <GL/freeglut.h>
 
 
-_BE_BEGIN
+BE_BEGIN
 
     class GLInterface : public SystemInterface {
     public:
         void processEvent(Event event);
     };
 
-_BE_END
+BE_END
 
 #endif //BALLENGINE4CPP_GLINTERFACE_H

@@ -1,20 +1,26 @@
 /*****************************************************************************
 FileName:   define.h
 Creater:    Zekai Zhao
-Date:       2020/12/5
 Desc:       Define macro and type.
 Version:    0.1
 ******************************************************************************/
-1
+
 #ifndef BALLENGINE4CPP_DEFINE_H
 #define BALLENGINE4CPP_DEFINE_H
 
 #define WIN32
 //#define LINUX
 
-#define _BE_BEGIN namespace be{
-#define _BE_END   }
-#define _BE_USE   using namespace be;
+#define CLASS_OPTION protected
+#define CLASS_INTERFACE public
+
+#define OPTION_SINGLETON_CLASS(CLASSNAME) explicit CLASSNAME() {}; CLASSNAME(CLASSNAME &) {}; CLASSNAME &operator=(const CLASSNAME &input) { return *this; };
+
+#define INTERFACE_INSTANTIATION(CLASSNAME) static CLASSNAME &instantiation() {static CLASSNAME *instance = nullptr;if (instance == nullptr) {instance = new CLASSNAME();}return *instance;}
+
+#define BE_BEGIN namespace be{
+#define BE_END   }
+#define BE_USE   using namespace be;
 
 #define emitNewEvent(x, y) (emit(Event(this,y,x)))
 #define emitEvent(x) (emit(x))

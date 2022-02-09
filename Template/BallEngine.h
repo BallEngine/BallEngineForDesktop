@@ -1,7 +1,6 @@
 /*****************************************************************************
 FileName:   BallEngine.h
 Creater:    Xeler
-Date:       2021/04/20
 Desc:       Engine Head.
 Version:    0.1
 ******************************************************************************/
@@ -16,7 +15,7 @@ Version:    0.1
 #include "SystemInterface.h"
 #include <thread>
 
-_BE_BEGIN
+BE_BEGIN
 
     class Manager;
 
@@ -38,6 +37,6 @@ _BE_BEGIN
         SystemInterface *systemInterface;
     };
 
-_BE_END
+BE_END
 
 #endif //BALLENGINE4CPP_BALLENGINE_H

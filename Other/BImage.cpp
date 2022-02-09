@@ -1,7 +1,6 @@
 /*****************************************************************************
 FileName:   BImage.cpp
 Creater:    Xeler
-Date:       2021/04/20
 Desc:       Desc
 Version:    0.1
 ******************************************************************************/
@@ -12,20 +11,28 @@ using namespace be;
 
 BImage::BImage() {
     type = NONE;
-    imageLength = 0;
     width = 0;
     height = 0;
     picData = nullptr;
-    picHeadLength=0;
-    pixelLength = 0;
 }
 
 BImage::BImage(BString imagePath) {
     std::ifstream imageFile = std::ifstream(imagePath.toChar(), std::ios::in | std::ios::binary);
-    imageFile.seekg(std::ios::end);
-    imageLength = 1 + imageFile.tellg();
-    picData = new byte[imageLength];
-    imageFile.read((char *) picData, imageLength);
+
+    int flag = -1;
+
+    BString filePostfix = imagePath.strSub(imagePath.getLength() - 4, imagePath.getLength());
+
+    if (filePostfix == ".bmp" ) {
+
+    } else if (filePostfix == ".jpg" || filePostfix == "jpeg") {
+
+    } else if (filePostfix == ".png") {
+
+    } else {
+
+    }
+
     imageFile.close();
 }
 
@@ -34,27 +41,19 @@ BImage::BImage(BImage bImage, uint startX, uint startY, uint endX, uint endY) {
 }
 
 BImage::BImage(const BImage &bImage) {
-    type = bImage.type;
-    imageLength = bImage.imageLength;
-    picHeadLength = bImage.picHeadLength;
-    pixelLength = bImage.pixelLength;
-    width = bImage.width;
-    height = bImage.height;
-    while (imageLength--) {
-        picData[imageLength] = bImage.picData[imageLength];
-    }
-    imageLength = bImage.imageLength;
+    (*this) = bImage;
 }
 
 BImage &BImage::operator=(const BImage &bImage) {
     type = bImage.type;
-    imageLength = bImage.imageLength;
     width = bImage.width;
     height = bImage.height;
-    while (imageLength--) {
-        picData[imageLength] = bImage.picData[imageLength];
+    picLength = bImage.picLength;
+    ulong copyLength = picLength;
+    picData = new byte[copyLength];
+    while (copyLength--) {
+        picData[copyLength] = bImage.picData[copyLength];
     }
-    imageLength = bImage.imageLength;
     return *this;
 }
 
@@ -74,8 +73,8 @@ void BImage::drawArc(uint pointAX, uint pointAY, uint pointBX, uint pointBY, uin
 
 }
 
-void BImage::drawPic(BImage pic, uint startX, uint startY, Paint paint) {
-    
+void BImage::drawPic(BImage pic, uint startX, uint startY) {
+
 }
 
 byte *BImage::getImageData() {

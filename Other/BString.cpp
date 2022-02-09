@@ -1,9 +1,8 @@
 ﻿/*****************************************************************************
 FileName:   BString.cpp
 Creater:    Xeler
-Date:       2021/05/13
 Desc:       Desc
-Version:    1.1
+Version:    1.0
 ******************************************************************************/
 
 #include "BString.h"
@@ -211,6 +210,10 @@ void BString::checkNewTempChars(unsigned int length) {
     m_pTempChars = new char[length];
 }
 
+unsigned long BString::getLength() {
+    return m_iStringLength;
+}
+
 void strCopy(char *to, const char *from) {
     int i = 0;
     while (from[i] != '\0') {
@@ -227,4 +230,3 @@ unsigned int strCount(const char *str) {
     }
     return i;
 }
-

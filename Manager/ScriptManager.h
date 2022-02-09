@@ -1,7 +1,6 @@
 /*****************************************************************************
 FileName:   ScriptManager.h
 Creater:    Xeler
-Date:       2021/04/20
 Desc:       Desc
 Version:    0.1
 ******************************************************************************/
@@ -13,7 +12,7 @@ Version:    0.1
 #include "../define.h"
 #include "../Template/Manager.h"
 
-_BE_BEGIN
+BE_BEGIN
 
     class ScriptManager : public Manager {
     public:
@@ -31,6 +30,6 @@ _BE_BEGIN
         std::vector<BString> key[26];
         std::vector<int> value[26];
     };
-_BE_END
+BE_END
 
 #endif //BALLENGINE4CPP_SCRIPTMANAGER_H

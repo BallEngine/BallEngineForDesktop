@@ -1,7 +1,6 @@
 /*****************************************************************************
 FileName:   PasterManager.h
 Creater:    Xeler
-Date:       2021/04/20
 Desc:       Define class Paster and PasterManager.
 Version:    0.1
 ******************************************************************************/
@@ -13,7 +12,7 @@ Version:    0.1
 #include "../Template/Manager.h"
 #include <vector>
 
-_BE_BEGIN
+BE_BEGIN
 
     class Paster {
     public:
@@ -43,6 +42,6 @@ _BE_BEGIN
         std::vector<int> pastersID;
     };
 
-_BE_END
+BE_END
 
 #endif //BALLENGINE4CPP_PASTERMANAGER_H

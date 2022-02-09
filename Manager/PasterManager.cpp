@@ -1,7 +1,6 @@
 /*****************************************************************************
 FileName:   PasterManager.cpp
 Creater:    Xeler
-Date:       2021/04/20
 Desc:       PasterManager & Paster class code.
 Version:    0.1
 ******************************************************************************/
@@ -9,7 +8,7 @@ Version:    0.1
 #include "PasterManager.h"
 #include "../Template/BallEngine.h"
 
-_BE_USE
+BE_USE
 
 Paster::Paster(BImage pics[], unsigned int picCount) {
     int i = 0;

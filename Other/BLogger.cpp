@@ -1,10 +1,8 @@
 /*****************************************************************************
-FileName:   AudioManager.cpp
+FileName:   BLogger.h
 Creater:    Xeler
-Desc:       Desc
+Desc:       Log 4 BallEngine
 Version:    0.1
 ******************************************************************************/
 
-#include "AudioManager.h"
-
-BE_USE
+#include "BLogger.h"

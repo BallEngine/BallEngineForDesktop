@@ -1,7 +1,6 @@
 /*****************************************************************************
 FileName:   QtInterface.h
 Creater:    Xeler
-Date:       2021/04/20
 Desc:       QtInterface define.
 Version:    0.1
 ******************************************************************************/
@@ -12,7 +11,7 @@ Version:    0.1
 #include "../define.h"
 #include "../Template/SystemInterface.h"
 
-_BE_USE
+BE_USE
 
 class QtBallEngine : public BallEngine {
 public:

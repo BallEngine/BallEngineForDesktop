@@ -1,7 +1,6 @@
 /*****************************************************************************
 FileName:   BImage.h
 Creater:    Xeler
-Date:       2021/04/20
 Desc:       Desc
 Version:    0.1
 ******************************************************************************/
@@ -12,26 +11,60 @@ Version:    0.1
 #include "BString.h"
 #include <fstream>
 
+typedef unsigned short word;
+typedef unsigned long dword;
 typedef unsigned char byte;
 typedef unsigned int uint;
+typedef unsigned long ulong;
 
 namespace be {
 
+    //DelayTODO : support png&jpg
     enum ImageType {
         NONE = 0,
-        BMP_NONE,
-        BMP_AVE,
-        BMP_,
-        BMP_8BYTE,
+        BMP,
         PNG,
         JPG
     };
-    
-    enum GrayType{
-        NOTYPE = 0,
-        AVERAGE,
-        Standard,
-        BYTE8
+
+    struct BmpRGBSQUAD{
+        byte rgbBlue;
+        byte rgbGreen;
+        byte rgbRed;
+        byte rgbReserved;
+    };
+
+    struct SourceBmpInfo{
+        word type;
+        dword size;
+        word reserved1;
+        word reserved2;
+        dword offBits;
+    };
+
+    struct SourceBmpImageInfo{
+        dword size;
+        long width;
+        long height;
+        word planes;
+        word bitCount;
+        dword compression;
+        dword sizeImage;
+        long xPelsPerMeter;
+        long yPelsPerMeter;
+        dword clrUsed;
+        dword clrImportant;
+    };
+
+    struct BmpInfo{
+        word reserved[2];
+        word compression;
+    };
+
+    struct PngInfo{
+    };
+
+    struct JpgInfo{
     };
 
     struct Paint {
@@ -50,14 +83,16 @@ namespace be {
         void drawLine(uint startX, uint startY, uint endX, uint endY, Paint paint);
         void drawArc(uint circleX, uint circleY, uint radius, uint startAngle, uint endAngle, Paint paint);
         void drawArc(uint pointAX, uint pointAY, uint pointBX, uint pointBY, uint pointCX, uint pointCY, Paint paint);
-        void drawPic(BImage pic, uint startX, uint startY, Paint paint);
+        void drawPic(BImage pic, uint startX, uint startY);
         byte* getImageData();
         ImageType getType();
     private:
         ImageType type;
-        uint width, height;
-        unsigned long imageLength;
-        unsigned short pixelLength,picHeadLength;
+        BmpInfo bmpInfo;
+        PngInfo pngInfo;
+        JpgInfo jpgInfo;
+        ulong width, height;
+        ulong picLength;
         byte *picData;
     };
 
