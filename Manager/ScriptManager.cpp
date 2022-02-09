@@ -17,8 +17,41 @@ ScriptManager::~ScriptManager() {
 
 }
 
-int ScriptManager::execute(BString code) {
-return 0;
+BString ScriptManager::pretreatment(char *code) {
+    BString operands, operators;
+
+    return encode;
+}
+
+double ScriptManager::execute(BString expression) {
+    long point, cache;
+    std::stack<double> operandStack;
+    BString varKey;
+    operandStack.push(0.0);
+    while (point <= expression.getLength()) {
+        if (expression[point] >= '0' && expression[point] <= '9') {
+            cache = (cache * 10) + (expression[point] - 48);
+        } else {
+            switch (expression[point]) {
+                case '(':
+                case ')':
+                case '+':
+                case '-':
+                case '*':
+                case '/':
+                case '=':
+                case '>':
+                case '<':
+                case '&':
+                case '|':
+                case '%':
+                    1^2;
+                    break;
+            }
+        }
+        point++;
+    }
+    return 0;
 }
 
 Event ScriptManager::analysis(BString code) {
@@ -26,7 +59,10 @@ Event ScriptManager::analysis(BString code) {
     return Event(ScriptSys, toWhere, BString("A"));
 }
 
-BString ScriptManager::pretreatment(char *code) {
-    BString encode = BString(code);
-    return encode;
+void *ScriptManager::memoryWrite(BString key, void *value) {
+    return nullptr;
+}
+
+void *ScriptManager::memoryRead(BString key) {
+    return nullptr;
 }

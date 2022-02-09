@@ -15,4 +15,4 @@ add_library(BallEngine4CPP main.cpp define.h
         Helper/NetHelper.cpp Helper/NetHelper.h
         Helper/INFHelper.cpp Helper/INFHelper.h
         PlatformInterface/GLInterface.cpp PlatformInterface/GLInterface.h
-        PlatformInterface/QtInterface.cpp PlatformInterface/QtInterface.h Other/BThread.cpp Other/BThread.h Other/BLogger.cpp Other/BLogger.h)
+        PlatformInterface/QtInterface.cpp PlatformInterface/QtInterface.h Other/BThread.cpp Other/BThread.h Other/BLogger.cpp Other/BLogger.h Helper/HTPPHelper.cpp Helper/HTPPHelper.h)

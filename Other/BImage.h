@@ -10,6 +10,7 @@ Version:    0.1
 
 #include "BString.h"
 #include <fstream>
+#include <math.h>
 
 typedef unsigned short word;
 typedef unsigned long dword;
@@ -21,20 +22,20 @@ namespace be {
 
     //DelayTODO : support png&jpg
     enum ImageType {
-        NONE = 0,
-        BMP,
-        PNG,
-        JPG
+        None = 0,
+        Bmp,
+        Png,
+        Jpg
     };
 
-    struct BmpRGBSQUAD{
+    struct BmpRGBSQUAD {
         byte rgbBlue;
         byte rgbGreen;
         byte rgbRed;
         byte rgbReserved;
     };
 
-    struct SourceBmpInfo{
+    struct SourceBmpInfo {
         word type;
         dword size;
         word reserved1;
@@ -42,7 +43,7 @@ namespace be {
         dword offBits;
     };
 
-    struct SourceBmpImageInfo{
+    struct SourceBmpImageInfo {
         dword size;
         long width;
         long height;
@@ -56,36 +57,56 @@ namespace be {
         dword clrImportant;
     };
 
-    struct BmpInfo{
+    struct BmpInfo {
         word reserved[2];
         word compression;
+        BmpRGBSQUAD *colors;
     };
 
-    struct PngInfo{
+    struct PngInfo {
+
     };
 
-    struct JpgInfo{
+    struct JpgInfo {
     };
 
     struct Paint {
         uint red, green, blue, alpha, size;
     };
-    Paint createPaint(uint red, uint green, uint blue, uint alpha, uint size);
 
     class BImage {
     public:
         BImage();
+
         BImage(BString imagePath);
+
         BImage(BImage bImage, uint startX, uint startY, uint endX, uint endY);
+
         BImage(const BImage &bImage);
+
         BImage &operator=(const BImage &bImage);
+
         ~BImage();
+
         void drawLine(uint startX, uint startY, uint endX, uint endY, Paint paint);
+
         void drawArc(uint circleX, uint circleY, uint radius, uint startAngle, uint endAngle, Paint paint);
+
         void drawArc(uint pointAX, uint pointAY, uint pointBX, uint pointBY, uint pointCX, uint pointCY, Paint paint);
+
         void drawPic(BImage pic, uint startX, uint startY);
-        byte* getImageData();
+
+        byte *getImageData();
+
         ImageType getType();
+
+    protected:
+        void convertFromBMP(std::ifstream picStream);
+
+        void convertFromJPG(std::ifstream picStream);
+
+        void convertFromPNG(std::ifstream picStream);
+
     private:
         ImageType type;
         BmpInfo bmpInfo;

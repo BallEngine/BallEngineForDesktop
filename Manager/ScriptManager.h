@@ -9,23 +9,42 @@ Version:    0.1
 #define BALLENGINE4CPP_SCRIPTMANAGER_H
 
 #include <vector>
+#include <stack>
 #include "../define.h"
 #include "../Template/Manager.h"
 
 BE_BEGIN
 
+    enum OperatorPriority {
+        Bracket = 0,
+        Mul = 2,
+        Div = 2,
+        Add = 3,
+        Sub = 3,
+        Semicolon = 6
+    };
+
     class ScriptManager : public Manager {
     public:
         ScriptManager();
+
         ~ScriptManager();
-        //执行函数
-        int execute(BString code);
-        //解析函数
-        Event analysis(BString code);
+
         //预处理函数
-        BString pretreatment(char* code);
-        void* memoryWrite(BString key,void* value);
-        void* memoryRead(BString key);
+        BString
+        pretreatment(char *code);
+
+        //执行函数
+        double execute(BString expression);
+
+        //解析函数
+        Event
+        analysis(BString code);
+
+        void *memoryWrite(BString key, void *value);
+
+        void *memoryRead(BString key);
+
     protected:
         std::vector<BString> key[26];
         std::vector<int> value[26];

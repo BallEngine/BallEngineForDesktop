@@ -11,7 +11,6 @@ Version:    0.1
 #include "../define.h"
 #include "../Template/Manager.h"
 
-
 BE_BEGIN
 
     class AudioManager : public Manager {
