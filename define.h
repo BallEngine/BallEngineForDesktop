@@ -14,7 +14,7 @@ Version:    0.1
 #define CLASS_OPTION protected
 #define CLASS_INTERFACE public
 
-#define OPTION_SINGLETON_CLASS(CLASSNAME) explicit CLASSNAME() {}; CLASSNAME(CLASSNAME &) {}; CLASSNAME &operator=(const CLASSNAME &input) { return *this; };
+#define OPTION_SINGLETON_CLASS(CLASSNAME) explicit CLASSNAME() {}; CLASSNAME(CLASSNAME &) = delete; CLASSNAME &operator=(const CLASSNAME &input) = delete;
 
 #define INTERFACE_INSTANTIATION(CLASSNAME) static CLASSNAME &instantiation() {static CLASSNAME *instance = nullptr;if (instance == nullptr) {instance = new CLASSNAME();}return *instance;};
 

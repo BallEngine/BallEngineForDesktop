@@ -8,6 +8,7 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_NETHELPER_H
 #define BALLENGINE4CPP_NETHELPER_H
 
+#include <queue>
 #include "../Other/BString.h"
 
 #ifdef LINUX
@@ -29,19 +30,29 @@ namespace be {
     class NetHelper {
     public:
         NetHelper(unsigned int port = 21324, BString ip = BString("0.0.0.0")); //port:bmx
-        void serverStart();
-        void clientStart();
-        void close();
-        bool isCrash();
-        bool sendMessage(BString message);
-        BString getMessage();
-        BString operator>>(BString bString);
-        NetHelper operator<<(BString bString);
         ~NetHelper();
+
+        void serverStart();
+
+        void clientStart();
+
+        void close();
+
+        bool isConnect();
+
+        bool sendMessage(BString message);
+
+        BString getMessage();
+
+        BString operator>>(BString bString);
+
+        NetHelper operator<<(BString bString);
+
     private:
         bool runtime;
         SOCKET connectSocket;
         sockaddr_in connectAddress;
+        std::queue<BString> messageQueue;
     };
 
 }

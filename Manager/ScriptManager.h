@@ -15,37 +15,35 @@ Version:    0.1
 
 BE_BEGIN
 
-    enum OperatorPriority {
-        Bracket = 0,
-        Mul = 2,
-        Div = 2,
-        Add = 3,
-        Sub = 3,
-        Semicolon = 6
-    };
 
     class ScriptManager : public Manager {
     public:
+
+        constexpr static unsigned char operatorPriority[21] = {11, 11, 11, 11, 10, 9, 9, 9, 8, 8, 7, 7, 7, 7, 6, 6, 5,
+                                                               4, 3, 2, 1};
+
         ScriptManager();
 
         ~ScriptManager();
 
         //预处理函数
-        BString
-        pretreatment(char *code);
+        BString pretreatment(char *code);
 
         //执行函数
         double execute(BString expression);
 
         //解析函数
-        Event
-        analysis(BString code);
+        Event analysis(BString code);
 
         void *memoryWrite(BString key, void *value);
 
         void *memoryRead(BString key);
 
     protected:
+        static unsigned char getOperatorIndex(BString operatorString);
+
+
+    private:
         std::vector<BString> key[26];
         std::vector<int> value[26];
     };

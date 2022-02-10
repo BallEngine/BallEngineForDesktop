@@ -23,7 +23,7 @@ public:
 
 class QtInterface : public SystemInterface {
 public:
-    BallEngine *createEngine();
+    BallEngine &createEngine();
     SystemInterface getInterface();
     BImage updateFrame();
     void *castPasterToPic();

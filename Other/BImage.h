@@ -51,16 +51,16 @@ namespace be {
         word bitCount;
         dword compression;
         dword sizeImage;
-        long xPelsPerMeter;
-        long yPelsPerMeter;
+        long xPixelsPerMeter;
+        long yPixelsPerMeter;
         dword clrUsed;
         dword clrImportant;
     };
 
     struct BmpInfo {
-        word reserved[2];
-        word compression;
-        BmpRGBSQUAD *colors;
+        word reserved[2] = {0, 0};
+        word compression = 0;
+        BmpRGBSQUAD *colors = nullptr;
     };
 
     struct PngInfo {
@@ -72,7 +72,7 @@ namespace be {
 
     struct Paint {
         uint red, green, blue, alpha, size;
-    };
+    } defaultPaint{0, 0, 0, 0, 0};
 
     class BImage {
     public:

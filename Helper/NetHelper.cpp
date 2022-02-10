@@ -25,21 +25,43 @@ void NetHelper::serverStart() {
 }
 
 void NetHelper::clientStart() {
-    
+
 }
 
 void NetHelper::close() {
 
 }
 
-bool NetHelper::isCrash() {
-    return true;
+bool NetHelper::isConnect() {
+    return connectSocket;
 }
 
 bool NetHelper::sendMessage(BString message) {
+    unsigned long startIndex = 0;
+    if (message.getLength() <= 512) {
+    } else {
+        while ((startIndex + 512) < message.getLength()) {
+            sendto(connectSocket, message.strSub(0, 512), 512, 0, &connectAddress, sizeof(connectAddress));
+            startIndex += 512;
+        }
+    }
     return true;
 }
 
 BString NetHelper::getMessage() {
     return BString();
+}
+
+BString NetHelper::operator>>(BString bString) {
+    if (messageQueue.empty()) {
+        return BString();
+    } else {
+        BString ret = BString(messageQueue.front());
+        messageQueue.pop();
+        return ret;
+    }
+}
+
+NetHelper NetHelper::operator<<(BString bString) {
+    return NetHelper();
 }

@@ -11,8 +11,6 @@ Version:    0.1
 
 BE_USE
 
-BallEngine *BallEngine::ballEngine = new BallEngine();
-
 void BallEngine::emit(Event event) {
     switch(event.to)    {
         case Interface:

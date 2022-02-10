@@ -13,16 +13,26 @@ Version:    0.1
 
 BE_BEGIN
 
-    class SystemInterface {
+    virtual class SystemInterface {
+    CLASS_OPTION:
+
+        OPTION_SINGLETON_CLASS(SystemInterface);
+    CLASS_INTERFACE:
+
+        INTERFACE_INSTANTIATION(SystemInterface);
     public:
-        virtual BallEngine *createEngine();
-        virtual SystemInterface getInterface();
-        virtual BImage updateFrame();
-        virtual void *castPasterToPic();
-        virtual void processEvent(Event event);
-    protected:
-        SystemInterface();
-        virtual ~SystemInterface();
+
+        ~SystemInterface() {};
+
+        virtual BallEngine *createEngine() {};
+
+        virtual SystemInterface getInterface() {};
+
+        virtual BImage updateFrame() {};
+
+        virtual void *castPasterToPic() {};
+
+        virtual void processEvent(Event event) {};
     };
 
 BE_END

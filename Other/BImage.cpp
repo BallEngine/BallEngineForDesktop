@@ -49,7 +49,7 @@ BImage::BImage(const BImage &bImage) {
     width = bImage.width;
     height = bImage.height;
     picLength = bImage.picLength;
-    picData = bImage.picData
+    picData = bImage.picData;
 }
 
 BImage &BImage::operator=(const BImage &bImage) {
