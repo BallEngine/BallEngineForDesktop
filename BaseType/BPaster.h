@@ -1,0 +1,12 @@
+
+
+#ifndef BALLENGINE4CPP_BPASTER_H
+#define BALLENGINE4CPP_BPASTER_H
+
+
+class BPaster {
+
+};
+
+
+#endif //BALLENGINE4CPP_BPASTER_H

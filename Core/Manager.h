@@ -8,7 +8,7 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_MANAGER_H
 #define BALLENGINE4CPP_MANAGER_H
 
-#include "../define.h"
+#include "define.h"
 
 BE_BEGIN
 

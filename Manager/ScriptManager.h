@@ -10,8 +10,8 @@ Version:    0.1
 
 #include <vector>
 #include <stack>
-#include "../define.h"
-#include "../Template/Manager.h"
+#include "../Core/define.h"
+#include "../Core/Manager.h"
 
 BE_BEGIN
 

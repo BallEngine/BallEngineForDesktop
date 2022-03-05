@@ -9,7 +9,7 @@ Version:    0.1
 #define BALLENGINE4CPP_NETHELPER_H
 
 #include <queue>
-#include "../Other/BString.h"
+#include "../BaseType/BString.h"
 
 #ifdef LINUX
 

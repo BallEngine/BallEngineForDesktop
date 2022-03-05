@@ -28,9 +28,19 @@ void *BThread::checkReturn() {
     return ret;
 }
 
-void BThread::startThread() {
-    if (pthread_create(&threadID, nullptr, this.thre, (void *) this)) {
+void BThread::initThread(params arg) {
+    if (!(status | 0B0111)) {
+        params localArgs;
+        localArgs.size = arg.size;
+        localArgs.buffer = (char *) malloc(sizeof(char) * arg.size);
+        threadID = pthread_create(&thread,,funcPtr,localArgs);
+        status ^= BTHREAD_STATUS_RETURN;
+        status |= BTHREAD_STATUS_WAITGO;
     }
+}
+
+void BThread::startThread() {
+
 }
 
 void BThread::stopThread() {
@@ -46,22 +56,18 @@ void BThread::pauseThread() {
 void BThread::resumeThread() {
 }
 
-void BThread::setArgs(void *args) {
-    args;
-}
-
 bool BThread::isReady() {
-
+    return status & BTHREAD_STATUS_WAITGO;
 }
 
 bool BThread::isRunning() {
-
+    return status & BTHREAD_STATUS_RUNING;
 }
 
 bool BThread::isReturn() {
-
+    return status & BTHREAD_STATUS_RETURN;
 }
 
 bool BThread::isHangup() {
-
+    return status & BTHREAD_STATUS_HANGUP;
 }

@@ -6,7 +6,7 @@ Version:    0.1
 ******************************************************************************/
 
 #include "PasterManager.h"
-#include "../Template/BallEngine.h"
+#include "../Core/BallEngine.h"
 
 BE_USE
 

@@ -16,6 +16,7 @@ Version:    0.1
 #ifdef WIN32
 
 #define sleep Sleep
+
 #include <windows.h>
 
 #endif
@@ -24,37 +25,55 @@ Version:    0.1
 
 typedef unsigned char uch;
 
-/*
-#define BTHREAD_STATUS_WAITGO   ((uch)1)
-#define BTHREAD_STATUS_RUNING   ((uch)2)
-#define BTHREAD_STATUS_RETURN   ((uch)4)
-#define BTHREAD_STATUS_HANGUP   ((uch)8)
-*/
+#define BTHREAD_STATUS_WAITGO ((uch)1)
+#define BTHREAD_STATUS_RUNING ((uch)2)
+#define BTHREAD_STATUS_HANGUP ((uch)4)
+#define BTHREAD_STATUS_RETURN ((uch)8)
 
 namespace be {
 
-    typedef void* FuncType(int, char *[]);
+    typedef void *FuncType(void *);
+
+    typedef struct FuncArgs {
+        unsigned long size;
+        char *buffer;
+    } params;
 
     class BThread {
     public:
         explicit BThread(FuncType *func);
+
         ~BThread();
+
         unsigned char getStatus();
+
         void *checkReturn();
+
+        void initThread(params args);
+
         void startThread();
+
         void stopThread();
+
         void pauseThread();
+
         void resumeThread();
+
         void setArgs(void *args);
+
         //检测线程状态
         //是否准备执行
         bool isReady();
+
         //是否正在执行
         bool isRunning();
+
         //是否已返回
         bool isReturn();
+
         //是否挂起（暂停）
         bool isHangup();
+
     private:
         pthread_t threadID;
         FuncType *funcPtr;

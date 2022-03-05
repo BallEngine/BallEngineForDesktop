@@ -8,8 +8,9 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_JSONHELPER_H
 #define BALLENGINE4CPP_JSONHELPER_H
 
-#include "../Other/BString.h"
+#include "../BaseType/BString.h"
 #include <map>
+#include <string>
 #include <fstream>
 
 namespace be {
@@ -22,7 +23,7 @@ namespace be {
     protected:
         void analysis(BString code);
     private:
-        std::map<BString, BString> m_mapData;
+        std::map<std::string , BString> m_mapData;
     };
 
 }

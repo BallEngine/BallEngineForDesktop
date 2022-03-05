@@ -8,7 +8,7 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_BALLENGINE_H
 #define BALLENGINE4CPP_BALLENGINE_H
 
-#include "../define.h"
+#include "define.h"
 #include "../Manager/PasterManager.h"
 #include "../Manager/ScriptManager.h"
 #include "../Manager/AudioManager.h"

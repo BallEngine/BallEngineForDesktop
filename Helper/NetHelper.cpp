@@ -41,7 +41,8 @@ bool NetHelper::sendMessage(BString message) {
     if (message.getLength() <= 512) {
     } else {
         while ((startIndex + 512) < message.getLength()) {
-            sendto(connectSocket, message.strSub(0, 512), 512, 0, &connectAddress, sizeof(connectAddress));
+            sendto(connectSocket, message.strSub(0, 512).toCStyleStr(), 512, 0,
+                   (sockaddr *)(&connectAddress), sizeof(connectAddress));
             startIndex += 512;
         }
     }

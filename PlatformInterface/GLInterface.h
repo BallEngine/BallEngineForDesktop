@@ -8,10 +8,10 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_GLINTERFACE_H
 #define BALLENGINE4CPP_GLINTERFACE_H
 
-#include "../define.h"
-#include "../Template/SystemInterface.h"
+#include "../Core/define.h"
+#include "../Core/SystemInterface.h"
 //#include <GL/glew.h>
-#include <GL/freeglut.h>
+//#include <GL/freeglut.h>
 
 
 BE_BEGIN

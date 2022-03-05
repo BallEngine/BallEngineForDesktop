@@ -8,8 +8,8 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_AUDIOMANAGER_H
 #define BALLENGINE4CPP_AUDIOMANAGER_H
 
-#include "../define.h"
-#include "../Template/Manager.h"
+#include "../Core/define.h"
+#include "../Core/Manager.h"
 
 BE_BEGIN
 

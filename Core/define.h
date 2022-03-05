@@ -8,9 +8,6 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_DEFINE_H
 #define BALLENGINE4CPP_DEFINE_H
 
-#define WIN32
-//#define LINUX
-
 #define CLASS_OPTION protected
 #define CLASS_INTERFACE public
 
@@ -25,9 +22,10 @@ Version:    0.1
 #define emitNewEvent(x, y) (emit(Event(this,y,x)))
 #define emitEvent(x) (emit(x))
 
-#include "Other/BString.h"
-#include "Other/BImage.h"
-#include "Helper/INFHelper.h"
-#include "Helper/NetHelper.h"
+#include "../BaseType/BString.h"
+#include "../BaseType/BImage.h"
+#include "../BaseType/BPaster.h"
+#include "../Helper/INFHelper.h"
+#include "../Helper/NetHelper.h"
 
 #endif //BALLENGINE4CPP_DEFINE_H

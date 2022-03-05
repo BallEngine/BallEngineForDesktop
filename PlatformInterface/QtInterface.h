@@ -8,29 +8,19 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_QTINTERFACE_H
 #define BALLENGINE4CPP_QTINTERFACE_H
 
-#include "../define.h"
-#include "../Template/SystemInterface.h"
+#include "../Core/define.h"
+#include "../Core/SystemInterface.h"
+
+#include <QImage>
 
 BE_USE
-
-class QtBallEngine : public BallEngine {
-public:
-    QtBallEngine();
-
-    ~QtBallEngine();
-};
-
-
 class QtInterface : public SystemInterface {
 public:
-    BallEngine &createEngine();
-    SystemInterface getInterface();
-    BImage updateFrame();
+    explicit QtInterface();
+    ~QtInterface();
+    void updateFrame(BImage frame);
     void *castPasterToPic();
     void processEvent(Event event);
-private:
-    QtInterface();
-    ~QtInterface();
 };
 
 #endif //BALLENGINE4CPP_QTINTERFACE_H

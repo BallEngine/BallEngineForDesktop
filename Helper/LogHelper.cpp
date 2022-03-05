@@ -1,8 +1,8 @@
 /*****************************************************************************
-FileName:   BLogger.h
+FileName:   LogHelper.h
 Creater:    Xeler
 Desc:       Log 4 BallEngine
 Version:    0.1
 ******************************************************************************/
 
-#include "BLogger.h"
+#include "LogHelper.h"

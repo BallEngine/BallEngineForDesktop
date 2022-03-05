@@ -39,13 +39,13 @@ INFHelper::~INFHelper() {
 }
 
 BString INFHelper::getValue(BString &dataName) {
-    return m_mapData.at(dataName);
+    return m_mapData.at(dataName.toCStyleStr());
 }
 
 void INFHelper::analysis(BString code) {
-    unsigned long count = 0;
-    BString key = BString(), value = BString();
-    key = code.strSub(0, code.strFind('='));
-    value = code.strSub(code.strFind('=') + 1, code.getLength());
-    m_mapData.insert(key, value);
+    unsigned long point = code.strFind('=');
+    std::pair<std::string , BString> dataPair;
+    dataPair.first = code.strSub(0, point).toCStyleStr();
+    dataPair.second = code.strSub(point + 1, code.getLength());
+    m_mapData.insert(dataPair);
 }
