@@ -2,7 +2,6 @@
 FileName:   NetHelper.cpp
 Creater:    Xeler
 Desc:       Build.
-Version:    0.1
 ******************************************************************************/
 
 

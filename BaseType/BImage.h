@@ -2,7 +2,6 @@
 FileName:   BImage.h
 Creater:    Xeler
 Desc:       Desc
-Version:    0.1
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_BIMAGE_H

@@ -2,7 +2,6 @@
 FileName:   BString.h
 Creater:    Xeler
 Desc:       Kit Class.
-Version:    1.0
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_BSTRING_H

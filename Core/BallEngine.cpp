@@ -2,7 +2,6 @@
 FileName:   BallEngine.cpp
 Creater:    Xeler
 Desc:       Engine Code.
-Version:    0.1
 ******************************************************************************/
 
 #include "BallEngine.h"

@@ -2,7 +2,6 @@
 FileName:   BString.cpp
 Creater:    Xeler
 Desc:       Desc
-Version:    1.0
 ******************************************************************************/
 
 #include "BString.h"
