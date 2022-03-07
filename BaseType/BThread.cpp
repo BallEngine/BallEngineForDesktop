@@ -33,7 +33,7 @@ void BThread::initThread(params arg) {
         params localArgs;
         localArgs.size = arg.size;
         localArgs.buffer = (char *) malloc(sizeof(char) * arg.size);
-        threadID = pthread_create(&thread,,funcPtr,localArgs);
+        threadID = pthread_create(&threadHandler, nullptr, funcPtr, &localArgs);
         status ^= BTHREAD_STATUS_RETURN;
         status |= BTHREAD_STATUS_WAITGO;
     }

@@ -14,13 +14,16 @@ Version:    0.1
 #include <QImage>
 
 BE_USE
+
 class QtInterface : public SystemInterface {
 public:
     explicit QtInterface();
+
     ~QtInterface();
+
     void updateFrame(BImage frame);
-    void *castPasterToPic();
-    void processEvent(Event event);
+
+    void processEvent(BEvent event);
 };
 
 #endif //BALLENGINE4CPP_QTINTERFACE_H

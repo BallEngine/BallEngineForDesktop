@@ -15,15 +15,15 @@ BE_BEGIN
 
     class SystemInterface {
     public:
-        SystemInterface();
+        explicit SystemInterface();
 
         ~SystemInterface();
 
+        BImage pretreatmentFrame(BImage frame);
+
         virtual void updateFrame(BImage);
 
-        virtual BImage castPasterToPic(BPaster paster);
-
-        virtual void processEvent(Event event);
+        virtual void processEvent(BEvent event);
     };
 
 BE_END

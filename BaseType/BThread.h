@@ -75,7 +75,8 @@ namespace be {
         bool isHangup();
 
     private:
-        pthread_t threadID;
+        pthread_t threadHandler;
+        unsigned int threadID;
         FuncType *funcPtr;
         unsigned short int status;
         void *args;

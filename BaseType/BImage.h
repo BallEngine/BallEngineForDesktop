@@ -8,7 +8,6 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_BIMAGE_H
 #define BALLENGINE4CPP_BIMAGE_H
 
-#include "BString.h"
 #include <fstream>
 #include <cmath>
 
@@ -78,7 +77,7 @@ namespace be {
     public:
         explicit BImage();
 
-        BImage(BString imagePath);
+        BImage(std::string imagePath);
 
         BImage(const BImage &bImage);
 
@@ -97,6 +96,8 @@ namespace be {
         void clip(uint pointAX, uint pointAY, uint pointBX, uint pointBY);
 
         byte *getImageData();
+
+        unsigned long getImageDataSize();
 
         ImageType getType();
 

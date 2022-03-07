@@ -10,35 +10,24 @@ Version:    0.1
 
 #include "../Core/define.h"
 #include "../Core/Manager.h"
+#include "../ComplexType/BPaster.h"
 #include <vector>
 
 BE_BEGIN
-
-    class Paster {
-    public:
-        Paster(BImage pics[], unsigned int picCount = 1);
-        ~Paster();
-        Paster &operator=(const Paster &paster);
-        void frameControl(int frameNumber = 1);
-        BImage getFrame();
-    private:
-        std::vector<BImage> pictures;
-        int picPoint = 0, picNumber = 0;
-    };
 
     class PasterManager : public Manager {
     public:
         PasterManager();
         ~PasterManager();
-        void processEvent(Event event);
-        int addPaster(Paster paster);
+        void processEvent(BEvent event);
+        int addPaster(BPaster paster);
         bool removePaster(unsigned int point);
-        bool changePaster(unsigned int point, Paster paster);
-        Paster *getPaster(unsigned int point);
-        Paster operator[](unsigned int point);
+        bool changePaster(unsigned int point, BPaster paster);
+        BPaster *getPaster(unsigned int point);
+        BPaster operator[](unsigned int point);
         void clear();
     private:
-        std::vector<Paster> pasters;
+        std::vector<BPaster> pasters;
         std::vector<int> pastersID;
     };
 

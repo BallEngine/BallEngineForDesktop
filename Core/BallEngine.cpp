@@ -11,17 +11,18 @@ Version:    0.1
 
 BE_USE
 
-void BallEngine::emit(Event event) {
-    switch(event.to)    {
+void BallEngine::emitBEvent(const BEvent& event) {
+    BallEngine &instance = BallEngine::instantiation();
+    switch (event.to) {
         case Interface:
-            systemInterface->processEvent(event);
+            instance.systemInterface->processEvent(event);
             break;
         case PasterSys:
-            pasterManager->processEvent(event);
+            instance.pasterManager->processEvent(event);
             break;
         case ScriptSys:
         case Other:
-            scriptManager->processEvent(event);
+            instance.scriptManager->processEvent(event);
             break;
         default:
             break;

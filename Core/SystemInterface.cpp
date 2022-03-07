@@ -7,6 +7,8 @@ Version:    0.1
 
 #include "SystemInterface.h"
 
-BE_BEGIN
+BE_USE
 
-BE_END
+BImage SystemInterface::pretreatmentFrame(BImage frame) {
+    return be::BImage();
+}

@@ -10,7 +10,7 @@ Version:    0.1
 
 BE_USE
 
-Event::Event(ManagerType whereFrom, ManagerType wantTo, BString eventMessage) {
+BEvent::BEvent(ManagerType whereFrom, ManagerType wantTo, BString eventMessage) {
     from = whereFrom;
     to = wantTo;
     data = eventMessage;

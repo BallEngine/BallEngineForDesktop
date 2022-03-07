@@ -7,6 +7,26 @@ Version:    1.0
 
 #include "BString.h"
 
+namespace be {
+
+    void strCopy(char *to, const char *from) {
+        int i = 0;
+        while (from[i] != '\0') {
+            to[i] = from[i];
+            i++;
+        }
+        to[i] = '\0';
+    }
+
+    unsigned int strCount(const char *str) {
+        unsigned int i = 0;
+        while (str[i] != '\0') {
+            i++;
+        }
+        return i;
+    }
+}
+
 using namespace be;
 
 BString::BString() {
@@ -181,21 +201,4 @@ void BString::memoryGC(unsigned int threshold) {
         delete[] m_pString;
         m_pString = tempStr;
     }
-}
-
-void strCopy(char *to, const char *from) {
-    int i = 0;
-    while (from[i] != '\0') {
-        to[i] = from[i];
-        i++;
-    }
-    to[i] = '\0';
-}
-
-unsigned int strCount(const char *str) {
-    unsigned int i = 0;
-    while (str[i] != '\0') {
-        i++;
-    }
-    return i;
 }

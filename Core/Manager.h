@@ -20,9 +20,9 @@ BE_BEGIN
         Other
     };
 
-    class Event {
+    class BEvent {
     public:
-        Event(ManagerType whereFrom, ManagerType wantTo, BString eventMessage);
+        BEvent(ManagerType whereFrom, ManagerType wantTo, BString eventMessage);
         ManagerType from, to;
         BString data;
     };
@@ -31,7 +31,7 @@ BE_BEGIN
     public:
         Manager();
         Manager *retSelf();
-        virtual void processEvent(Event event);
+        virtual void processEvent(BEvent event);
     };
 
 BE_END

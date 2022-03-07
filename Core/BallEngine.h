@@ -2,7 +2,6 @@
 FileName:   BallEngine.h
 Creater:    Xeler
 Desc:       Engine Head.
-Version:    0.1
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_BALLENGINE_H
@@ -29,7 +28,7 @@ BE_BEGIN
 
     public:
 
-        void emit(Event event);
+        void static emitBEvent(const BEvent& event);
 
     protected:
         //Engine Manager

@@ -8,9 +8,17 @@ set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_PREFIX_PATH "D:/Qt/6.2.2/mingw_64")
 
-add_library(BallEngine4CPP main.cpp Core/define.h
+find_package(Qt6 COMPONENTS
+        Core
+        Gui
+        Widgets
+        REQUIRED)
+
+add_executable(BallEngine4CPP main.cpp Core/define.h
         BaseType/BString.cpp BaseType/BString.h
         BaseType/BImage.cpp BaseType/BImage.h
+        BaseType/BThread.cpp BaseType/BThread.h
+        ComplexType/BPaster.cpp ComplexType/BPaster.h
         Core/Manager.cpp Core/Manager.h
         Core/BallEngine.cpp Core/BallEngine.h
         Core/SystemInterface.cpp Core/SystemInterface.h
@@ -19,14 +27,10 @@ add_library(BallEngine4CPP main.cpp Core/define.h
         Manager/PasterManager.cpp Manager/PasterManager.h
         Helper/NetHelper.cpp Helper/NetHelper.h
         Helper/INFHelper.cpp Helper/INFHelper.h
+        Helper/LogHelper.cpp Helper/LogHelper.h
+        Helper/HTTPHelper.cpp Helper/HTTPHelper.h
         PlatformInterface/GLInterface.cpp PlatformInterface/GLInterface.h
-        PlatformInterface/QtInterface.cpp PlatformInterface/QtInterface.h BaseType/BThread.cpp BaseType/BThread.h Helper/LogHelper.cpp Helper/LogHelper.h Helper/HTTPHelper.cpp Helper/HTTPHelper.h BaseType/BPaster.cpp BaseType/BPaster.h)
-
-find_package(Qt6 COMPONENTS
-        Core
-        Gui
-        Widgets
-        REQUIRED)
+        PlatformInterface/QtInterface.cpp PlatformInterface/QtInterface.h)
 
 target_link_libraries(BallEngine4CPP
         Qt::Core

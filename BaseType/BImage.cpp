@@ -20,12 +20,12 @@ BImage::BImage() {
     pngInfo = {};
 }
 
-BImage::BImage(BString imagePath) {
-    std::ifstream imageFile = std::ifstream(imagePath.toCStyleStr(), std::ios::in | std::ios::binary);
+BImage::BImage(std::string imagePath) {
+    std::ifstream imageFile = std::ifstream(imagePath.c_str(), std::ios::in | std::ios::binary);
 
     int flag = -1;
 
-    BString filePostfix = imagePath.strSub(imagePath.getLength() - 4, imagePath.getLength());
+    std::string filePostfix = imagePath.substr(imagePath.length() - 4, imagePath.length());
 
     if (filePostfix == ".bmp") {
         convertFromBMP(imageFile);

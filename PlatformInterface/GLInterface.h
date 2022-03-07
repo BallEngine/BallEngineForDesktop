@@ -18,7 +18,7 @@ BE_BEGIN
 
     class GLInterface : public SystemInterface {
     public:
-        void processEvent(Event event);
+        void processEvent(BEvent event);
     };
 
 BE_END

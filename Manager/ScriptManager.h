@@ -33,11 +33,13 @@ BE_BEGIN
         double execute(BString expression);
 
         //解析函数
-        Event analysis(BString code);
+        BEvent analysis(BString code);
 
         void *memoryWrite(BString key, void *value);
 
         void *memoryRead(BString key);
+
+        void processEvent(BEvent event);
 
     protected:
         static unsigned char getOperatorIndex(BString operatorString);
