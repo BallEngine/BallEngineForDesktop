@@ -8,22 +8,24 @@
 
 BE_BEGIN
 
-class BPaster {
-public:
-    BPaster(BImage pics[], unsigned int picCount = 1);
+    class BPaster {
+    public:
+        BPaster();
 
-    ~BPaster();
+        BPaster(BImage pics[], unsigned int picCount = 1);
 
-    BPaster &operator=(const BPaster &paster);
+        ~BPaster();
 
-    void frameControl(int frameNumber = 1);
+        BPaster &operator=(const BPaster &paster);
 
-    BImage getFrame();
+        void frameControl(int frameNumber = 1);
 
-private:
-    std::vector<BImage> pictures;
-    int picPoint = 0, picNumber = 0;
-};
+        BImage getFrame();
+
+    private:
+        std::vector<BImage> pictures;
+        int picPoint = 0, picNumber = 0;
+    };
 
 BE_END
 

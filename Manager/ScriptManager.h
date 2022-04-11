@@ -12,6 +12,7 @@ Version:    0.1
 #include <stack>
 #include "../Core/define.h"
 #include "../Core/Manager.h"
+#include "../BaseType/BString.h"
 
 BE_BEGIN
 
@@ -39,7 +40,7 @@ BE_BEGIN
 
         void *memoryRead(BString key);
 
-        void processEvent(BEvent event);
+        void processEvent(BEvent event) override;
 
     protected:
         static unsigned char getOperatorIndex(BString operatorString);

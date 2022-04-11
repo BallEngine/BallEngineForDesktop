@@ -6,9 +6,7 @@
 
 int main(int argc, char *argv[]) {
     BallEngine &ballEngine = BallEngine::instantiation();
-    QtInterface anInterface = QtInterface();
-    QApplication application(argc, argv);
-    QWidget mainWidget;
-    mainWidget.show();
-    return application.exec();
+    QtInterface qtInterface(argc,argv);
+
+    return qtInterface.execute();
 }

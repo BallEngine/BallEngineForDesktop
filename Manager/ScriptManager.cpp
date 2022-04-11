@@ -79,3 +79,7 @@ unsigned char ScriptManager::getOperatorIndex(BString operatorString) {
     if (operatorString == ";") { return 20; };
     return -1;
 }
+
+void ScriptManager::processEvent(BEvent event) {
+    
+}

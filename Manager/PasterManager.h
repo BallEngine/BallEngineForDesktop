@@ -17,16 +17,24 @@ BE_BEGIN
 
     class PasterManager : public Manager {
     public:
-        PasterManager();
+        explicit PasterManager(BImage *basePic = nullptr);
+
         ~PasterManager();
-        void processEvent(BEvent event);
+
+        void processEvent(BEvent event) override;
+
         int addPaster(BPaster paster);
+
         bool removePaster(unsigned int point);
+
         bool changePaster(unsigned int point, BPaster paster);
-        BPaster *getPaster(unsigned int point);
-        BPaster operator[](unsigned int point);
+
+        BPaster &operator[](unsigned int point);
+
         void clear();
+
     private:
+        BPaster baseScreen;
         std::vector<BPaster> pasters;
         std::vector<int> pastersID;
     };

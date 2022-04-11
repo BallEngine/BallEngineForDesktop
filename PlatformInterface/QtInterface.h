@@ -2,7 +2,6 @@
 FileName:   QtInterface.h
 Creater:    Xeler
 Desc:       QtInterface define.
-Version:    0.1
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_QTINTERFACE_H
@@ -12,18 +11,27 @@ Version:    0.1
 #include "../Core/SystemInterface.h"
 
 #include <QImage>
+#include <QWidget>
+#include <QLabel>
+#include <QApplication>
 
 BE_USE
 
 class QtInterface : public SystemInterface {
 public:
-    explicit QtInterface();
+    explicit QtInterface(int argc, char *argv[]);
 
     ~QtInterface();
 
-    void updateFrame(BImage frame);
+    void updateFrame(BImage frame) override;
 
-    void processEvent(BEvent event);
+    void processEvent(BEvent event) override;
+
+    int execute();
+
+private:
+    QApplication qtApplication;
+    QLabel qtScreen;
 };
 
 #endif //BALLENGINE4CPP_QTINTERFACE_H

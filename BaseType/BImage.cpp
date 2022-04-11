@@ -8,6 +8,8 @@ Desc:       Desc
 
 using namespace be;
 
+struct BPaint defaultPaint{0, 0, 0, 0, 0};
+
 BImage::BImage() {
     type = None;
     width = 0;
@@ -68,15 +70,15 @@ BImage::~BImage() {
     delete[] picData;
 }
 
-void BImage::drawLine(uint startX, uint startY, uint endX, uint endY, Paint paint) {
+void BImage::drawLine(uint startX, uint startY, uint endX, uint endY, BPaint paint) {
 
 }
 
-void BImage::drawArc(uint circleX, uint circleY, uint radius, uint startAngle, uint endAngle, Paint paint) {
+void BImage::drawArc(uint circleX, uint circleY, uint radius, uint startAngle, uint endAngle, BPaint paint) {
 
 }
 
-void BImage::drawArc(uint pointAX, uint pointAY, uint pointBX, uint pointBY, uint pointCX, uint pointCY, Paint paint) {
+void BImage::drawArc(uint pointAX, uint pointAY, uint pointBX, uint pointBY, uint pointCX, uint pointCY, BPaint paint) {
 
 }
 
@@ -92,8 +94,28 @@ byte *BImage::getImageData() {
     return picData;
 }
 
+unsigned long BImage::getImageDataSize() {
+    return picLength;
+}
+
+byte *BImage::getImageSourceData() {
+    //TODO
+    return (byte *) 0;
+}
+
+unsigned long BImage::getImageSourceDataSize() {
+    //TODO
+    return 0;
+}
+
 ImageType BImage::getType() {
     return type;
+}
+
+BImage *BImage::getBlankImage(ImageType type) {
+    static BImage blankImage[] = {BImage(), BImage(), BImage(), BImage()};
+
+    return new BImage(blankImage[type]);
 }
 
 void BImage::convertFromBMP(std::ifstream &picStream) {
@@ -132,4 +154,16 @@ void BImage::convertFromJPG(std::ifstream &picStream) {
 
 void BImage::convertFromPNG(std::ifstream &picStream) {
 
+}
+
+byte *BImage::convertToBMPSource() {
+    return nullptr;
+}
+
+byte *BImage::convertToJPGSource() {
+    return nullptr;
+}
+
+byte *BImage::convertToPNGSource() {
+    return nullptr;
 }

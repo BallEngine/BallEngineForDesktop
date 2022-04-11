@@ -10,6 +10,7 @@ Desc:       Build.
 using namespace be;
 
 NetHelper::NetHelper(unsigned int port, BString ip) {
+
     connectSocket = socket(AF_INET, SOCK_DGRAM, 0);
     runtime = true;
     memset(&connectAddress, 0, sizeof(sockaddr_in));
@@ -17,6 +18,10 @@ NetHelper::NetHelper(unsigned int port, BString ip) {
     connectAddress.sin_port = htons(port);
     runtime = bind(connectSocket, (sockaddr *) &connectAddress, sizeof(sockaddr_in));
     runtime = runtime && listen(connectSocket, SOMAXCONN);
+}
+
+NetHelper::~NetHelper() {
+
 }
 
 void NetHelper::serverStart() {

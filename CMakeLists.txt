@@ -15,22 +15,22 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(BallEngine4CPP main.cpp Core/define.h
-        BaseType/BString.cpp BaseType/BString.h
-        BaseType/BImage.cpp BaseType/BImage.h
-        BaseType/BThread.cpp BaseType/BThread.h
-        ComplexType/BPaster.cpp ComplexType/BPaster.h
-        Core/Manager.cpp Core/Manager.h
-        Core/BallEngine.cpp Core/BallEngine.h
-        Core/SystemInterface.cpp Core/SystemInterface.h
-        Manager/ScriptManager.cpp Manager/ScriptManager.h
-        Manager/AudioManager.cpp Manager/AudioManager.h
-        Manager/PasterManager.cpp Manager/PasterManager.h
-        Helper/NetHelper.cpp Helper/NetHelper.h
-        Helper/INFHelper.cpp Helper/INFHelper.h
-        Helper/LogHelper.cpp Helper/LogHelper.h
-        Helper/HTTPHelper.cpp Helper/HTTPHelper.h
-        PlatformInterface/GLInterface.cpp PlatformInterface/GLInterface.h
-        PlatformInterface/QtInterface.cpp PlatformInterface/QtInterface.h)
+        BaseType/BString.h BaseType/BString.cpp
+        BaseType/BImage.h BaseType/BImage.cpp
+        BaseType/BThread.h BaseType/BThread.cpp
+        ComplexType/BPaster.h ComplexType/BPaster.cpp
+        Core/Manager.h Core/Manager.cpp
+        Core/BallEngine.h Core/BallEngine.cpp
+        Core/SystemInterface.h Core/SystemInterface.cpp
+        Manager/ScriptManager.h Manager/ScriptManager.cpp
+        Manager/AudioManager.h Manager/AudioManager.cpp
+        Manager/PasterManager.h Manager/PasterManager.cpp
+        Helper/NetHelper.h Helper/NetHelper.cpp
+        Helper/INFHelper.h Helper/INFHelper.cpp
+        Helper/LogHelper.h Helper/LogHelper.cpp
+        Helper/HTTPHelper.h Helper/HTTPHelper.cpp
+        PlatformInterface/GLInterface.h PlatformInterface/GLInterface.cpp
+        PlatformInterface/QtInterface.h PlatformInterface/QtInterface.cpp)
 
 target_link_libraries(BallEngine4CPP
         Qt::Core
@@ -39,6 +39,8 @@ target_link_libraries(BallEngine4CPP
         )
 
 if (WIN32)
+    set(CMAKE_LIBRARY_PATH "C:\\Windows\\System32\\")
+    target_link_libraries(BallEngine4CPP ws2_32)
     set(QT_INSTALL_PATH "${CMAKE_PREFIX_PATH}")
     if (EXISTS "${QT_INSTALL_PATH}/plugins/platforms/qwindows${DEBUG_SUFFIX}.dll")
         add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD

@@ -6,7 +6,6 @@ Version:    0.1
 ******************************************************************************/
 
 #include "Manager.h"
-#include "BallEngine.h"
 
 BE_USE
 
@@ -19,6 +18,6 @@ BEvent::BEvent(ManagerType whereFrom, ManagerType wantTo, BString eventMessage) 
 Manager::Manager() {
 }
 
-Manager *Manager::retSelf() {
-    return this;
+void Manager::processEvent(BEvent event) {
+
 }

@@ -2,15 +2,14 @@
 FileName:   QtInterface.cpp
 Creater:    Xeler
 Desc:       QtInterface code.
-Version:    0.1
 ******************************************************************************/
 
 #include "QtInterface.h"
 
 BE_USE
 
-QtInterface::QtInterface() {
-
+QtInterface::QtInterface(int argc, char *argv[]) : qtApplication(argc, argv) {
+    qtScreen.show();
 }
 
 QtInterface::~QtInterface() {
@@ -19,9 +18,15 @@ QtInterface::~QtInterface() {
 
 void QtInterface::updateFrame(BImage frame) {
     BImage localFrame = SystemInterface::pretreatmentFrame(frame);
-    QImage qtFrame = QImage::fromData(localFrame.getImageData(),localFrame.getImageDataSize());
+    QPixmap qtFrame = QPixmap::fromImage(QImage::fromData(localFrame.getImageData(), localFrame.getImageDataSize()));
+
+    qtScreen.setPixmap(qtFrame);
 }
 
 void QtInterface::processEvent(BEvent event) {
 
+}
+
+int QtInterface::execute() {
+    return qtApplication.exec();
 }

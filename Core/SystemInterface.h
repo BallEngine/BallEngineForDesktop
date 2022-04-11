@@ -10,20 +10,25 @@ Version:    0.1
 
 #include "define.h"
 #include "Manager.h"
+#include "../BaseType/BImage.h"
 
 BE_BEGIN
 
     class SystemInterface {
     public:
-        explicit SystemInterface();
+        explicit SystemInterface() {};
 
-        ~SystemInterface();
+        ~SystemInterface() {};
 
-        BImage pretreatmentFrame(BImage frame);
+        BImage &pretreatmentFrame(BImage &frame);
 
-        virtual void updateFrame(BImage);
+        virtual void updateFrame(BImage) {};
 
-        virtual void processEvent(BEvent event);
+        virtual void processEvent(BEvent event) {};
+
+        virtual int execute() {return 0;};
+    private:
+        bool runtimeFlag;
     };
 
 BE_END

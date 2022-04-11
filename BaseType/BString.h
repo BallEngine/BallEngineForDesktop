@@ -21,7 +21,7 @@ namespace be {
     public:
         BString();
 
-        explicit BString(const char *str);
+        BString(const char *str);
 
         BString(const BString &bString);
 

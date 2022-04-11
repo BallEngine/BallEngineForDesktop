@@ -2,6 +2,10 @@
 
 BE_USE
 
+BPaster::BPaster() {
+    pictures.push_back(*BImage::getBlankImage(ImageType::None));
+}
+
 BPaster::BPaster(BImage pics[], unsigned int picCount) {
     int i = 0;
     while (i - picCount) {

@@ -56,9 +56,9 @@ namespace be {
     };
 
     struct BmpInfo {
-        word reserved[2] = {0, 0};
-        word compression = 0;
-        BmpRGBSQUAD *colors = nullptr;
+        word reserved[2];
+        word compression;
+        BmpRGBSQUAD *colors;
     };
 
     struct PngInfo {
@@ -68,9 +68,9 @@ namespace be {
     struct JpgInfo {
     };
 
-    struct Paint {
+    struct BPaint {
         uint red, green, blue, alpha, size;
-    } defaultPaint{0, 0, 0, 0, 0};
+    };
 
     class BImage {
     public:
@@ -84,11 +84,11 @@ namespace be {
 
         ~BImage();
 
-        void drawLine(uint startX, uint startY, uint endX, uint endY, Paint paint);
+        void drawLine(uint startX, uint startY, uint endX, uint endY, BPaint paint);
 
-        void drawArc(uint circleX, uint circleY, uint radius, uint startAngle, uint endAngle, Paint paint);
+        void drawArc(uint circleX, uint circleY, uint radius, uint startAngle, uint endAngle, BPaint paint);
 
-        void drawArc(uint pointAX, uint pointAY, uint pointBX, uint pointBY, uint pointCX, uint pointCY, Paint paint);
+        void drawArc(uint pointAX, uint pointAY, uint pointBX, uint pointBY, uint pointCX, uint pointCY, BPaint paint);
 
         void drawPic(const BImage &pic, uint startX, uint startY);
 
@@ -98,7 +98,13 @@ namespace be {
 
         unsigned long getImageDataSize();
 
+        byte *getImageSourceData();
+
+        unsigned long getImageSourceDataSize();
+
         ImageType getType();
+
+        static BImage *getBlankImage(ImageType type);
 
     protected:
         void convertFromBMP(std::ifstream &picStream);
@@ -106,6 +112,12 @@ namespace be {
         void convertFromJPG(std::ifstream &picStream);
 
         void convertFromPNG(std::ifstream &picStream);
+
+        byte *convertToBMPSource();
+
+        byte *convertToJPGSource();
+
+        byte *convertToPNGSource();
 
     private:
         ImageType type;

@@ -10,7 +10,13 @@ Desc:       Engine Code.
 
 BE_USE
 
-void BallEngine::emitBEvent(const BEvent& event) {
+BallEngine::BallEngine() {
+    audioManager = new AudioManager();
+    pasterManager = new PasterManager();
+    scriptManager = new ScriptManager();
+}
+
+void BallEngine::emitBEvent(const BEvent &event) {
     BallEngine &instance = BallEngine::instantiation();
     switch (event.to) {
         case Interface:
@@ -27,3 +33,21 @@ void BallEngine::emitBEvent(const BEvent& event) {
             break;
     }
 }
+
+AudioManager &BallEngine::getAudioManager() {
+    return *audioManager;
+}
+
+PasterManager &BallEngine::getPasterManager() {
+    return *pasterManager;
+}
+
+ScriptManager &BallEngine::getScriptManager() {
+    return *scriptManager;
+}
+
+SystemInterface &BallEngine::getSystemInterface() {
+    return *systemInterface;
+}
+
+

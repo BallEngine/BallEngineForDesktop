@@ -13,15 +13,21 @@ Version:    0.1
 
 #ifdef LINUX
 
+#include <unistd.h>
 #include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #endif
 #ifdef WIN32
 
+#include <unistd.h>
 #include <winsock2.h>
 #include <windows.h>
 #include <inaddr.h>
 #include <pthread.h>
+
+#pragma comment(lib, "ws2_32.lib")
 
 #endif
 
@@ -29,7 +35,8 @@ namespace be {
 
     class NetHelper {
     public:
-        NetHelper(unsigned int port = 21324, BString ip = BString("0.0.0.0")); //port:bmx
+        explicit NetHelper(unsigned int port = 21324, BString ip = BString("0.0.0.0")); //port:bmx
+
         ~NetHelper();
 
         void serverStart();

@@ -9,6 +9,7 @@ Version:    0.1
 #define BALLENGINE4CPP_MANAGER_H
 
 #include "define.h"
+#include "../BaseType/BString.h"
 
 BE_BEGIN
 
@@ -30,7 +31,6 @@ BE_BEGIN
     class Manager {
     public:
         Manager();
-        Manager *retSelf();
         virtual void processEvent(BEvent event);
     };
 

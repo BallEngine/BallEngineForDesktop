@@ -16,23 +16,28 @@ Desc:       Engine Head.
 
 BE_BEGIN
 
-    class Manager;
-
     class BallEngine {
     CLASS_OPTION:
 
         OPTION_SINGLETON_CLASS(BallEngine)
+
     CLASS_INTERFACE:
 
         INTERFACE_INSTANTIATION(BallEngine)
 
     public:
 
-        void static emitBEvent(const BEvent& event);
+        void emitBEvent(const BEvent &event);
+
+        AudioManager &getAudioManager();
+
+        PasterManager &getPasterManager();
+
+        ScriptManager &getScriptManager();
+
+        SystemInterface &getSystemInterface();
 
     protected:
-        //Engine Manager
-        static BallEngine *ballEngine;
         AudioManager *audioManager;
         PasterManager *pasterManager;
         ScriptManager *scriptManager;

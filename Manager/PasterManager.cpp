@@ -10,27 +10,23 @@ Version:    0.1
 
 BE_USE
 
-PasterManager::PasterManager() {
-
+PasterManager::PasterManager(BImage *basePic) {
+    baseScreen = BPaster(basePic);
 }
-
 
 PasterManager::~PasterManager() {
     clear();
 }
 
-
 void PasterManager::processEvent(BEvent event) {
-
+    //TODO
 }
-
 
 int PasterManager::addPaster(BPaster paster) {
     pasters.push_back(paster);
     pastersID.push_back(pasters.size() + 1);
     return pastersID[pastersID.size() - 1];
 }
-
 
 bool PasterManager::removePaster(unsigned int point) {
     auto ic = pasters.begin();
@@ -48,17 +44,20 @@ bool PasterManager::removePaster(unsigned int point) {
     }
 }
 
-
 void PasterManager::clear() {
     pasters.clear();
     pastersID.clear();
 }
 
+bool PasterManager::changePaster(unsigned int point, BPaster paster) {
+    //TODO
+    return false;
+}
 
-BPaster PasterManager::operator[](unsigned int point) {
+BPaster &PasterManager::operator[](unsigned int point) {
     if (point < pasters.size()) {
         return pasters[point];
     } else {
-        return nullptr;
+        return baseScreen;
     }
 }

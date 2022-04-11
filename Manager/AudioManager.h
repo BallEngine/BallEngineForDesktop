@@ -2,7 +2,6 @@
 FileName:   AudioManager.h
 Creater:    Xeler
 Desc:       Desc
-Version:    0.1
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_AUDIOMANAGER_H
@@ -14,7 +13,10 @@ Version:    0.1
 BE_BEGIN
 
     class AudioManager : public Manager {
+    public:
+        AudioManager();
 
+        void processEvent(BEvent event) override;
     };
 
 BE_END
