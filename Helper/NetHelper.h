@@ -2,7 +2,6 @@
 FileName:   NetHelper.h
 Creater:    Xeler
 Desc:       Desc
-Version:    0.1
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_NETHELPER_H

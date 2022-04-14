@@ -1,6 +1,6 @@
 /*****************************************************************************
 FileName:   define.h
-Creater:    Zekai Zhao
+Creater:    Xeler
 Desc:       Define macro and type.
 ******************************************************************************/
 
@@ -21,5 +21,7 @@ Desc:       Define macro and type.
 #define BE_USE      using namespace be;
 
 #define emitNewEvent(from,target,message)  (BallEngine::emitBEvent(BEvent(from,target,message)))
+
+typedef unsigned long long PtrNum;
 
 #endif //BALLENGINE4CPP_DEFINE_H

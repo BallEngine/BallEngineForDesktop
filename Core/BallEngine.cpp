@@ -14,20 +14,26 @@ BallEngine::BallEngine() {
     audioManager = new AudioManager();
     pasterManager = new PasterManager();
     scriptManager = new ScriptManager();
+
+    systemInterface = nullptr;
 }
 
+void BallEngine::initialization(SystemInterface &interface) {
+    systemInterface = &interface;
+}
+
+
 void BallEngine::emitBEvent(const BEvent &event) {
-    BallEngine &instance = BallEngine::instantiation();
     switch (event.to) {
         case Interface:
-            instance.systemInterface->processEvent(event);
+            systemInterface->processEvent(event);
             break;
         case PasterSys:
-            instance.pasterManager->processEvent(event);
+            pasterManager->processEvent(event);
             break;
         case ScriptSys:
         case Other:
-            instance.scriptManager->processEvent(event);
+            scriptManager->processEvent(event);
             break;
         default:
             break;
@@ -49,5 +55,3 @@ ScriptManager &BallEngine::getScriptManager() {
 SystemInterface &BallEngine::getSystemInterface() {
     return *systemInterface;
 }
-
-

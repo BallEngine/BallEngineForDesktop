@@ -11,7 +11,7 @@ Version:    0.1
 #include "../Core/define.h"
 #include "../Core/Manager.h"
 #include "../ComplexType/BPaster.h"
-#include <vector>
+#include <map>
 
 BE_BEGIN
 
@@ -23,20 +23,25 @@ BE_BEGIN
 
         void processEvent(BEvent event) override;
 
-        int addPaster(BPaster paster);
+        PtrNum addPaster(const BPaster &paster);
 
-        bool removePaster(unsigned int point);
+        bool removePaster(PtrNum point);
 
-        bool changePaster(unsigned int point, BPaster paster);
+        BPaster &getPaster(PtrNum point);
 
-        BPaster &operator[](unsigned int point);
+        bool setPaster(PtrNum point,const BPaster& paster);
+
+        bool checkPasterValid(PtrNum point);
+
+        BPaster &operator[](PtrNum point);
 
         void clear();
 
+        BImage drawScreen(unsigned short framesSpace = 1);
+
     private:
         BPaster baseScreen;
-        std::vector<BPaster> pasters;
-        std::vector<int> pastersID;
+        std::map<PtrNum,BPaster> pasters;
     };
 
 BE_END

@@ -37,5 +37,8 @@ void BPaster::frameControl(int frame) {
 }
 
 BImage BPaster::getFrame() {
+    if (!picPoint < pictures.size()) {
+        picPoint = 0;
+    }
     return pictures[picPoint++];
 }

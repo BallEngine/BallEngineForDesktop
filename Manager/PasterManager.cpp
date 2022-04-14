@@ -19,45 +19,60 @@ PasterManager::~PasterManager() {
 }
 
 void PasterManager::processEvent(BEvent event) {
-    //TODO
+
 }
 
-int PasterManager::addPaster(BPaster paster) {
-    pasters.push_back(paster);
-    pastersID.push_back(pasters.size() + 1);
-    return pastersID[pastersID.size() - 1];
+PtrNum PasterManager::addPaster(const BPaster &paster) {
+    PtrNum point = (PtrNum) (&paster);
+    bool valid = checkPasterValid(point);
+    while (valid) {
+        point++;
+        valid = checkPasterValid(point);
+    }
+    setPaster(point, paster);
+    return point;
 }
 
-bool PasterManager::removePaster(unsigned int point) {
-    auto ic = pasters.begin();
-    auto ic2 = pastersID.begin();
-    while (--point && ic != pasters.end()) {
-        ++ic;
-        ++ic2;
+bool PasterManager::removePaster(PtrNum point) {
+    bool valid = checkPasterValid(point);
+    if (valid) {
+        pasters.erase(point);
     }
-    if (ic != pasters.end()) {
-        pasters.erase(ic);
-        pastersID.erase(ic2);
-        return true;
-    } else {
-        return false;
-    }
+    return valid;
 }
 
 void PasterManager::clear() {
     pasters.clear();
-    pastersID.clear();
 }
 
-bool PasterManager::changePaster(unsigned int point, BPaster paster) {
-    //TODO
-    return false;
+BPaster &PasterManager::operator[](PtrNum point) {
+    return getPaster(point);
 }
 
-BPaster &PasterManager::operator[](unsigned int point) {
-    if (point < pasters.size()) {
+BPaster &PasterManager::getPaster(PtrNum point) {
+    bool valid = checkPasterValid(point);
+    if (valid) {
         return pasters[point];
-    } else {
-        return baseScreen;
     }
+    return baseScreen;
+}
+
+bool PasterManager::setPaster(PtrNum point, const BPaster &paster) {
+    std::pair<PtrNum, BPaster> valuePair(point, paster);
+    pasters.insert(valuePair);
+    return valuePair.first;
+}
+
+bool PasterManager::checkPasterValid(PtrNum point) {
+    return pasters.find(point) != pasters.end();
+}
+
+BImage PasterManager::drawScreen(unsigned short framesSpace) {
+    BImage newScreen = baseScreen.getFrame();
+    auto ic = pasters.begin();
+    while (ic != pasters.end()) {
+        newScreen.drawPic(ic->second.getFrame(), 0, 0);
+        ic++;
+    }
+    return newScreen;
 }

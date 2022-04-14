@@ -29,6 +29,8 @@ BE_BEGIN
 
         void emitBEvent(const BEvent &event);
 
+        void initialization(SystemInterface& interface);
+
         AudioManager &getAudioManager();
 
         PasterManager &getPasterManager();

@@ -7,12 +7,17 @@
 #include "../BaseType/BImage.h"
 
 BE_BEGIN
+    struct PasterInfo {
+        unsigned short positionX, positionY;
+        unsigned short sizeX, sizeY;
+        float scale;
+    };
 
     class BPaster {
     public:
         BPaster();
 
-        BPaster(BImage pics[], unsigned int picCount = 1);
+        explicit BPaster(BImage pics[], unsigned int picCount = 1);
 
         ~BPaster();
 

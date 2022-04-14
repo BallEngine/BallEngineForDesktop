@@ -2,7 +2,6 @@
 FileName:   Manager.cpp
 Creater:    Xeler
 Desc:       Manager Code.
-Version:    0.1
 ******************************************************************************/
 
 #include "Manager.h"
