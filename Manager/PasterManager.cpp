@@ -24,6 +24,7 @@ void PasterManager::processEvent(BEvent event) {
 
 PtrNum PasterManager::addPaster(const BPaster &paster) {
     PtrNum point = (PtrNum) (&paster);
+    PasterInfo info = {0, 0, 0, 0, 0};
     bool valid = checkPasterValid(point);
     while (valid) {
         point++;
@@ -36,13 +37,13 @@ PtrNum PasterManager::addPaster(const BPaster &paster) {
 bool PasterManager::removePaster(PtrNum point) {
     bool valid = checkPasterValid(point);
     if (valid) {
-        pasters.erase(point);
+        pasterMap.erase(point);
     }
     return valid;
 }
 
 void PasterManager::clear() {
-    pasters.clear();
+    pasterMap.clear();
 }
 
 BPaster &PasterManager::operator[](PtrNum point) {
@@ -52,26 +53,28 @@ BPaster &PasterManager::operator[](PtrNum point) {
 BPaster &PasterManager::getPaster(PtrNum point) {
     bool valid = checkPasterValid(point);
     if (valid) {
-        return pasters[point];
+        return pasterMap[point];
     }
     return baseScreen;
 }
 
 bool PasterManager::setPaster(PtrNum point, const BPaster &paster) {
     std::pair<PtrNum, BPaster> valuePair(point, paster);
-    pasters.insert(valuePair);
+    std::pair<PtrNum, PasterInfo> infoValuePair(point, {0, 0, paster., , 0});
+    pasterMap.insert(valuePair);
+    pasterInfoMap.insert(infoValuePair);
     return valuePair.first;
 }
 
 bool PasterManager::checkPasterValid(PtrNum point) {
-    return pasters.find(point) != pasters.end();
+    return pasterMap.find(point) != pasterMap.end();
 }
 
 BImage PasterManager::drawScreen(unsigned short framesSpace) {
     BImage newScreen = baseScreen.getFrame();
-    auto ic = pasters.begin();
-    while (ic != pasters.end()) {
-        newScreen.drawPic(ic->second.getFrame(), 0, 0);
+    auto ic = pasterMap.begin();
+    while (ic != pasterMap.end()) {
+        newScreen.drawPic(ic->second.getFrame(), , 0);
         ic++;
     }
     return newScreen;

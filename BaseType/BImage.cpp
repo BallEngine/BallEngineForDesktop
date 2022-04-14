@@ -11,14 +11,12 @@ using namespace be;
 struct BPaint defaultPaint{0, 0, 0, 0, 0};
 
 BImage::BImage() {
-    type = None;
-    width = 0;
-    height = 0;
-    picLength = 0;
+    imageType = None;
+    imageInfo.width = 0;
+    imageInfo.height = 0;
+    imageInfo.picLength = 0;
+    picInfo = nullptr;
     picData = nullptr;
-    bmpInfo = {};
-    jpgInfo = {};
-    pngInfo = {};
 }
 
 BImage::BImage(std::string imagePath) {
@@ -43,25 +41,48 @@ BImage::BImage(std::string imagePath) {
 }
 
 BImage::BImage(const BImage &bImage) {
-    type = bImage.type;
-    bmpInfo = bImage.bmpInfo;
-    jpgInfo = bImage.jpgInfo;
-    pngInfo = bImage.pngInfo;
-    width = bImage.width;
-    height = bImage.height;
-    picLength = bImage.picLength;
-    picData = bImage.picData;
+    imageType = bImage.imageType;
+    imageInfo.width = bImage.imageInfo.width;
+    imageInfo.height = bImage.imageInfo.height;
+    imageInfo.picLength = bImage.imageInfo.picLength;
+    picData = new byte[bImage.imageInfo.picLength];
+    memcpy(picData, bImage.picData, bImage.imageInfo.picLength);
+    switch (imageType) {
+        case ImageType::Bmp:
+            picInfo = new BmpInfo;
+            break;
+        case ImageType::Jpg:
+            picInfo = new JpgInfo;
+            break;
+        case ImageType::Png:
+            picInfo = new PngInfo;
+            break;
+        case ImageType::None:
+            picInfo = nullptr;
+            break;
+    }
 }
 
 BImage &BImage::operator=(const BImage &bImage) {
-    type = bImage.type;
-    width = bImage.width;
-    height = bImage.height;
-    picLength = bImage.picLength;
-    ulong copyLength = picLength;
-    picData = new byte[copyLength];
-    while (copyLength--) {
-        picData[copyLength] = bImage.picData[copyLength];
+    imageType = bImage.imageType;
+    imageInfo.width = bImage.imageInfo.width;
+    imageInfo.height = bImage.imageInfo.height;
+    imageInfo.picLength = bImage.imageInfo.picLength;
+    picData = new byte[bImage.imageInfo.picLength];
+    memcpy(picData, bImage.picData, bImage.imageInfo.picLength);
+    switch (imageType) {
+        case ImageType::Bmp:
+            picInfo = new BmpInfo;
+            break;
+        case ImageType::Jpg:
+            picInfo = new JpgInfo;
+            break;
+        case ImageType::Png:
+            picInfo = new PngInfo;
+            break;
+        case ImageType::None:
+            picInfo = nullptr;
+            break;
     }
     return *this;
 }
@@ -95,7 +116,7 @@ byte *BImage::getImageData() {
 }
 
 unsigned long BImage::getImageDataSize() {
-    return picLength;
+    return imageInfo.picLength;
 }
 
 byte *BImage::getImageSourceData() {
@@ -109,7 +130,7 @@ unsigned long BImage::getImageSourceDataSize() {
 }
 
 ImageType BImage::getType() {
-    return type;
+    return imageType;
 }
 
 BImage *BImage::getBlankImage(ImageType type) {
@@ -125,13 +146,13 @@ void BImage::convertFromBMP(std::ifstream &picStream) {
     picStream.read((char *) (&sourceBmpInfo), sizeof(sourceBmpInfo));
     picStream.read((char *) (&sourceBmpImageInfo), sizeof(sourceBmpImageInfo));
 
-    type = Bmp;
-    width = sourceBmpImageInfo.width;
-    height = sourceBmpImageInfo.height;
-    bmpInfo.reserved[0] = sourceBmpInfo.reserved1;
-    bmpInfo.reserved[1] = sourceBmpInfo.reserved2;
-    bmpInfo.compression = sourceBmpImageInfo.compression;
-    picLength = sourceBmpImageInfo.sizeImage;
+    imageType = Bmp;
+    imageInfo.width = sourceBmpImageInfo.width;
+    imageInfo.height = sourceBmpImageInfo.height;
+    imageInfo.picLength = sourceBmpImageInfo.sizeImage;
+    ((BmpInfo *) picInfo)->reserved[0] = sourceBmpInfo.reserved1;
+    ((BmpInfo *) picInfo)->reserved[1] = sourceBmpInfo.reserved2;
+    ((BmpInfo *) picInfo)->compression = sourceBmpImageInfo.compression;
 
     if (sourceBmpImageInfo.bitCount >= 24) {
         if (sourceBmpImageInfo.clrUsed <= 0) {
@@ -139,13 +160,13 @@ void BImage::convertFromBMP(std::ifstream &picStream) {
         }
         dword offset = 0;
         while (sourceBmpImageInfo.clrUsed > offset) {
-            picStream.read((char *) (&(bmpInfo.colors[offset])), sizeof(BmpRGBSQUAD));
+            picStream.read((char *) (&(((BmpInfo *) picInfo)->colors[offset])), sizeof(BmpRGBSQUAD));
             offset++;
         }
     }
 
-    picData = new byte[(picLength)];
-    picStream.read((char *) (picData), picLength);
+    picData = new byte[imageInfo.picLength];
+    picStream.read((char *) (picData), imageInfo.picLength);
 }
 
 void BImage::convertFromJPG(std::ifstream &picStream) {

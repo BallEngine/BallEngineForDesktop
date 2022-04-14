@@ -26,6 +26,11 @@ namespace be {
         Jpg
     };
 
+    struct ImageInfo {
+        ulong width, height;
+        ulong picLength;
+    };
+
     struct BmpRGBSQUAD {
         byte rgbBlue;
         byte rgbGreen;
@@ -120,12 +125,9 @@ namespace be {
         byte *convertToPNGSource();
 
     private:
-        ImageType type;
-        BmpInfo bmpInfo;
-        PngInfo pngInfo;
-        JpgInfo jpgInfo;
-        ulong width, height;
-        ulong picLength;
+        ImageType imageType;
+        ImageInfo imageInfo;
+        void *picInfo;
         byte *picData;
     };
 

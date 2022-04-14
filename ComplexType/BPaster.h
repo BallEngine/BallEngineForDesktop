@@ -27,7 +27,14 @@ BE_BEGIN
 
         BImage getFrame();
 
+        PasterInfo getInfo();
+
+        void movePaster(unsigned short posX, unsigned short posY);
+
+        void movePasterTo(unsigned short posX, unsigned short posY);
+
     private:
+        PasterInfo pasterInfo;
         std::vector<BImage> pictures;
         int picPoint = 0, picNumber = 0;
     };

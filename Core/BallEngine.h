@@ -43,6 +43,7 @@ BE_BEGIN
         AudioManager *audioManager;
         PasterManager *pasterManager;
         ScriptManager *scriptManager;
+
         //PlatformInterface
         SystemInterface *systemInterface;
     };

@@ -29,7 +29,7 @@ BE_BEGIN
 
         BPaster &getPaster(PtrNum point);
 
-        bool setPaster(PtrNum point,const BPaster& paster);
+        bool setPaster(PtrNum point, const BPaster &paster);
 
         bool checkPasterValid(PtrNum point);
 
@@ -41,7 +41,8 @@ BE_BEGIN
 
     private:
         BPaster baseScreen;
-        std::map<PtrNum,BPaster> pasters;
+        std::map<PtrNum, BPaster> pasterMap;
+        std::map<PtrNum, PasterInfo> pasterInfoMap;
     };
 
 BE_END
