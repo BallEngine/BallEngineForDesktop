@@ -1,8 +1,6 @@
 /*****************************************************************************
 FileName:   PasterManager.cpp
-Creater:    Xeler
 Desc:       PasterManager & Paster class code.
-Version:    0.1
 ******************************************************************************/
 
 #include "PasterManager.h"

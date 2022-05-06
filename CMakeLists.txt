@@ -25,6 +25,7 @@ add_executable(BallEngine4CPP main.cpp Core/define.h
         Manager/ScriptManager.h Manager/ScriptManager.cpp
         Manager/AudioManager.h Manager/AudioManager.cpp
         Manager/PasterManager.h Manager/PasterManager.cpp
+        Manager/GameManager.h Manager/GameManager.cpp
         Helper/NetHelper.h Helper/NetHelper.cpp
         Helper/INFHelper.h Helper/INFHelper.cpp
         Helper/LogHelper.h Helper/LogHelper.cpp

@@ -33,6 +33,10 @@ BE_BEGIN
 
         void movePasterTo(unsigned short posX, unsigned short posY);
 
+        void
+
+        //TODO:Zoom
+
     private:
         PasterInfo pasterInfo;
         std::vector<BImage> pictures;

@@ -42,3 +42,17 @@ BImage BPaster::getFrame() {
     }
     return pictures[picPoint++];
 }
+
+PasterInfo BPaster::getInfo() {
+    return pasterInfo;
+}
+
+void BPaster::movePaster(unsigned short posX, unsigned short posY) {
+    pasterInfo.positionX += posX;
+    pasterInfo.positionY += posY;
+}
+
+void BPaster::movePasterTo(unsigned short posX, unsigned short posY) {
+    pasterInfo.positionX = posX;
+    pasterInfo.positionY = posY;
+}

@@ -1,8 +1,6 @@
 /*****************************************************************************
 FileName:   PasterManager.h
-Creater:    Xeler
 Desc:       Define class Paster and PasterManager.
-Version:    0.1
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_PASTERMANAGER_H
