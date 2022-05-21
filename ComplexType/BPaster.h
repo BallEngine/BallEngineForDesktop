@@ -5,12 +5,21 @@
 
 #include "../Core/define.h"
 #include "../BaseType/BImage.h"
+#include "../BaseType/BString.h"
 
 BE_BEGIN
     struct PasterInfo {
         unsigned short positionX, positionY;
         unsigned short sizeX, sizeY;
         float scale;
+    };
+
+    enum PasterAction {
+        Click = 0,
+        Press,
+        Release,
+        In,
+        Out
     };
 
     class BPaster {
@@ -33,7 +42,7 @@ BE_BEGIN
 
         void movePasterTo(unsigned short posX, unsigned short posY);
 
-        void
+        void bindAction(PasterAction actionType, BString actionScript);
 
         //TODO:Zoom
 

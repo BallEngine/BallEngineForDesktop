@@ -9,7 +9,7 @@ Version:    0.1
 
 using namespace be;
 
-INFHelper::INFHelper(BString fileName) {
+INFHelper::INFHelper(BString &fileName) {
     std::ifstream fileStream = std::ifstream(fileName.toCStyleStr(), std::ios::in | std::ios::binary);
     fileStream.seekg(std::ios::end);
     unsigned long fileLength = fileStream.tellg(), count = 0;
@@ -42,9 +42,14 @@ BString INFHelper::getValue(BString &dataName) {
     return m_mapData.at(dataName.toCStyleStr());
 }
 
+void INFHelper::setValue(std::string &dataName, BString dataValue) {
+    m_mapData.insert(dataName,dataValue);
+}
+
+
 void INFHelper::analysis(BString code) {
     unsigned long point = code.strFind('=');
-    std::pair<std::string , BString> dataPair;
+    std::pair<std::string, BString> dataPair;
     dataPair.first = code.strSub(0, point).toCStyleStr();
     dataPair.second = code.strSub(point + 1, code.getLength());
     m_mapData.insert(dataPair);

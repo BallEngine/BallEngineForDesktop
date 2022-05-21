@@ -56,3 +56,7 @@ void BPaster::movePasterTo(unsigned short posX, unsigned short posY) {
     pasterInfo.positionX = posX;
     pasterInfo.positionY = posY;
 }
+
+void BPaster::bindAction(PasterAction actionType, BString actionScript) {
+
+}

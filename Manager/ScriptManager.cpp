@@ -44,7 +44,7 @@ double ScriptManager::execute(BString expression) {
 
 BEvent ScriptManager::analysis(BString code) {
     ManagerType toWhere = ScriptSys;
-    return BEvent(ScriptSys, toWhere, BString("A"));
+    return BEvent(ScriptSys, toWhere, code);
 }
 
 void *ScriptManager::memoryWrite(BString key, void *value) {

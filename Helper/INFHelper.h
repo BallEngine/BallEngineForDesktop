@@ -17,13 +17,19 @@ namespace be {
 
     class INFHelper {
     public:
-        explicit INFHelper(BString fileName);
+        explicit INFHelper(BString &fileName);
+
         ~INFHelper();
+
+        void setValue(std::string &dataName, BString dataValue);
+
         BString getValue(BString &dataName);
+
     protected:
         void analysis(BString code);
+
     private:
-        std::map<std::string , BString> m_mapData;
+        std::map<std::string, BString> m_mapData;
     };
 
 }
