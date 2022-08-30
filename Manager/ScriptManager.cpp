@@ -1,8 +1,7 @@
 /*****************************************************************************
 FileName:   ScriptManager.cpp
-Creater:    Xeler
+Author:     Xeler
 Desc:       Desc
-Version:    0.1
 ******************************************************************************/
 
 #include "ScriptManager.h"

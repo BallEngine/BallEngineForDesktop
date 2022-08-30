@@ -1,20 +1,25 @@
 /*****************************************************************************
 FileName:   BallEngine.h
-Creater:    Xeler
+Author:     Xeler
 Desc:       Engine Head.
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_BALLENGINE_H
 #define BALLENGINE4CPP_BALLENGINE_H
 
+#include <thread>
+
 #include "define.h"
+
 #include "../Manager/PasterManager.h"
 #include "../Manager/ScriptManager.h"
 #include "../Manager/AudioManager.h"
-#include "SystemInterface.h"
-#include <thread>
 
 BE_BEGIN
+
+    struct BWindow{
+
+    };
 
     class BallEngine {
     CLASS_OPTION:
@@ -29,7 +34,7 @@ BE_BEGIN
 
         void emitBEvent(const BEvent &event);
 
-        void initialization(SystemInterface& interface);
+        void initialization();
 
         AudioManager &getAudioManager();
 
@@ -37,15 +42,13 @@ BE_BEGIN
 
         ScriptManager &getScriptManager();
 
-        SystemInterface &getSystemInterface();
 
     protected:
         AudioManager *audioManager;
         PasterManager *pasterManager;
         ScriptManager *scriptManager;
 
-        //PlatformInterface
-        SystemInterface *systemInterface;
+
     };
 
 BE_END

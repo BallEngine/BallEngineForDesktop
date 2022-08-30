@@ -1,8 +1,7 @@
 /*****************************************************************************
 FileName:   Manager.h
-Creater:    Xeler
+Author:     Xeler
 Desc:       Define ManagerType,EventMessage and Manager class(Super virtual class of other Manager).
-Version:    0.1
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_MANAGER_H
@@ -16,7 +15,6 @@ BE_BEGIN
 
     enum ManagerType {
         System = 0,
-        Interface,
         PasterSys,
         ScriptSys,
         Other

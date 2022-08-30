@@ -1,9 +1,15 @@
+/*****************************************************************************
+FileName:   BPaster.cpp
+Author:     Xeler
+Desc:       Paster class.
+******************************************************************************/
+
 #include "BPaster.h"
 
 BE_USE
 
 BPaster::BPaster() {
-    pictures.push_back(*BImage::getBlankImage(ImageType::None));
+    pictures.push_back(IMG_);
 }
 
 BPaster::BPaster(BImage pics[], unsigned int picCount) {

@@ -1,18 +1,20 @@
+/*****************************************************************************
+FileName:   BPaster.h
+Author:     Xeler
+Desc:       Paster class.
+******************************************************************************/
+
 #ifndef BALLENGINE4CPP_BPASTER_H
 #define BALLENGINE4CPP_BPASTER_H
 
 #include <vector>
+#include <string>
+
+#include <SDL2/SDL.h>
 
 #include "../Core/define.h"
-#include "../BaseType/BImage.h"
 
 BE_BEGIN
-    struct PasterInfo {
-        unsigned short positionX, positionY;
-        unsigned short sizeX, sizeY;
-        float scale;
-    };
-
     enum PasterAction {
         Click = 0,
         Press,
@@ -25,7 +27,7 @@ BE_BEGIN
     public:
         BPaster();
 
-        explicit BPaster(BImage pics[], unsigned int picCount = 1);
+        explicit BPaster(SDL_Texture pics[], unsigned int picCount = 1);
 
         ~BPaster();
 
@@ -33,9 +35,7 @@ BE_BEGIN
 
         void frameControl(int frameNumber = 1);
 
-        BImage getFrame();
-
-        PasterInfo getInfo() const;
+        SDL_Texture getFrame();
 
         void movePaster(unsigned short posX, unsigned short posY);
 
@@ -43,11 +43,8 @@ BE_BEGIN
 
         void bindAction(PasterAction actionType, std::string actionScript);
 
-        //TODO:Zoom
-
     private:
-        PasterInfo pasterInfo;
-        std::vector<BImage> pictures;
+        std::vector<SDL_Texture> pictures;
         int picPoint = 0, picNumber = 0;
     };
 

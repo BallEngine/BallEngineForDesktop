@@ -1,8 +1,7 @@
 /*****************************************************************************
 FileName:   ScriptManager.h
-Creater:    Xeler
+Author:     Xeler
 Desc:       Desc
-Version:    0.1
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_SCRIPTMANAGER_H

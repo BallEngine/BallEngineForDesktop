@@ -1,8 +1,7 @@
 /*****************************************************************************
 FileName:   LogHelper.h
-Creater:    Xeler
+Author:     Xeler
 Desc:       Log 4 BallEngine
-Version:    0.1
 ******************************************************************************/
 
 #include "LogHelper.h"

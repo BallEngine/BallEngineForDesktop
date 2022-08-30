@@ -1,8 +1,7 @@
 /*****************************************************************************
 FileName:   BThread.h
-Creater:    Xeler
+Author:     Xeler
 Desc:       Desc
-Version:    0.1
 ******************************************************************************/
 
 #ifndef BALLENGINE4CPP_BTHREAD_H
