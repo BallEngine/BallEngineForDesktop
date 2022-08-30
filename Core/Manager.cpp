@@ -8,7 +8,7 @@ Desc:       Manager Code.
 
 BE_USE
 
-BEvent::BEvent(ManagerType whereFrom, ManagerType wantTo, BString eventMessage) {
+BEvent::BEvent(ManagerType whereFrom, ManagerType wantTo, std::string eventMessage) {
     from = whereFrom;
     to = wantTo;
     data = eventMessage;

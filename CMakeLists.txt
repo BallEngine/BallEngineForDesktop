@@ -15,7 +15,6 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(BallEngine4CPP main.cpp Core/define.h
-        BaseType/BString.h BaseType/BString.cpp
         BaseType/BImage.h BaseType/BImage.cpp
         BaseType/BThread.h BaseType/BThread.cpp
         ComplexType/BPaster.h ComplexType/BPaster.cpp
@@ -27,7 +26,6 @@ add_executable(BallEngine4CPP main.cpp Core/define.h
         Manager/PasterManager.h Manager/PasterManager.cpp
         Manager/GameManager.h Manager/GameManager.cpp
         Helper/NetHelper.h Helper/NetHelper.cpp
-        Helper/INFHelper.h Helper/INFHelper.cpp
         Helper/LogHelper.h Helper/LogHelper.cpp
         Helper/HTTPHelper.h Helper/HTTPHelper.cpp
         PlatformInterface/GLInterface.h PlatformInterface/GLInterface.cpp

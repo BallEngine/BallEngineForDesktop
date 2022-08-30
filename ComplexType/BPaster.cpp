@@ -43,7 +43,7 @@ BImage BPaster::getFrame() {
     return pictures[picPoint++];
 }
 
-PasterInfo BPaster::getInfo() {
+PasterInfo BPaster::getInfo() const {
     return pasterInfo;
 }
 
@@ -57,6 +57,6 @@ void BPaster::movePasterTo(unsigned short posX, unsigned short posY) {
     pasterInfo.positionY = posY;
 }
 
-void BPaster::bindAction(PasterAction actionType, BString actionScript) {
+void BPaster::bindAction(PasterAction actionType, std::string actionScript) {
 
 }

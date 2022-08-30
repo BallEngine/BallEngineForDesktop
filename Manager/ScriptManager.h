@@ -8,11 +8,11 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_SCRIPTMANAGER_H
 #define BALLENGINE4CPP_SCRIPTMANAGER_H
 
-#include <vector>
 #include <stack>
+#include <vector>
+#include <string>
 #include "../Core/define.h"
 #include "../Core/Manager.h"
-#include "../BaseType/BString.h"
 
 BE_BEGIN
 
@@ -28,26 +28,26 @@ BE_BEGIN
         ~ScriptManager();
 
         //预处理函数
-        BString pretreatment(char *code);
+        std::string pretreatment(char *code);
 
         //执行函数
-        double execute(BString expression);
+        double execute(std::string expression);
 
         //解析函数
-        BEvent analysis(BString code);
+        BEvent analysis(std::string code);
 
-        void *memoryWrite(BString key, void *value);
+        void *memoryWrite(std::string key, void *value);
 
-        void *memoryRead(BString key);
+        void *memoryRead(std::string key);
 
         void processEvent(BEvent event) override;
 
     protected:
-        static unsigned char getOperatorIndex(BString operatorString);
+        static unsigned char getOperatorIndex(std::string operatorString);
 
 
     private:
-        std::vector<BString> key[26];
+        std::vector<std::string> key[26];
         std::vector<int> value[26];
     };
 BE_END

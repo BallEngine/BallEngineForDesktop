@@ -40,7 +40,6 @@ BE_BEGIN
     private:
         BPaster baseScreen;
         std::map<PtrNum, BPaster> pasterMap;
-        std::map<PtrNum, PasterInfo> pasterInfoMap;
     };
 
 BE_END

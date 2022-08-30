@@ -8,7 +8,6 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_LOGHELPER_H
 #define BALLENGINE4CPP_LOGHELPER_H
 
-#include "../BaseType/BString.h"
 #include "../Core/define.h"
 
 class LogHelper {

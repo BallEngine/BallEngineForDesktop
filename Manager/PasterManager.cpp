@@ -58,9 +58,7 @@ BPaster &PasterManager::getPaster(PtrNum point) {
 
 bool PasterManager::setPaster(PtrNum point, const BPaster &paster) {
     std::pair<PtrNum, BPaster> valuePair(point, paster);
-    std::pair<PtrNum, PasterInfo> infoValuePair(point, {0, 0, paster., , 0});
     pasterMap.insert(valuePair);
-    pasterInfoMap.insert(infoValuePair);
     return valuePair.first;
 }
 
@@ -72,7 +70,7 @@ BImage PasterManager::drawScreen(unsigned short framesSpace) {
     BImage newScreen = baseScreen.getFrame();
     auto ic = pasterMap.begin();
     while (ic != pasterMap.end()) {
-        newScreen.drawPic(ic->second.getFrame(), , 0);
+        newScreen.drawPic(ic->second.getFrame(), 0, 0);
         ic++;
     }
     return newScreen;

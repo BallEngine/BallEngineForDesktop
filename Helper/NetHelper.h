@@ -8,7 +8,7 @@ Desc:       Desc
 #define BALLENGINE4CPP_NETHELPER_H
 
 #include <queue>
-#include "../BaseType/BString.h"
+#include <string>
 
 #ifdef LINUX
 
@@ -34,7 +34,7 @@ namespace be {
 
     class NetHelper {
     public:
-        explicit NetHelper(unsigned int port = 21324, BString ip = BString("0.0.0.0")); //port:bmx
+        explicit NetHelper(unsigned int port = 21324, std::string ip = "0.0.0.0"); //port:bmx
 
         ~NetHelper();
 
@@ -46,19 +46,19 @@ namespace be {
 
         bool isConnect();
 
-        bool sendMessage(BString message);
+        bool sendMessage(std::string message);
 
-        BString getMessage();
+        std::string getMessage();
 
-        BString operator>>(BString bString);
+        void operator>>(std::string &str);
 
-        NetHelper operator<<(BString bString);
+        NetHelper &operator<<(std::string str);
 
     private:
         bool runtime;
         SOCKET connectSocket;
         sockaddr_in connectAddress;
-        std::queue<BString> messageQueue;
+        std::queue<std::string> messageQueue;
     };
 
 }

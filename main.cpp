@@ -1,6 +1,4 @@
 #include <iostream>
-#include <QApplication>
-#include <QWidget>
 #include "Core/BallEngine.h"
 #include "PlatformInterface/QtInterface.h"
 

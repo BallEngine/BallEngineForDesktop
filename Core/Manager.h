@@ -8,8 +8,9 @@ Version:    0.1
 #ifndef BALLENGINE4CPP_MANAGER_H
 #define BALLENGINE4CPP_MANAGER_H
 
+#include <string>
+
 #include "define.h"
-#include "../BaseType/BString.h"
 
 BE_BEGIN
 
@@ -23,9 +24,9 @@ BE_BEGIN
 
     class BEvent {
     public:
-        BEvent(ManagerType whereFrom, ManagerType wantTo, BString eventMessage);
+        BEvent(ManagerType whereFrom, ManagerType wantTo, std::string eventMessage);
         ManagerType from, to;
-        BString data;
+        std::string data;
     };
 
     class Manager {

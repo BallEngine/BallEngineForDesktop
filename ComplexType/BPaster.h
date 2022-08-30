@@ -5,7 +5,6 @@
 
 #include "../Core/define.h"
 #include "../BaseType/BImage.h"
-#include "../BaseType/BString.h"
 
 BE_BEGIN
     struct PasterInfo {
@@ -36,13 +35,13 @@ BE_BEGIN
 
         BImage getFrame();
 
-        PasterInfo getInfo();
+        PasterInfo getInfo() const;
 
         void movePaster(unsigned short posX, unsigned short posY);
 
         void movePasterTo(unsigned short posX, unsigned short posY);
 
-        void bindAction(PasterAction actionType, BString actionScript);
+        void bindAction(PasterAction actionType, std::string actionScript);
 
         //TODO:Zoom
 
