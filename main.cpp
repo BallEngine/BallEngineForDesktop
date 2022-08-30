@@ -1,10 +1,8 @@
 #include <iostream>
 #include "Core/BallEngine.h"
-#include "PlatformInterface/QtInterface.h"
 
 int main(int argc, char *argv[]) {
-    BallEngine &ballEngine = BallEngine::instantiation();
-    QtInterface qtInterface(argc,argv);
+    be::BallEngine &ballEngine = be::BallEngine::instantiation();
 
-    return qtInterface.execute();
+    return 0;
 }

@@ -43,6 +43,8 @@ bool NetHelper::isConnect() {
 bool NetHelper::sendMessage(std::string message) {
     unsigned long startIndex = 0;
     if (message.length() <= 512) {
+        sendto(connectSocket, message.c_str(), message.length(), 0, (sockaddr *) (&connectAddress),
+               sizeof(connectAddress));
     } else {
         while ((startIndex + 512) < message.length()) {
             sendto(connectSocket, message.substr(0, 512).c_str(), 512, 0,
@@ -66,7 +68,7 @@ void NetHelper::operator>>(std::string &str) {
     }
 }
 
-NetHelper &NetHelper::operator<<(std::string str) {
+NetHelper &NetHelper::operator<<(std::string &str) {
     sendMessage(str);
     return *this;
 }

@@ -52,7 +52,7 @@ namespace be {
 
         void operator>>(std::string &str);
 
-        NetHelper &operator<<(std::string str);
+        NetHelper &operator<<(std::string &str);
 
     private:
         bool runtime;
