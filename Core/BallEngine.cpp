@@ -14,10 +14,10 @@ BallEngine::BallEngine() {
     audioManager = new AudioManager();
     pasterManager = new PasterManager();
     scriptManager = new ScriptManager();
-
 }
 
 void BallEngine::initialization() {
+    SDL_Init(SDL_INIT_EVERYTHING);
 }
 
 

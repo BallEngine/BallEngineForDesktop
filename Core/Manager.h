@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Define ManagerType,EventMessage and Manager class(Super virtual class of other Manager).
 ******************************************************************************/
 
-#ifndef BALLENGINE4CPP_MANAGER_H
-#define BALLENGINE4CPP_MANAGER_H
+#ifndef BallEngine_MANAGER_H
+#define BallEngine_MANAGER_H
 
 #include <string>
 
@@ -35,4 +35,4 @@ BE_BEGIN
 
 BE_END
 
-#endif //BALLENGINE4CPP_MANAGER_H
+#endif //BallEngine_MANAGER_H

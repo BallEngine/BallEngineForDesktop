@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Engine Head.
 ******************************************************************************/
 
-#ifndef BALLENGINE4CPP_BALLENGINE_H
-#define BALLENGINE4CPP_BALLENGINE_H
+#ifndef BallEngine_BALLENGINE_H
+#define BallEngine_BALLENGINE_H
 
 #include <thread>
 
@@ -16,10 +16,6 @@ Desc:       Engine Head.
 #include "../Manager/AudioManager.h"
 
 BE_BEGIN
-
-    struct BWindow{
-
-    };
 
     class BallEngine {
     CLASS_OPTION:
@@ -53,4 +49,4 @@ BE_BEGIN
 
 BE_END
 
-#endif //BALLENGINE4CPP_BALLENGINE_H
+#endif //BallEngine_BALLENGINE_H

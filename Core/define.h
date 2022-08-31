@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Define macro and type.
 ******************************************************************************/
 
-#ifndef BALLENGINE4CPP_DEFINE_H
-#define BALLENGINE4CPP_DEFINE_H
+#ifndef BallEngine_DEFINE_H
+#define BallEngine_DEFINE_H
 
 #define BALLENGINE_VERSION  V0.2A
 
@@ -24,4 +24,4 @@ Desc:       Define macro and type.
 
 typedef unsigned long long PtrNum;
 
-#endif //BALLENGINE4CPP_DEFINE_H
+#endif //BallEngine_DEFINE_H

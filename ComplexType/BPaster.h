@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Paster class.
 ******************************************************************************/
 
-#ifndef BALLENGINE4CPP_BPASTER_H
-#define BALLENGINE4CPP_BPASTER_H
+#ifndef BallEngine_BPASTER_H
+#define BallEngine_BPASTER_H
 
 #include <vector>
 #include <string>
@@ -50,4 +50,4 @@ BE_BEGIN
 
 BE_END
 
-#endif //BALLENGINE4CPP_BPASTER_H
+#endif //BallEngine_BPASTER_H

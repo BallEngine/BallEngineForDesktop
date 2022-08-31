@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Desc
 ******************************************************************************/
 
-#ifndef BALLENGINE4CPP_AUDIOMANAGER_H
-#define BALLENGINE4CPP_AUDIOMANAGER_H
+#ifndef BallEngine_AUDIOMANAGER_H
+#define BallEngine_AUDIOMANAGER_H
 
 #include "../Core/define.h"
 #include "../Core/Manager.h"
@@ -21,4 +21,4 @@ BE_BEGIN
 
 BE_END
 
-#endif //BALLENGINE4CPP_AUDIOMANAGER_H
+#endif //BallEngine_AUDIOMANAGER_H

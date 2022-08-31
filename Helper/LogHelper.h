@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Log 4 BallEngine
 ******************************************************************************/
 
-#ifndef BALLENGINE4CPP_LOGHELPER_H
-#define BALLENGINE4CPP_LOGHELPER_H
+#ifndef BallEngine_LOGHELPER_H
+#define BallEngine_LOGHELPER_H
 
 #include "../Core/define.h"
 
@@ -15,4 +15,4 @@ CLASS_INTERFACE:
 };
 
 
-#endif //BALLENGINE4CPP_LOGHELPER_H
+#endif //BallEngine_LOGHELPER_H

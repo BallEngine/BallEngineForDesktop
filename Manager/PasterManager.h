@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Define class Paster and PasterManager.
 ******************************************************************************/
 
-#ifndef BALLENGINE4CPP_PASTERMANAGER_H
-#define BALLENGINE4CPP_PASTERMANAGER_H
+#ifndef BallEngine_PASTERMANAGER_H
+#define BallEngine_PASTERMANAGER_H
 
 #include "../Core/define.h"
 #include "../Core/Manager.h"
@@ -45,4 +45,4 @@ BE_BEGIN
 
 BE_END
 
-#endif //BALLENGINE4CPP_PASTERMANAGER_H
+#endif //BallEngine_PASTERMANAGER_H

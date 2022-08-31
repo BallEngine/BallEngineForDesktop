@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Desc
 ******************************************************************************/
 
-#ifndef BALLENGINE4CPP_NETHELPER_H
-#define BALLENGINE4CPP_NETHELPER_H
+#ifndef BallEngine_NETHELPER_H
+#define BallEngine_NETHELPER_H
 
 #include <queue>
 #include <string>
@@ -63,4 +63,4 @@ namespace be {
 
 }
 
-#endif //BALLENGINE4CPP_NETHELPER_H
+#endif //BallEngine_NETHELPER_H
