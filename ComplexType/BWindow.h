@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       SDL window package class.
 ******************************************************************************/
 
-#ifndef BallEngine_BWINDOW_H
-#define BallEngine_BWINDOW_H
+#ifndef BALLENGINE_BWINDOW_H
+#define BALLENGINE_BWINDOW_H
 
 #include <string>
 
@@ -28,4 +28,4 @@ BE_BEGIN
 
 BE_END
 
-#endif //BallEngine_BWINDOW_H
+#endif //BALLENGINE_BWINDOW_H

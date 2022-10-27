@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Desc
 ******************************************************************************/
 
-#ifndef BallEngine_BTHREAD_H
-#define BallEngine_BTHREAD_H
+#ifndef BALLENGINE_BTHREAD_H
+#define BALLENGINE_BTHREAD_H
 
 #ifdef LINUX
 
@@ -83,4 +83,4 @@ namespace be {
     };
 }
 
-#endif //BallEngine_BTHREAD_H
+#endif //BALLENGINE_BTHREAD_H

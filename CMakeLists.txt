@@ -1,14 +1,14 @@
-cmake_minimum_required(VERSION 3.21)
-project(BallEngine)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.21)
+PROJECT(BallEngine)
 
-set(CMAKE_CXX_STANDARD 14)
-set(INC_DIR ./Library/include/)
-set(LINK_DIR ./Library/library/)
+SET(CMAKE_CXX_STANDARD 14)
+SET(INC_DIR ./Library/include/)
+SET(LINK_DIR ./Library/library/)
 
-include_directories(${INC_DIR})
-link_directories(${LINK_DIR} )
+INCLUDE_DIRECTORIES(${INC_DIR})
+LINK_DIRECTORIES(${LINK_DIR})
 
-add_executable(BallEngine main.cpp Core/define.h
+ADD_EXECUTABLE(BallEngine main.cpp Core/define.h
         BaseType/BThread.h BaseType/BThread.cpp
         ComplexType/BPaster.h ComplexType/BPaster.cpp
         Core/Manager.h Core/Manager.cpp
@@ -22,6 +22,6 @@ add_executable(BallEngine main.cpp Core/define.h
         ComplexType/BWindow.cpp ComplexType/BWindow.h)
 
 if (WIN32)
-    set(CMAKE_LIBRARY_PATH "C:\\Windows\\System32\\")
-    target_link_libraries(BallEngine ws2_32 SDL2)
+    SET(CMAKE_LIBRARY_PATH "C:\\Windows\\System32\\")
+    TARGET_LINK_LIBRARIES(BallEngine ws2_32 SDL2)
 endif ()

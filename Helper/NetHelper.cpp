@@ -9,45 +9,40 @@ Desc:       Build.
 
 using namespace be;
 
-NetHelper::NetHelper(unsigned int port, std::string ip) {
+NetHelper::NetHelper() {
 
-    connectSocket = socket(AF_INET, SOCK_DGRAM, 0);
-    runtime = true;
-    memset(&connectAddress, 0, sizeof(sockaddr_in));
-    connectAddress.sin_addr.S_un.S_addr = htonl(inet_addr(ip.c_str()));
-    connectAddress.sin_port = htons(port);
-    runtime = bind(connectSocket, (sockaddr *) &connectAddress, sizeof(sockaddr_in));
-    runtime = runtime && listen(connectSocket, SOMAXCONN);
 }
 
 NetHelper::~NetHelper() {
 
 }
 
-void NetHelper::serverStart() {
-
-}
-
-void NetHelper::clientStart() {
-
+void NetHelper::init(unsigned int port, std::string ip, bool isServer) {
+    m_connectSocket = socket(AF_INET, SOCK_DGRAM, 0);
+    m_isRunning = false;
+    memset(&m_connectAddress, 0, sizeof(sockaddr_in));
+    m_connectAddress.sin_addr.S_un.S_addr = htonl(inet_addr(ip.c_str()));
+    m_connectAddress.sin_port = htons(port);
+    m_isRunning = bind(m_connectSocket, (sockaddr *) &m_connectAddress, sizeof(sockaddr_in));
+    m_isRunning = m_isRunning && listen(m_connectSocket, SOMAXCONN);
 }
 
 void NetHelper::close() {
 
 }
 
-bool NetHelper::isConnect() {
-    return connectSocket;
+bool NetHelper::isRunning() {
+    return m_isRunning;
 }
 
-bool NetHelper::sendMessage(std::string message) {
+bool NetHelper::sendMessage(std::string msg) {
     unsigned long startIndex = 0;
-    if (message.length() <= 512) {
-        sendto(connectSocket, message.c_str(), message.length(), 0, (sockaddr *) (&connectAddress),
+    if (msg.length() <= 512) {
+        sendto(connectSocket, message.c_str(), msg.length(), 0, (sockaddr *) (&connectAddress),
                sizeof(connectAddress));
     } else {
-        while ((startIndex + 512) < message.length()) {
-            sendto(connectSocket, message.substr(0, 512).c_str(), 512, 0,
+        while ((startIndex + 512) < msg.length()) {
+            sendto(connectSocket, msg.substr(0, 512).c_str(), 512, 0,
                    (sockaddr *) (&connectAddress), sizeof(connectAddress));
             startIndex += 512;
         }
@@ -55,17 +50,13 @@ bool NetHelper::sendMessage(std::string message) {
     return true;
 }
 
-std::string NetHelper::getMessage() {
+std::string NetHelper::getMessage(std::string msg) {
     return "";
 }
 
-void NetHelper::operator>>(std::string &str) {
-    if (messageQueue.empty()) {
-        str = "";
-    } else {
-        str = messageQueue.front();
-        messageQueue.pop();
-    }
+NetHelper &NetHelper::operator>>(std::string &str) {
+    getMessage(str);
+    return *this;
 }
 
 NetHelper &NetHelper::operator<<(std::string &str) {

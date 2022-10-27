@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Engine Head.
 ******************************************************************************/
 
-#ifndef BallEngine_BALLENGINE_H
-#define BallEngine_BALLENGINE_H
+#ifndef BALLENGINE_BALLENGINE_H
+#define BALLENGINE_BALLENGINE_H
 
 #include <thread>
 
@@ -49,4 +49,4 @@ BE_BEGIN
 
 BE_END
 
-#endif //BallEngine_BALLENGINE_H
+#endif //BALLENGINE_BALLENGINE_H

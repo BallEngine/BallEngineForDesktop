@@ -4,15 +4,17 @@ Author:     Xeler
 Desc:       Desc
 ******************************************************************************/
 
-#ifndef BallEngine_NETHELPER_H
-#define BallEngine_NETHELPER_H
+#ifndef BALLENGINE_NETHELPER_H
+#define BALLENGINE_NETHELPER_H
 
 #include <queue>
 #include <string>
 
+#include <unistd.h>
+
 #ifdef LINUX
 
-#include <unistd.h>
+
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
@@ -20,7 +22,6 @@ Desc:       Desc
 #endif
 #ifdef WIN32
 
-#include <unistd.h>
 #include <winsock2.h>
 #include <windows.h>
 #include <inaddr.h>
@@ -34,33 +35,31 @@ namespace be {
 
     class NetHelper {
     public:
-        explicit NetHelper(unsigned int port = 21324, std::string ip = "0.0.0.0"); //port:bmx
+        explicit NetHelper();
 
         ~NetHelper();
 
-        void serverStart();
-
-        void clientStart();
+        void init(unsigned int port = 21324, std::string ip = "0.0.0.0", bool isServer = true); //port:bmx
 
         void close();
 
-        bool isConnect();
+        bool isRunning();
 
         bool sendMessage(std::string message);
 
         std::string getMessage();
 
-        void operator>>(std::string &str);
+        NetHelper &operator>>(std::string &str);
 
         NetHelper &operator<<(std::string &str);
 
     private:
-        bool runtime;
-        SOCKET connectSocket;
-        sockaddr_in connectAddress;
-        std::queue<std::string> messageQueue;
+        bool m_isRunning;
+        SOCKET m_connectSocket;
+        sockaddr_in m_connectAddress;
+        std::queue<std::string> m_messageQueue;
     };
 
 }
 
-#endif //BallEngine_NETHELPER_H
+#endif //BALLENGINE_NETHELPER_H

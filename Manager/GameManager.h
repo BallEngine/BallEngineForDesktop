@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       PasterManager & Paster class code.
 ******************************************************************************/
 
-#ifndef BallEngine_GAMEMANAGER_H
-#define BallEngine_GAMEMANAGER_H
+#ifndef BALLENGINE_GAMEMANAGER_H
+#define BALLENGINE_GAMEMANAGER_H
 
 #include "../Core/define.h"
 #include "../Core/Manager.h"
@@ -18,4 +18,4 @@ BE_BEGIN
 
 BE_END
 
-#endif //BallEngine_GAMEMANAGER_H
+#endif //BALLENGINE_GAMEMANAGER_H

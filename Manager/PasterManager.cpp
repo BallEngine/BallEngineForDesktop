@@ -9,7 +9,7 @@ Desc:       PasterManager & Paster class code.
 
 BE_USE
 
-PasterManager::PasterManager(BImage *basePic) {
+PasterManager::PasterManager(SDL_Texture *basePic) {
     baseScreen = BPaster(basePic);
 }
 
@@ -23,7 +23,6 @@ void PasterManager::processEvent(BEvent event) {
 
 PtrNum PasterManager::addPaster(const BPaster &paster) {
     PtrNum point = (PtrNum) (&paster);
-    PasterInfo info = {0, 0, 0, 0, 0};
     bool valid = checkPasterValid(point);
     while (valid) {
         point++;
@@ -67,8 +66,8 @@ bool PasterManager::checkPasterValid(PtrNum point) {
     return pasterMap.find(point) != pasterMap.end();
 }
 
-BImage PasterManager::drawScreen(unsigned short framesSpace) {
-    BImage newScreen = baseScreen.getFrame();
+SDL_Texture PasterManager::drawScreen(unsigned short framesSpace) {
+    SDL_Texture newScreen = baseScreen.getFrame();
     auto ic = pasterMap.begin();
     while (ic != pasterMap.end()) {
         newScreen.drawPic(ic->second.getFrame(), 0, 0);

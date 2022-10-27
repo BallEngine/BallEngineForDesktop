@@ -9,13 +9,13 @@ Desc:       Paster class.
 BE_USE
 
 BPaster::BPaster() {
-    pictures.push_back(IMG_);
 }
 
-BPaster::BPaster(BImage pics[], unsigned int picCount) {
+BPaster::BPaster(SDL_Texture pics[], unsigned int picCount) {
     int i = 0;
     while (i - picCount) {
         pictures.push_back(pics[i]);
+        SDL_CreateTextureFromSurface();
         i++;
     }
 }
@@ -42,25 +42,11 @@ void BPaster::frameControl(int frame) {
     }
 }
 
-BImage BPaster::getFrame() {
+SDL_Texture BPaster::getFrame() {
     if (!picPoint < pictures.size()) {
         picPoint = 0;
     }
     return pictures[picPoint++];
-}
-
-PasterInfo BPaster::getInfo() const {
-    return pasterInfo;
-}
-
-void BPaster::movePaster(unsigned short posX, unsigned short posY) {
-    pasterInfo.positionX += posX;
-    pasterInfo.positionY += posY;
-}
-
-void BPaster::movePasterTo(unsigned short posX, unsigned short posY) {
-    pasterInfo.positionX = posX;
-    pasterInfo.positionY = posY;
 }
 
 void BPaster::bindAction(PasterAction actionType, std::string actionScript) {

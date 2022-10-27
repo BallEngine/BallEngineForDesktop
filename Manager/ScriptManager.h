@@ -4,8 +4,8 @@ Author:     Xeler
 Desc:       Desc
 ******************************************************************************/
 
-#ifndef BallEngine_SCRIPTMANAGER_H
-#define BallEngine_SCRIPTMANAGER_H
+#ifndef BALLENGINE_SCRIPTMANAGER_H
+#define BALLENGINE_SCRIPTMANAGER_H
 
 #include <stack>
 #include <vector>
@@ -51,4 +51,4 @@ BE_BEGIN
     };
 BE_END
 
-#endif //BallEngine_SCRIPTMANAGER_H
+#endif //BALLENGINE_SCRIPTMANAGER_H
