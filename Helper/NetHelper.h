@@ -45,9 +45,13 @@ namespace be {
 
         bool isRunning();
 
-        bool sendMessage(std::string message);
+        bool sendMessage(const char *buffer, unsigned int size);
 
-        std::string getMessage();
+        bool sendMessage(std::string msg);
+
+        unsigned int recvMessage(std::string &msg);
+
+        unsigned int recvMessage(char *buffer, unsigned int size);
 
         NetHelper &operator>>(std::string &str);
 

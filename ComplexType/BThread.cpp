@@ -39,7 +39,7 @@ void BThread::initThread(params arg) {
 }
 
 void BThread::startThread() {
-
+    pthread_create(,);
 }
 
 void BThread::stopThread() {
@@ -53,6 +53,10 @@ void BThread::pauseThread() {
 }
 
 void BThread::resumeThread() {
+}
+
+void BThread::setArgs(void *args) {
+
 }
 
 bool BThread::isReady() {

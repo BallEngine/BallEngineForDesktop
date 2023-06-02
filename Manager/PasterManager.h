@@ -7,7 +7,7 @@ Desc:       Define class Paster and PasterManager.
 #ifndef BALLENGINE_PASTERMANAGER_H
 #define BALLENGINE_PASTERMANAGER_H
 
-#include "../Core/define.h"
+#include "../define.h"
 #include "../Core/Manager.h"
 #include "../ComplexType/BPaster.h"
 #include <map>

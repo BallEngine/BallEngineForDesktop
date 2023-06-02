@@ -29,6 +29,8 @@ typedef unsigned char uch;
 #define BTHREAD_STATUS_HANGUP ((uch)4)
 #define BTHREAD_STATUS_RETURN ((uch)8)
 
+#include "../define.h"
+
 namespace be {
 
     typedef void *FuncType(void *);

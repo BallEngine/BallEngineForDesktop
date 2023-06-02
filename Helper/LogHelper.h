@@ -7,7 +7,7 @@ Desc:       Log 4 BallEngine
 #ifndef BALLENGINE_LOGHELPER_H
 #define BALLENGINE_LOGHELPER_H
 
-#include "../Core/define.h"
+#include "../define.h"
 
 class LogHelper {
 CLASS_OPTION:

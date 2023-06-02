@@ -8,8 +8,8 @@ SET(LINK_DIR ./Library/library/)
 INCLUDE_DIRECTORIES(${INC_DIR})
 LINK_DIRECTORIES(${LINK_DIR})
 
-ADD_EXECUTABLE(BallEngine main.cpp Core/define.h
-        BaseType/BThread.h BaseType/BThread.cpp
+ADD_EXECUTABLE(BallEngine main.cpp define.h
+        ComplexType/BThread.h ComplexType/BThread.cpp
         ComplexType/BPaster.h ComplexType/BPaster.cpp
         Core/Manager.h Core/Manager.cpp
         Core/BallEngine.h Core/BallEngine.cpp
@@ -19,9 +19,9 @@ ADD_EXECUTABLE(BallEngine main.cpp Core/define.h
         Manager/GameManager.h Manager/GameManager.cpp
         Helper/NetHelper.h Helper/NetHelper.cpp
         Helper/LogHelper.h Helper/LogHelper.cpp
-        ComplexType/BWindow.cpp ComplexType/BWindow.h)
+        ComplexType/BWindow.cpp ComplexType/BWindow.h ComplexType/BFile.cpp ComplexType/BFile.h)
 
-if (WIN32)
+IF (WIN32)
     SET(CMAKE_LIBRARY_PATH "C:\\Windows\\System32\\")
     TARGET_LINK_LIBRARIES(BallEngine ws2_32 SDL2)
-endif ()
+ENDIF ()

@@ -11,7 +11,7 @@ Desc:       SDL window package class.
 
 #include <SDL2/SDL.h>
 
-#include "../Core/define.h"
+#include "../define.h"
 
 BE_BEGIN
 

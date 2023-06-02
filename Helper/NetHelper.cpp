@@ -10,16 +10,17 @@ Desc:       Build.
 using namespace be;
 
 NetHelper::NetHelper() {
-
+    m_isRunning = false;
 }
 
 NetHelper::~NetHelper() {
-
+    if (m_isRunning) {
+        close();
+    }
 }
 
 void NetHelper::init(unsigned int port, std::string ip, bool isServer) {
     m_connectSocket = socket(AF_INET, SOCK_DGRAM, 0);
-    m_isRunning = false;
     memset(&m_connectAddress, 0, sizeof(sockaddr_in));
     m_connectAddress.sin_addr.S_un.S_addr = htonl(inet_addr(ip.c_str()));
     m_connectAddress.sin_port = htons(port);
@@ -35,23 +36,32 @@ bool NetHelper::isRunning() {
     return m_isRunning;
 }
 
-bool NetHelper::sendMessage(std::string msg) {
+bool NetHelper::sendMessage(const char *buffer, unsigned int size) {
     unsigned long startIndex = 0;
-    if (msg.length() <= 512) {
-        sendto(connectSocket, message.c_str(), msg.length(), 0, (sockaddr *) (&connectAddress),
-               sizeof(connectAddress));
+    if (size <= 512) {
+        sendto(m_connectSocket, buffer, size, 0, (sockaddr *) (&m_connectAddress),
+               sizeof(m_connectAddress));
     } else {
-        while ((startIndex + 512) < msg.length()) {
-            sendto(connectSocket, msg.substr(0, 512).c_str(), 512, 0,
-                   (sockaddr *) (&connectAddress), sizeof(connectAddress));
+        while ((startIndex + 512) < size) {
+            sendto(m_connectSocket, msg.substr(0, 512).c_str(), 512, 0,
+                   (sockaddr *) (&m_connectAddress), sizeof(m_connectAddress));
             startIndex += 512;
         }
     }
-    return true;
+    return m_isRunning;
 }
 
-std::string NetHelper::getMessage(std::string msg) {
-    return "";
+bool NetHelper::sendMessage(std::string &msg) {
+    return sendMessage(msg.c_str(), msg.size());
+}
+
+unsigned int NetHelper::recvMessage(char *buffer, unsigned int size) {
+    unsigned int recvSize = 0;
+    unsigned long startIndex = 0;
+    if (size <= 512) {
+        recvFrom(connectSocket, buffer, size);
+    }
+    return recvSize;
 }
 
 NetHelper &NetHelper::operator>>(std::string &str) {

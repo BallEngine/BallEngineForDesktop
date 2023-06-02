@@ -9,12 +9,12 @@ Desc:       Define ManagerType,EventMessage and Manager class(Super virtual clas
 
 #include <string>
 
-#include "define.h"
+#include "../define.h"
 
 BE_BEGIN
 
     enum ManagerType {
-        System = 0,
+        AudioSys = 0,
         PasterSys,
         ScriptSys,
         Other

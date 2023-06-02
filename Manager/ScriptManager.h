@@ -10,7 +10,7 @@ Desc:       Desc
 #include <stack>
 #include <vector>
 #include <string>
-#include "../Core/define.h"
+#include "../define.h"
 #include "../Core/Manager.h"
 
 BE_BEGIN

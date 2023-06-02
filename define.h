@@ -16,9 +16,9 @@ Desc:       Define macro and type.
 
 #define INTERFACE_INSTANTIATION(CLASSNAME)  static CLASSNAME &instantiation() {static CLASSNAME *instance = nullptr;if (instance == nullptr) {instance = new CLASSNAME();}return *instance;};
 
-#define BE_BEGIN    namespace be{
+#define BE_BEGIN    namespace BE{
 #define BE_END      }
-#define BE_USE      using namespace be;
+#define BE_USE      using namespace BE;
 
 #define emitNewEvent(from,target,message)  (BallEngine::emitBEvent(BEvent(from,target,message)))
 

@@ -11,7 +11,7 @@ BE_USE
 BPaster::BPaster() {
 }
 
-BPaster::BPaster(SDL_Texture pics[], unsigned int picCount) {
+BPaster::BPaster(SDL_Texture *pics unsigned int picCount) {
     int i = 0;
     while (i - picCount) {
         pictures.push_back(pics[i]);

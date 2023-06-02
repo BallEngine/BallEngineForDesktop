@@ -7,7 +7,7 @@ Desc:       Desc
 #ifndef BALLENGINE_AUDIOMANAGER_H
 #define BALLENGINE_AUDIOMANAGER_H
 
-#include "../Core/define.h"
+#include "../define.h"
 #include "../Core/Manager.h"
 
 BE_BEGIN

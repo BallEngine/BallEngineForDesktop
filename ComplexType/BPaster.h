@@ -12,7 +12,7 @@ Desc:       Paster class.
 
 #include <SDL2/SDL.h>
 
-#include "../Core/define.h"
+#include "../define.h"
 
 BE_BEGIN
     enum PasterAction {
@@ -37,7 +37,7 @@ BE_BEGIN
 
         SDL_Texture getFrame();
 
-        void movePaster(unsigned short posX, unsigned short posY);
+        void setPosition(unsigned short posX, unsigned short posY);
 
         void movePasterTo(unsigned short posX, unsigned short posY);
 
