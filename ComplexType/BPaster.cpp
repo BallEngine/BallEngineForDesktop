@@ -11,13 +11,18 @@ BE_USE
 BPaster::BPaster() {
 }
 
-BPaster::BPaster(SDL_Texture *pics unsigned int picCount) {
+BPaster::BPaster(const std::string &defaultTag, SDL_Surface pics[], unsigned int picCount) {
     int i = 0;
+    std::vector<SDL_Surface> *list = new std::vector<SDL_Surface>;
     while (i - picCount) {
-        pictures.push_back(pics[i]);
-        SDL_CreateTextureFromSurface();
+        list->push_back(pics[i]);
         i++;
     }
+    std::pair<std::string, std::vector<SDL_Surface> *> defaultPair("default", list);
+    std::pair<std::string, std::vector<SDL_Surface> *> texturePair(defaultTag, list);
+
+    m_textures.(defaultPair);
+    m_textures.insert(texturePair);
 }
 
 BPaster::~BPaster() {
@@ -25,7 +30,7 @@ BPaster::~BPaster() {
 }
 
 BPaster &BPaster::operator=(const BPaster &paster) {
-    this->picPoint = paster.picPoint;
+    this->m_picPoint = paster.m_picPoint;
     auto ic = paster.pictures.begin();
     while (ic != pictures.end()) {
         this->pictures.push_back(*ic);
@@ -34,21 +39,33 @@ BPaster &BPaster::operator=(const BPaster &paster) {
     return *this;
 }
 
-void BPaster::frameControl(int frame) {
-    if (picPoint + frame > 0) {
-        picPoint += frame;
+void BPaster::setFrame(int frameNumber) {
+    if (m_picPoint + frameNumber > 0) {
+        m_picPoint += frameNumber;
     } else {
-        picPoint = 0;
+        m_picPoint = 0;
     }
 }
 
-SDL_Texture BPaster::getFrame() {
-    if (!picPoint < pictures.size()) {
-        picPoint = 0;
+SDL_Surface BPaster::getFrame() {
+    if (!(m_picPoint < m_textures.at(m_activeTag)->size())) {
+        m_picPoint = 0;
     }
-    return pictures[picPoint++];
+    return m_textures.at(m_activeTag)->[m_picPoint++];
 }
 
 void BPaster::bindAction(PasterAction actionType, std::string actionScript) {
+
+}
+
+void BPaster::setPos(PosPair pos) {
+
+}
+
+PosPair BPaster::getPos() {
+    return m_pasterPos;
+}
+
+void BPaster::addPicList(std::string tag, SDL_Surface *pics, unsigned int picCount) {
 
 }

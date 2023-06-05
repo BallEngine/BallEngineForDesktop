@@ -108,7 +108,7 @@ extern "C" {
  * SDL_Init fails. You must specifically initialize other subsystems if you
  * use them in your application.
  *
- * Logging (such as SDL_Log) works without initialization, too.
+ * Logging (such as SDL_Log) works without init, too.
  *
  * `flags` may be any of the following OR'd together:
  *
@@ -125,12 +125,12 @@ extern "C" {
  * - `SDL_INIT_EVERYTHING`: all of the above subsystems
  * - `SDL_INIT_NOPARACHUTE`: compatibility; this flag is ignored
  *
- * Subsystem initialization is ref-counted, you must call SDL_QuitSubSystem()
+ * Subsystem init is ref-counted, you must call SDL_QuitSubSystem()
  * for each SDL_InitSubSystem() to correctly shutdown a subsystem manually (or
  * call SDL_Quit() to force shutdown). If a subsystem is already loaded then
  * this call will increase the ref-count and return.
  *
- * \param flags subsystem initialization flags
+ * \param flags subsystem init flags
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
@@ -187,7 +187,7 @@ extern DECLSPEC void SDLCALL SDL_QuitSubSystem(Uint32 flags);
  *
  * \param flags any of the flags used by SDL_Init(); see SDL_Init for details.
  * \returns a mask of all initialized subsystems if `flags` is 0, otherwise it
- *          returns the initialization status of the specified subsystems.
+ *          returns the init status of the specified subsystems.
  *
  *          The return value does not include SDL_INIT_NOPARACHUTE.
  *
@@ -203,7 +203,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_WasInit(Uint32 flags);
  *
  * You should call this function even if you have already shutdown each
  * initialized subsystem with SDL_QuitSubSystem(). It is safe to call this
- * function even in the case of errors in initialization.
+ * function even in the case of errors in init.
  *
  * If you start a subsystem using a call to that subsystem's init function
  * (for example SDL_VideoInit()) instead of SDL_Init() or SDL_InitSubSystem(),

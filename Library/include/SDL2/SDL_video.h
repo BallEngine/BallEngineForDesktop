@@ -297,7 +297,7 @@ extern DECLSPEC int SDLCALL SDL_GetNumVideoDrivers(void);
  * Get the name of a built in video driver.
  *
  * The video drivers are presented in the order in which they are normally
- * checked during initialization.
+ * checked during init.
  *
  * \param index the index of a video driver
  * \returns the name of the video driver with the given **index**.

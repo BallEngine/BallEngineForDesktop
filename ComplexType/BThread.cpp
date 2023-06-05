@@ -6,7 +6,7 @@ Desc:       Desc
 
 #include "BThread.h"
 
-using namespace be;
+BE_USE
 
 BThread::BThread(FuncType *func) {
     threadID = 0;

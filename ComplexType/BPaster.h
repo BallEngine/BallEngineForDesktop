@@ -8,6 +8,7 @@ Desc:       Paster class.
 #define BALLENGINE_BPASTER_H
 
 #include <vector>
+#include <map>
 #include <string>
 
 #include <SDL2/SDL.h>
@@ -15,37 +16,50 @@ Desc:       Paster class.
 #include "../define.h"
 
 BE_BEGIN
+
+    struct PosPair {
+        unsigned int x, y;
+    };
+
     enum PasterAction {
         Click = 0,
         Press,
         Release,
         In,
-        Out
+        Out,
+        Listen
     };
 
     class BPaster {
     public:
         BPaster();
 
-        explicit BPaster(SDL_Texture pics[], unsigned int picCount = 1);
+        explicit BPaster(const std::string& defaultTag, SDL_Surface pics[], unsigned int picCount = 1);
 
         ~BPaster();
 
+        void addPicList(std::string tag, SDL_Surface pics[], unsigned int picCount = 1);
+
         BPaster &operator=(const BPaster &paster);
 
-        void frameControl(int frameNumber = 1);
+        void setFrame(int frameNumber = 1);
+
+        void setPos(PosPair pos);
 
         SDL_Texture getFrame();
 
-        void setPosition(unsigned short posX, unsigned short posY);
-
-        void movePasterTo(unsigned short posX, unsigned short posY);
+        PosPair getPos();
 
         void bindAction(PasterAction actionType, std::string actionScript);
 
     private:
-        std::vector<SDL_Texture> pictures;
-        int picPoint = 0, picNumber = 0;
+        std::map<std::string, std::vector<SDL_Texture> *> m_textures;
+
+        std::string m_activeTag;
+
+        PosPair m_pasterPos;
+
+        int m_picPoint = 0, m_picNumber = 0;
     };
 
 BE_END

@@ -31,7 +31,7 @@ typedef unsigned char uch;
 
 #include "../define.h"
 
-namespace be {
+BE_BEGIN
 
     typedef void *FuncType(void *);
 
@@ -83,6 +83,7 @@ namespace be {
         void *args;
         void *ret;
     };
-}
+
+BE_END
 
 #endif //BALLENGINE_BTHREAD_H

@@ -5,24 +5,22 @@ Desc:       SDL window package class.
 ******************************************************************************/
 
 #include "BallEngine.h"
-#include "../Manager/PasterManager.h"
-#include "../Manager/ScriptManager.h"
 
 BE_USE
 
 BallEngine::BallEngine() {
     audioManager = new AudioManager();
-    pasterManager = new PasterManager();
     scriptManager = new ScriptManager();
+    pasterManager = new PasterManager(width, height);
 }
 
-void BallEngine::initialization(std::string setupFile) {
+void BallEngine::init(const std::string &setupFile) {
 
     // Init
     SDL_Init(SDL_INIT_EVERYTHING);
 
     // Load Settings
-    Help
+    BConfig setup = BConfig(setupFile);
 
     SDL_CreateWindow("",);
 }

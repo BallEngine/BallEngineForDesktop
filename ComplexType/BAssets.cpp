@@ -1,15 +1,8 @@
 /*****************************************************************************
-FileName:   BFile.h
+FileName:   BAssets.cpp
 Author:    Xeler
 Desc:       Desc.
 ******************************************************************************/
-#ifndef BALLENGINE_BFILE_H
-#define BALLENGINE_BFILE_H
+#include "BAssets.h"
 
-
-class BFile {
-
-};
-
-
-#endif //BALLENGINE_BFILE_H
+BE_USE

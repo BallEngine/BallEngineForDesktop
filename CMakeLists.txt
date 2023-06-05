@@ -19,7 +19,7 @@ ADD_EXECUTABLE(BallEngine main.cpp define.h
         Manager/GameManager.h Manager/GameManager.cpp
         Helper/NetHelper.h Helper/NetHelper.cpp
         Helper/LogHelper.h Helper/LogHelper.cpp
-        ComplexType/BWindow.cpp ComplexType/BWindow.h ComplexType/BFile.cpp ComplexType/BFile.h)
+        ComplexType/BConfig.cpp ComplexType/BConfig.h ComplexType/BAssets.cpp ComplexType/BAssets.h)
 
 IF (WIN32)
     SET(CMAKE_LIBRARY_PATH "C:\\Windows\\System32\\")

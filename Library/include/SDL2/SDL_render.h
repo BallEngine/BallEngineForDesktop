@@ -571,12 +571,12 @@ extern DECLSPEC void * SDLCALL SDL_GetTextureUserData(SDL_Texture * texture);
  * The pixel data must be in the pixel format of the texture. Use
  * SDL_QueryTexture() to query the pixel format of the texture.
  *
- * This is a fairly slow function, intended for use with static textures that
+ * This is a fairly slow function, intended for use with static m_textures that
  * do not change often.
  *
  * If the texture is intended to be updated often, it is preferred to create
  * the texture as streaming and use the locking functions referenced below.
- * While this function will work with streaming textures, for optimization
+ * While this function will work with streaming m_textures, for optimization
  * reasons you may not get the pixels back if you lock the texture afterward.
  *
  * \param texture the texture to update
@@ -732,7 +732,7 @@ extern DECLSPEC int SDLCALL SDL_LockTextureToSurface(SDL_Texture *texture,
  * before unlocking it, as the pixels might otherwise be uninitialized memory.
  *
  * Which is to say: locking and immediately unlocking a texture can result in
- * corrupted textures, depending on the renderer in use.
+ * corrupted m_textures, depending on the renderer in use.
  *
  * \param texture a texture locked by SDL_LockTexture()
  *
@@ -1763,7 +1763,7 @@ extern DECLSPEC void SDLCALL SDL_RenderPresent(SDL_Renderer * renderer);
 extern DECLSPEC void SDLCALL SDL_DestroyTexture(SDL_Texture * texture);
 
 /**
- * Destroy the rendering context for a window and free associated textures.
+ * Destroy the rendering context for a window and free associated m_textures.
  *
  * \param renderer the rendering context
  *
@@ -1823,7 +1823,7 @@ extern DECLSPEC int SDLCALL SDL_RenderFlush(SDL_Renderer * renderer);
  * not with your own OpenGL context. If you need control over your OpenGL
  * context, you need to write your own texture-loading methods.
  *
- * Also note that SDL may upload RGB textures as BGR (or vice-versa), and
+ * Also note that SDL may upload RGB m_textures as BGR (or vice-versa), and
  * re-order the color channels in the shaders phase, so the uploaded texture
  * may have swapped color channels.
  *

@@ -8,15 +8,18 @@ Desc:       Define class Paster and PasterManager.
 #define BALLENGINE_PASTERMANAGER_H
 
 #include "../define.h"
+
+#include <map>
+#include "SDL2/SDL.h"
+
 #include "../Core/Manager.h"
 #include "../ComplexType/BPaster.h"
-#include <map>
 
 BE_BEGIN
 
     class PasterManager : public Manager {
     public:
-        explicit PasterManager(BImage *basePic = nullptr);
+        explicit PasterManager(unsigned int width, unsigned int height);
 
         ~PasterManager();
 
@@ -36,10 +39,10 @@ BE_BEGIN
 
         void clear();
 
-        BImage drawScreen(unsigned short framesSpace = 1);
+        SDL_Surface drawScreen(unsigned short framesSpace = 1);
 
     private:
-        BPaster baseScreen;
+        SDL_Surface baseScreen;
         std::map<PtrNum, BPaster> pasterMap;
     };
 

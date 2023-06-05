@@ -11,6 +11,7 @@ Desc:       Engine Head.
 
 #include <fstream>
 
+#include "../ComplexType/BConfig.h"
 #include "../Manager/PasterManager.h"
 #include "../Manager/ScriptManager.h"
 #include "../Manager/AudioManager.h"
@@ -30,7 +31,7 @@ public:
 
     void emitBEvent(const BEvent &event);
 
-    void initialization(std::string setupFile = "./settings.ini");
+    void init(const std::string &setupFile = "./settings.ini");
 
     AudioManager &getAudioManager();
 
@@ -44,6 +45,7 @@ protected:
     PasterManager *pasterManager;
     ScriptManager *scriptManager;
 
+    unsigned int width, height;
 
 };
 

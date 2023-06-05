@@ -38,7 +38,7 @@ extern "C" {
 #endif
 
 /**
- * Get the number of milliseconds since SDL library initialization.
+ * Get the number of milliseconds since SDL library init.
  *
  * This value wraps if the program runs for more than ~49 days.
  *
@@ -58,7 +58,7 @@ extern "C" {
 extern DECLSPEC Uint32 SDLCALL SDL_GetTicks(void);
 
 /**
- * Get the number of milliseconds since SDL library initialization.
+ * Get the number of milliseconds since SDL library init.
  *
  * Note that you should not use the SDL_TICKS_PASSED macro with values
  * returned by this function, as that macro does clever math to compensate for

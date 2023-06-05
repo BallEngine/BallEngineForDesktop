@@ -283,7 +283,7 @@ extern "C" {
  *  for capture. SDL_AudioCVT always uses the default resampler (although this
  *  might change for SDL 2.1).
  *
- *  This hint is currently only checked at audio subsystem initialization.
+ *  This hint is currently only checked at audio subsystem init.
  *
  *  This variable can be set to the following values:
  *
@@ -430,7 +430,7 @@ extern "C" {
  *  \brief  A variable controlling how 3D acceleration is used to accelerate the SDL screen surface.
  *
  *  SDL can try to accelerate the SDL screen surface by using streaming
- *  textures with a 3D rendering engine.  This variable controls whether and
+ *  m_textures with a 3D rendering engine.  This variable controls whether and
  *  how this is done.
  *
  *  This variable can be set to the following values:
@@ -1979,7 +1979,7 @@ extern "C" {
  *  special back-button-press callback functions.  Apps that need to respond
  *  to back-button-press events are expected to register one or more
  *  callback functions for such, shortly after being launched (during the
- *  app's initialization phase).  After the back button is pressed, the OS
+ *  app's init phase).  After the back button is pressed, the OS
  *  will invoke these callbacks.  If the app's callback(s) do not explicitly
  *  mark the event as handled by the time they return, or if the app never
  *  registers one of these callback, the OS will consider the event
@@ -2027,7 +2027,7 @@ extern "C" {
  *  The contents of this hint should be encoded as a UTF8 string.
  *
  *  The default value is "Privacy Policy".  This hint should only be set during app
- *  initialization, preferably before any calls to SDL_Init().
+ *  init, preferably before any calls to SDL_Init().
  *
  *  For additional information on linking to a privacy policy, see the documentation for
  *  SDL_HINT_WINRT_PRIVACY_POLICY_URL.

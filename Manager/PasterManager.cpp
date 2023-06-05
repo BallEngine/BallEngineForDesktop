@@ -9,12 +9,13 @@ Desc:       PasterManager & Paster class code.
 
 BE_USE
 
-PasterManager::PasterManager(SDL_Texture *basePic) {
-    baseScreen = BPaster(basePic);
+PasterManager::PasterManager(unsigned int width, unsigned int height) {
+    baseScreen = *(SDL_CreateRGBSurface(0, width, height, 8, 0, 0, 0, 0));
 }
 
 PasterManager::~PasterManager() {
-    clear();
+
+    this->clear();
 }
 
 void PasterManager::processEvent(BEvent event) {
@@ -66,11 +67,12 @@ bool PasterManager::checkPasterValid(PtrNum point) {
     return pasterMap.find(point) != pasterMap.end();
 }
 
-SDL_Texture PasterManager::drawScreen(unsigned short framesSpace) {
-    SDL_Texture newScreen = baseScreen.getFrame();
+SDL_Surface PasterManager::drawScreen(unsigned short framesSpace) {
+    SDL_Surface newScreen = baseScreen;
     auto ic = pasterMap.begin();
     while (ic != pasterMap.end()) {
-        newScreen.drawPic(ic->second.getFrame(), 0, 0);
+
+        newScreen.draw(ic->second.getFrame(), ic->second.getPos(), 0);
         ic++;
     }
     return newScreen;

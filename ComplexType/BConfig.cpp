@@ -1,11 +1,8 @@
 /*****************************************************************************
-FileName:   BFile.cpp
+FileName:   BConfig.cpp
 Author:    Xeler
 Desc:       Desc.
 ******************************************************************************/
-#include "BFile.h"
+#include "BConfig.h"
 
-${
-NAMESPACES_OPEN_CPP}
-${
-NAMESPACES_CLOSE_CPP}
+BE_USE
