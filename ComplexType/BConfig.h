@@ -10,12 +10,14 @@ Desc:       Desc.
 
 #include <map>
 #include <string>
+#include <fstream>
+#include <cstring>
 
 BE_BEGIN
 
     class BConfig {
     public:
-        BConfig(const std::string fileName);
+        explicit BConfig(const std::string &fileName);
 
         ~BConfig();
 
@@ -24,11 +26,14 @@ BE_BEGIN
         std::string getValue(const std::string &key);
 
         void reload();
+
         void save();
 
     private:
 
-        std::map<> m_config;
+        std::fstream m_configFile;
+        std::map<std::string, std::string> m_config;
+        int *p;
     };
 
 BE_END
