@@ -11,10 +11,8 @@ Desc:       Desc.
 #include <map>
 #include <string>
 #include <fstream>
-#include <cstring>
 
 BE_BEGIN
-
     class BConfig {
     public:
         explicit BConfig(const std::string &fileName);
@@ -33,7 +31,6 @@ BE_BEGIN
 
         std::fstream m_configFile;
         std::map<std::string, std::string> m_config;
-        int *p;
     };
 
 BE_END

@@ -11,19 +11,21 @@ BE_USE
 BPaster::BPaster() {
 }
 
-BPaster::BPaster(const std::string &defaultTag, SDL_Surface pics[], unsigned int picCount) {
+BPaster::BPaster(const std::string &defaultTag, SDL_Surface pics[], unsigned int picCount, SDL_Renderer* renderer) {
     int i = 0;
-    std::vector<SDL_Surface> *list = new std::vector<SDL_Surface>;
-    while (i - picCount) {
-        list->push_back(pics[i]);
+    std::vector<SDL_Texture*> *list = new std::vector<SDL_Texture*>;
+    while (i < picCount) {
+        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, &pics[i]);
+        list->push_back(texture);
         i++;
     }
-    std::pair<std::string, std::vector<SDL_Surface> *> defaultPair("default", list);
-    std::pair<std::string, std::vector<SDL_Surface> *> texturePair(defaultTag, list);
+    std::pair<std::string, std::vector<SDL_Texture*> *> defaultPair("default", list);
+    std::pair<std::string, std::vector<SDL_Texture*> *> texturePair(defaultTag, list);
 
-    m_textures.(defaultPair);
+    m_textures.insert(defaultPair);
     m_textures.insert(texturePair);
 }
+
 
 BPaster::~BPaster() {
     pictures.clear();

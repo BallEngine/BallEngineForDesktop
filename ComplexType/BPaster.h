@@ -16,7 +16,6 @@ Desc:       Paster class.
 #include "../define.h"
 
 BE_BEGIN
-
     struct PosPair {
         unsigned int x, y;
     };
@@ -34,7 +33,8 @@ BE_BEGIN
     public:
         BPaster();
 
-        explicit BPaster(const std::string& defaultTag, SDL_Surface pics[], unsigned int picCount = 1);
+        explicit BPaster(const std::string &defaultTag, SDL_Surface pics[], unsigned int picCount = 1,
+                         SDL_Renderer *renderer = nullptr);
 
         ~BPaster();
 
@@ -52,8 +52,9 @@ BE_BEGIN
 
         void bindAction(PasterAction actionType, std::string actionScript);
 
-    private:
-        std::map<std::string, std::vector<SDL_Texture> *> m_textures;
+    private
+    :
+        std::map<std::string, std::vector<SDL_Texture *> *> m_textures;
 
         std::string m_activeTag;
 

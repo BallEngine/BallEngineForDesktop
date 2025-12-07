@@ -12,7 +12,6 @@ Desc:       Define ManagerType,EventMessage and Manager class(Super virtual clas
 #include "../define.h"
 
 BE_BEGIN
-
     enum ManagerType {
         AudioSys = 0,
         PasterSys,
@@ -23,6 +22,7 @@ BE_BEGIN
     class BEvent {
     public:
         BEvent(ManagerType whereFrom, ManagerType wantTo, std::string eventMessage);
+
         ManagerType from, to;
         std::string data;
     };
@@ -30,6 +30,9 @@ BE_BEGIN
     class Manager {
     public:
         Manager();
+
+        virtual ~Manager() = default;
+
         virtual void processEvent(BEvent event);
     };
 

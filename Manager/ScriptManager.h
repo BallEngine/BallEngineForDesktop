@@ -24,7 +24,7 @@ BE_BEGIN
 
         ScriptManager();
 
-        ~ScriptManager();
+        ~ScriptManager() override;
 
         //预处理函数
         std::string pretreatment(char *code);

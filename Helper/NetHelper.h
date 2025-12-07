@@ -32,7 +32,6 @@ Desc:       Desc
 #endif
 
 namespace be {
-
     class NetHelper {
     public:
         explicit NetHelper();
@@ -45,17 +44,17 @@ namespace be {
 
         bool isRunning();
 
-        bool sendMessage(const char *buffer, unsigned int size);
+        bool sendMessage(const char *buffer, int size);
 
-        bool sendMessage(std::string msg);
+        bool sendMessage(const std::string &msg);
 
-        unsigned int recvMessage(std::string &msg);
+        unsigned int recvMessage(const std::string &msg) const;
 
-        unsigned int recvMessage(char *buffer, unsigned int size);
+        unsigned int recvMessage(const char *buffer, int size) const;
 
         NetHelper &operator>>(std::string &str);
 
-        NetHelper &operator<<(std::string &str);
+        NetHelper &operator<<(const std::string &str);
 
     private:
         bool m_isRunning;
@@ -63,7 +62,6 @@ namespace be {
         sockaddr_in m_connectAddress;
         std::queue<std::string> m_messageQueue;
     };
-
 }
 
 #endif //BALLENGINE_NETHELPER_H

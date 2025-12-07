@@ -19,9 +19,9 @@ BE_BEGIN
 
     class PasterManager : public Manager {
     public:
-        explicit PasterManager(unsigned int width, unsigned int height);
+        explicit PasterManager(int width, int height);
 
-        ~PasterManager();
+        ~PasterManager() override;
 
         void processEvent(BEvent event) override;
 

@@ -14,8 +14,7 @@ BEvent::BEvent(ManagerType whereFrom, ManagerType wantTo, std::string eventMessa
     data = eventMessage;
 }
 
-Manager::Manager() {
-}
+Manager::Manager() = default;
 
 void Manager::processEvent(BEvent event) {
 

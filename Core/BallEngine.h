@@ -20,33 +20,31 @@ BE_USE
 
 class BallEngine {
 CLASS_OPTION:
-
     OPTION_SINGLETON_CLASS(BallEngine)
 
 CLASS_INTERFACE:
-
     INTERFACE_INSTANTIATION(BallEngine)
 
 public:
-
-    void emitBEvent(const BEvent &event);
+    void emitBEvent(const BEvent &event) const;
 
     void init(const std::string &setupFile = "./settings.ini");
 
-    AudioManager &getAudioManager();
+    AudioManager &getAudioManager() const;
 
-    PasterManager &getPasterManager();
+    PasterManager &getPasterManager() const;
 
-    ScriptManager &getScriptManager();
-
+    ScriptManager &getScriptManager() const;
 
 protected:
     AudioManager *audioManager;
     PasterManager *pasterManager;
     ScriptManager *scriptManager;
 
-    unsigned int width, height;
+    SDL_Window *m_window;
+    SDL_Renderer *m_renderer;
 
+    unsigned int width, height;
 };
 
 #endif //BALLENGINE_BALLENGINE_H

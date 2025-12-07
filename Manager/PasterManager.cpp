@@ -9,21 +9,19 @@ Desc:       PasterManager & Paster class code.
 
 BE_USE
 
-PasterManager::PasterManager(unsigned int width, unsigned int height) {
+PasterManager::PasterManager(int width, int height) {
     baseScreen = *(SDL_CreateRGBSurface(0, width, height, 8, 0, 0, 0, 0));
 }
 
 PasterManager::~PasterManager() {
-
     this->clear();
 }
 
 void PasterManager::processEvent(BEvent event) {
-
 }
 
 PtrNum PasterManager::addPaster(const BPaster &paster) {
-    PtrNum point = (PtrNum) (&paster);
+    auto point = reinterpret_cast<PtrNum>(&paster);
     bool valid = checkPasterValid(point);
     while (valid) {
         point++;
@@ -71,7 +69,6 @@ SDL_Surface PasterManager::drawScreen(unsigned short framesSpace) {
     SDL_Surface newScreen = baseScreen;
     auto ic = pasterMap.begin();
     while (ic != pasterMap.end()) {
-
         newScreen.draw(ic->second.getFrame(), ic->second.getPos(), 0);
         ic++;
     }
