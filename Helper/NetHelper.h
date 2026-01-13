@@ -7,31 +7,30 @@ Desc:       Desc
 #ifndef BALLENGINE_NETHELPER_H
 #define BALLENGINE_NETHELPER_H
 
+#include "../Header/Define.h"
+
 #include <queue>
 #include <string>
 
 #include <unistd.h>
 
+#include "../Manager/PasterManager.h"
+
 #ifdef LINUX
-
-
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
-
 #endif
-#ifdef WIN32
 
+#ifdef WIN32
 #include <winsock2.h>
 #include <windows.h>
 #include <inaddr.h>
 #include <pthread.h>
-
 #pragma comment(lib, "ws2_32.lib")
-
 #endif
 
-namespace be {
+BE_BEGIN
     class NetHelper {
     public:
         explicit NetHelper();
@@ -62,6 +61,6 @@ namespace be {
         sockaddr_in m_connectAddress;
         std::queue<std::string> m_messageQueue;
     };
-}
+BE_END
 
 #endif //BALLENGINE_NETHELPER_H

@@ -7,7 +7,8 @@ Desc:       Engine Head.
 #ifndef BALLENGINE_BALLENGINE_H
 #define BALLENGINE_BALLENGINE_H
 
-#include "../define.h"
+#include "../Header/Define.h"
+#include "../Header/SingletonClassDefine.h"
 
 #include <fstream>
 
@@ -20,10 +21,7 @@ BE_USE
 
 class BallEngine {
 CLASS_OPTION:
-    OPTION_SINGLETON_CLASS(BallEngine)
-
-CLASS_INTERFACE:
-    INTERFACE_INSTANTIATION(BallEngine)
+    SINGLETON_CLASS(BallEngine)
 
 public:
     void emitBEvent(const BEvent &event) const;
@@ -34,15 +32,13 @@ public:
 
     PasterManager &getPasterManager() const;
 
-    ScriptManager &getScriptManager() const;
+    ScriptManager &getScriptManager();
 
 protected:
     AudioManager *audioManager;
     PasterManager *pasterManager;
     ScriptManager *scriptManager;
 
-    SDL_Window *m_window;
-    SDL_Renderer *m_renderer;
 
     unsigned int width, height;
 };

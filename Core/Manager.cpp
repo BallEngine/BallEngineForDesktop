@@ -8,7 +8,7 @@ Desc:       Manager Code.
 
 BE_USE
 
-BEvent::BEvent(ManagerType whereFrom, ManagerType wantTo, std::string eventMessage) {
+BEvent::BEvent(ManagerType whereFrom, ManagerType wantTo, std::string &&eventMessage) {
     from = whereFrom;
     to = wantTo;
     data = eventMessage;
@@ -17,5 +17,4 @@ BEvent::BEvent(ManagerType whereFrom, ManagerType wantTo, std::string eventMessa
 Manager::Manager() = default;
 
 void Manager::processEvent(BEvent event) {
-
 }

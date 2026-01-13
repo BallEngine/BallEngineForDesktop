@@ -8,19 +8,17 @@ Desc:       Paster class.
 
 BE_USE
 
-BPaster::BPaster() {
-}
-
-BPaster::BPaster(const std::string &defaultTag, SDL_Surface pics[], unsigned int picCount, SDL_Renderer* renderer) {
+BPaster::BPaster(const PosPair pos, const std::string &defaultTag, SDL_Surface pics[], unsigned int picCount,
+                 SDL_Renderer *renderer) : m_pasterPos(pos), m_activeTag("default") {
     int i = 0;
-    std::vector<SDL_Texture*> *list = new std::vector<SDL_Texture*>;
+    auto *list = new std::vector<SDL_Texture *>;
     while (i < picCount) {
-        SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, &pics[i]);
+        SDL_Texture *texture = SDL_CreateTextureFromSurface(renderer, &pics[i]);
         list->push_back(texture);
         i++;
     }
-    std::pair<std::string, std::vector<SDL_Texture*> *> defaultPair("default", list);
-    std::pair<std::string, std::vector<SDL_Texture*> *> texturePair(defaultTag, list);
+    std::pair<std::string, std::vector<SDL_Texture *> *> defaultPair("default", list);
+    std::pair<std::string, std::vector<SDL_Texture *> *> texturePair(defaultTag, list);
 
     m_textures.insert(defaultPair);
     m_textures.insert(texturePair);
@@ -28,20 +26,71 @@ BPaster::BPaster(const std::string &defaultTag, SDL_Surface pics[], unsigned int
 
 
 BPaster::~BPaster() {
-    pictures.clear();
+    for (auto &texturePair: m_textures) {
+        for (SDL_Texture *texture: *(texturePair.second)) {
+            if (texture) {
+                SDL_DestroyTexture(texture);
+            }
+        }
+        delete texturePair.second;
+    }
+    m_textures.clear();
+}
+
+BPaster::BPaster(const BPaster &paster) : m_picPoint(paster.m_picPoint),
+                                          m_picNumber(paster.m_picNumber),
+                                          m_pasterPos(paster.m_pasterPos) {
+    for (auto &texturePair: m_textures) {
+        for (SDL_Texture *texture: *(texturePair.second)) {
+            if (texture) {
+                SDL_DestroyTexture(texture);
+            }
+        }
+        delete texturePair.second;
+    }
+    m_textures.clear();
+
+    for (const auto &pair: paster.m_textures) {
+        auto newList = new std::vector<SDL_Texture *>();
+        for (const auto &texture: *(pair.second)) {
+            newList->push_back(texture);
+        }
+        m_textures[pair.first] = newList;
+    }
 }
 
 BPaster &BPaster::operator=(const BPaster &paster) {
-    this->m_picPoint = paster.m_picPoint;
-    auto ic = paster.pictures.begin();
-    while (ic != pictures.end()) {
-        this->pictures.push_back(*ic);
-        ++ic;
+    if (this == &paster) {
+        return *this;
     }
+
+    this->m_picPoint = paster.m_picPoint;
+    this->m_activeTag = paster.m_activeTag;
+    this->m_pasterPos = paster.m_pasterPos;
+
+    for (auto &texturePair: m_textures) {
+        for (SDL_Texture *texture: *(texturePair.second)) {
+            if (texture) {
+                SDL_DestroyTexture(texture);
+            }
+        }
+        delete texturePair.second;
+    }
+    m_textures.clear();
+
+    for (const auto &pair: paster.m_textures) {
+        auto newList = new std::vector<SDL_Texture *>();
+        for (const auto &texture: *(pair.second)) {
+            newList->push_back(texture);
+        }
+        m_textures[pair.first] = newList;
+    }
+
     return *this;
 }
 
-void BPaster::setFrame(int frameNumber) {
+
+void BPaster::setFrame(const int frameNumber) {
     if (m_picPoint + frameNumber > 0) {
         m_picPoint += frameNumber;
     } else {
@@ -49,19 +98,17 @@ void BPaster::setFrame(int frameNumber) {
     }
 }
 
-SDL_Surface BPaster::getFrame() {
+SDL_Texture *BPaster::getFrame() {
     if (!(m_picPoint < m_textures.at(m_activeTag)->size())) {
         m_picPoint = 0;
     }
-    return m_textures.at(m_activeTag)->[m_picPoint++];
+    return m_textures.at(m_activeTag)->at(m_picPoint++);
 }
 
 void BPaster::bindAction(PasterAction actionType, std::string actionScript) {
-
 }
 
 void BPaster::setPos(PosPair pos) {
-
 }
 
 PosPair BPaster::getPos() {
@@ -69,5 +116,4 @@ PosPair BPaster::getPos() {
 }
 
 void BPaster::addPicList(std::string tag, SDL_Surface *pics, unsigned int picCount) {
-
 }

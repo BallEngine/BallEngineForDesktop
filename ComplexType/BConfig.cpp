@@ -1,9 +1,11 @@
 /*****************************************************************************
 FileName:   BConfig.cpp
-Author:    Xeler
+Author:     Xeler
 Desc:       Desc.
 ******************************************************************************/
 #include "BConfig.h"
+
+#include <cstring>
 
 BE_USE
 
@@ -38,7 +40,7 @@ void BConfig::reload() {
         unsigned short offset = 0;
         while (!m_configFile.eof()) {
             m_configFile.getline(buffer, 65535);
-            offset = buffer - strchr(buffer, '=');
+            offset = buffer - std::strchr(buffer, '=');
             std::pair<std::string, std::string> kvPair = std::make_pair(std::string(buffer, offset),
                                                                         std::string(buffer + offset));
             m_config.insert(kvPair);

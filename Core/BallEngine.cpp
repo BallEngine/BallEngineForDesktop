@@ -11,7 +11,7 @@ BE_USE
 BallEngine::BallEngine() : width(0), height(0) {
     audioManager = new AudioManager();
     scriptManager = new ScriptManager();
-    pasterManager = new PasterManager(width, height);
+    pasterManager = new PasterManager();
 }
 
 void BallEngine::init(const std::string &setupFile) {
@@ -23,15 +23,8 @@ void BallEngine::init(const std::string &setupFile) {
     int width = std::stoi(setup.getValue("window.width"));
     int height = std::stoi(setup.getValue("window.height"));
 
-    m_window = SDL_CreateWindow(title.c_str(),
-                               SDL_WINDOWPOS_CENTERED,
-                               SDL_WINDOWPOS_CENTERED,
-                               width, height,
-                               SDL_WINDOW_SHOWN);
-
-    m_renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED);
+    pasterManager->init(title.c_str(), width, height);
 }
-
 
 
 void BallEngine::emitBEvent(const BEvent &event) const {
@@ -59,6 +52,6 @@ PasterManager &BallEngine::getPasterManager() const {
     return *pasterManager;
 }
 
-ScriptManager &BallEngine::getScriptManager() const {
+ScriptManager &BallEngine::getScriptManager() {
     return *scriptManager;
 }

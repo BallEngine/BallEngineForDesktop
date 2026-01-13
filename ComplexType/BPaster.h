@@ -13,11 +13,11 @@ Desc:       Paster class.
 
 #include <SDL2/SDL.h>
 
-#include "../define.h"
+#include "../Header/Define.h"
 
 BE_BEGIN
     struct PosPair {
-        unsigned int x, y;
+        int x, y;
     };
 
     enum PasterAction {
@@ -31,14 +31,16 @@ BE_BEGIN
 
     class BPaster {
     public:
-        BPaster();
+        BPaster() = delete;
 
-        explicit BPaster(const std::string &defaultTag, SDL_Surface pics[], unsigned int picCount = 1,
-                         SDL_Renderer *renderer = nullptr);
+        BPaster(PosPair pos, const std::string &defaultTag, SDL_Surface pics[], unsigned int picCount = 1,
+                SDL_Renderer *renderer = nullptr);
 
         ~BPaster();
 
         void addPicList(std::string tag, SDL_Surface pics[], unsigned int picCount = 1);
+
+        BPaster(const BPaster &paster);
 
         BPaster &operator=(const BPaster &paster);
 
@@ -46,14 +48,13 @@ BE_BEGIN
 
         void setPos(PosPair pos);
 
-        SDL_Texture getFrame();
+        SDL_Texture *getFrame();
 
         PosPair getPos();
 
         void bindAction(PasterAction actionType, std::string actionScript);
 
-    private
-    :
+    private :
         std::map<std::string, std::vector<SDL_Texture *> *> m_textures;
 
         std::string m_activeTag;

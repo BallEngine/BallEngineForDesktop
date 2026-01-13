@@ -7,48 +7,46 @@ Desc:       Desc
 #ifndef BALLENGINE_SCRIPTMANAGER_H
 #define BALLENGINE_SCRIPTMANAGER_H
 
-#include <stack>
-#include <vector>
-#include <string>
-#include "../define.h"
+#include "../Header/Define.h"
+#include "../Header/SingletonClassDefine.h"
 #include "../Core/Manager.h"
 
+#include <random>
+#include <stack>
+#include <vector>
+#include <cstring>
+#include <map>
+
 BE_BEGIN
-
-
     class ScriptManager : public Manager {
     public:
-
-        constexpr static unsigned char operatorPriority[21] = {11, 11, 11, 11, 10, 9, 9, 9, 8, 8, 7, 7, 7, 7, 6, 6, 5,
-                                                               4, 3, 2, 1};
+        constexpr static unsigned char operatorPriority[21] = {
+            11, 11, 11, 11, 10, 9, 9, 9, 8, 8, 7, 7, 7, 7, 6, 6, 5,
+            4, 3, 2, 1
+        };
 
         ScriptManager();
 
         ~ScriptManager() override;
 
-        //预处理函数
-        std::string pretreatment(char *code);
+        std::string pretreatment(const char *code);
 
-        //执行函数
-        double execute(std::string expression);
+        double execute(const std::string &expression);
 
-        //解析函数
         BEvent analysis(std::string code);
 
-        void *memoryWrite(std::string key, void *value);
+        void memoryWrite(const std::string &key, int value);
 
-        void *memoryRead(std::string key);
+        int memoryRead(const std::string &key);
 
         void processEvent(BEvent event) override;
 
     protected:
-        static unsigned char getOperatorIndex(std::string operatorString);
+        static unsigned char getOperatorIndex(const std::string &operatorString);
 
-
-    private:
-        std::vector<std::string> key[26];
-        std::vector<int> value[26];
+        std::map<std::string, int> memoryMap;
     };
+
 BE_END
 
 #endif //BALLENGINE_SCRIPTMANAGER_H

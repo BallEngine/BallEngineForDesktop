@@ -29,7 +29,7 @@ typedef unsigned char uch;
 #define BTHREAD_STATUS_HANGUP ((uch)4)
 #define BTHREAD_STATUS_RETURN ((uch)8)
 
-#include "../define.h"
+#include "../Header/Define.h"
 
 BE_BEGIN
 
@@ -46,9 +46,9 @@ BE_BEGIN
 
         ~BThread();
 
-        unsigned char getStatus();
+        unsigned char getStatus() const;
 
-        void *checkReturn();
+        void *checkReturn() const;
 
         void initThread(params args);
 
@@ -62,26 +62,21 @@ BE_BEGIN
 
         void setArgs(void *args);
 
-        //检测线程状态
-        //是否准备执行
         bool isReady();
 
-        //是否正在执行
         bool isRunning();
 
-        //是否已返回
         bool isReturn();
 
-        //是否挂起（暂停）
         bool isHangup();
 
     private:
-        pthread_t threadHandler;
-        unsigned int threadID;
-        FuncType *funcPtr;
-        unsigned short int status;
-        void *args;
-        void *ret;
+        pthread_t m_threadHandler;
+        unsigned int m_threadID;
+        FuncType *m_funcPtr;
+        unsigned short int m_status;
+        void *m_args;
+        void *m_ret;
     };
 
 BE_END

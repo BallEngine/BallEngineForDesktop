@@ -6,7 +6,7 @@ Desc:       Desc.
 #ifndef BALLENGINE_BCONFIG_H
 #define BALLENGINE_BCONFIG_H
 
-#include "../define.h"
+#include "../Header/Define.h"
 
 #include <map>
 #include <string>

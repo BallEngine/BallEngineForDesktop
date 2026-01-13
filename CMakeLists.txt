@@ -1,14 +1,14 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.21)
 PROJECT(BallEngine)
 
-SET(CMAKE_CXX_STANDARD 14)
+SET(CMAKE_CXX_STANDARD 11)
 SET(INC_DIR ./Library/include/)
 SET(LINK_DIR ./Library/library/)
 
 INCLUDE_DIRECTORIES(${INC_DIR})
 LINK_DIRECTORIES(${LINK_DIR})
 
-ADD_EXECUTABLE(BallEngine main.cpp define.h
+ADD_EXECUTABLE(BallEngine main.cpp Header/define.h
         ComplexType/BThread.h ComplexType/BThread.cpp
         ComplexType/BPaster.h ComplexType/BPaster.cpp
         Core/Manager.h Core/Manager.cpp
@@ -19,7 +19,8 @@ ADD_EXECUTABLE(BallEngine main.cpp define.h
         Manager/GameManager.h Manager/GameManager.cpp
         Helper/NetHelper.h Helper/NetHelper.cpp
         Helper/LogHelper.h Helper/LogHelper.cpp
-        ComplexType/BConfig.cpp ComplexType/BConfig.h ComplexType/BAssets.cpp ComplexType/BAssets.h)
+        ComplexType/BConfig.cpp ComplexType/BConfig.h ComplexType/BAssets.cpp ComplexType/BAssets.h
+        Header/SingletonClassDefine.h)
 
 IF (WIN32)
     SET(CMAKE_LIBRARY_PATH "C:\\Windows\\System32\\")

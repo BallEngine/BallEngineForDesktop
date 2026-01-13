@@ -9,7 +9,7 @@ Desc:       Define ManagerType,EventMessage and Manager class(Super virtual clas
 
 #include <string>
 
-#include "../define.h"
+#include "../Header/Define.h"
 
 BE_BEGIN
     enum ManagerType {
@@ -21,7 +21,7 @@ BE_BEGIN
 
     class BEvent {
     public:
-        BEvent(ManagerType whereFrom, ManagerType wantTo, std::string eventMessage);
+        BEvent(ManagerType whereFrom, ManagerType wantTo, std::string &&eventMessage);
 
         ManagerType from, to;
         std::string data;

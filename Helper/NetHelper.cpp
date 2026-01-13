@@ -7,7 +7,7 @@ Desc:       Build.
 
 #include "NetHelper.h"
 
-using namespace be;
+BE_USE
 
 NetHelper::NetHelper() {
     m_isRunning = false;

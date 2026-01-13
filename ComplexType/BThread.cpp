@@ -1,76 +1,98 @@
-/*****************************************************************************
-FileName:   BThread.cpp
-Author:     Xeler
-Desc:       Desc
-******************************************************************************/
-
 #include "BThread.h"
 
 BE_USE
 
 BThread::BThread(FuncType *func) {
-    threadID = 0;
-    ret = nullptr;
-    status = 0;
-    funcPtr = func;
+    m_threadID = 0;
+    m_ret = nullptr;
+    m_status = 0;
+    m_funcPtr = func;
 }
 
 BThread::~BThread() {
-    pthread_kill(threadID, 9);
+    if (m_threadID != 0) {
+        pthread_cancel(m_threadID);
+        pthread_join(m_threadID, nullptr);
+    }
 }
 
-unsigned char BThread::getStatus() {
-    return status;
+unsigned char BThread::getStatus() const {
+    return m_status;
 }
 
-void *BThread::checkReturn() {
-    return ret;
+void *BThread::checkReturn() const {
+    return m_ret;
 }
 
 void BThread::initThread(params arg) {
-    if (!(status | 0B0111)) {
-        params localArgs;
-        localArgs.size = arg.size;
-        localArgs.buffer = (char *) malloc(sizeof(char) * arg.size);
-        threadID = pthread_create(&threadHandler, nullptr, funcPtr, &localArgs);
-        status ^= BTHREAD_STATUS_RETURN;
-        status |= BTHREAD_STATUS_WAITGO;
+    if (!(m_status & 0x07)) {
+        params *localArgs = new params;
+        localArgs->size = arg.size;
+        localArgs->buffer = static_cast<char *>(malloc(sizeof(char) * arg.size));
+        if (localArgs->buffer != nullptr) {
+            memcpy(localArgs->buffer, arg.buffer, arg.size);
+
+            int result = pthread_create(&m_threadHandler, nullptr, m_funcPtr, localArgs);
+            if (result == 0) {
+                m_threadID = result;
+                m_status |= BTHREAD_STATUS_WAITGO;
+            } else {
+                free(localArgs->buffer);
+                delete localArgs;
+                m_threadID = 0;
+            }
+        } else {
+            delete localArgs;
+        }
     }
 }
 
 void BThread::startThread() {
-    pthread_create(,);
+    if (m_status & BTHREAD_STATUS_WAITGO) {
+        m_status |= BTHREAD_STATUS_RUNING;
+        m_status &= ~BTHREAD_STATUS_WAITGO;
+    }
 }
 
 void BThread::stopThread() {
-    if (threadID == 0) {
-    } else {
-        pthread_kill(threadID, 9);
+    if (m_threadID != 0) {
+        pthread_cancel(m_threadID);
+        pthread_join(m_threadID, nullptr);
+        m_threadID = 0;
+        m_status &= ~BTHREAD_STATUS_RUNING;
     }
 }
 
 void BThread::pauseThread() {
+    if (m_status & BTHREAD_STATUS_RUNING) {
+        m_status |= BTHREAD_STATUS_HANGUP;
+        m_status &= ~BTHREAD_STATUS_RUNING;
+    }
 }
 
 void BThread::resumeThread() {
+    if (m_status & BTHREAD_STATUS_HANGUP) {
+        m_status |= BTHREAD_STATUS_RUNING;
+        m_status &= ~BTHREAD_STATUS_HANGUP;
+    }
 }
 
 void BThread::setArgs(void *args) {
-
+    m_args = args;
 }
 
 bool BThread::isReady() {
-    return status & BTHREAD_STATUS_WAITGO;
+    return m_status & BTHREAD_STATUS_WAITGO;
 }
 
 bool BThread::isRunning() {
-    return status & BTHREAD_STATUS_RUNING;
+    return m_status & BTHREAD_STATUS_RUNING;
 }
 
 bool BThread::isReturn() {
-    return status & BTHREAD_STATUS_RETURN;
+    return m_status & BTHREAD_STATUS_RETURN;
 }
 
 bool BThread::isHangup() {
-    return status & BTHREAD_STATUS_HANGUP;
+    return m_status & BTHREAD_STATUS_HANGUP;
 }

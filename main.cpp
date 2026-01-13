@@ -3,7 +3,7 @@
 #undef main
 
 int main(int argc, char *argv[]) {
-    BallEngine &ballEngine = BallEngine::instantiation();
+    BallEngine &ballEngine = BallEngine::getInstance();
 
     ballEngine.init();
 
